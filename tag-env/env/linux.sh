@@ -1,0 +1,1 @@
+export MYENV="$MYENV -> linux"
