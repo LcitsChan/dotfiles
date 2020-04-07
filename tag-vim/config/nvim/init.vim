@@ -44,7 +44,7 @@ let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 
-" == 
+"  == 
 " == history: how many liines of history VUN has to remember
 " == 
 set history=700
@@ -73,6 +73,7 @@ Plug 'tpope/vim-surround'
 Plug 'preservim/nerdcommenter'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 
@@ -300,6 +301,11 @@ map th :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
 map tl :set splitright<CR>:vsplit<CR>
 map tk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
 map tj :set splitbelow<CR>:split<CR>
+
+" Save & quit
+noremap Q :q<CR>
+" noremap <C-q> :qa<CR>
+noremap S :w<CR>
 
 " ===
 " === rnvimr
