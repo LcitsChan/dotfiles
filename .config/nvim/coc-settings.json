@@ -1,0 +1,44 @@
+{
+  "coc.preferences.extensionUpdateCheck": "weekly",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "json"
+  ],
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": [
+        "go.mod"
+      ],
+      "filetypes": [
+        "go"
+      ]
+    }
+  },
+  "suggest.floatEnable": true,
+  "suggest.enablePreselect": false,
+  "suggest.noselect": true,
+  "codeLens.enable": true,
+  "explorer.width": 38,
+  "explorer.quitOnOpen": true,
+  "explorer.sources": [
+    {
+      "name": "buffer",
+      "expand": false
+    },
+    {
+      "name": "file",
+      "expand": true
+    }
+  ],
+  "explorer.file.column.indent.indentLine": true,
+  "explorer.file.showHiddenFiles": true,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.git.showIgnored": true,
+  "explorer.buffer.showHiddenBuffers": false,
+  "explorer.keyMappings.global": {
+    "gj": false,
+    "gk": false
+  },
+  "explorer.icon.hidden": "false",
+  "explorer.previewAction.onHover": "labeling"
+}

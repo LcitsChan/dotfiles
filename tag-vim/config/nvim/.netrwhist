@@ -1,6 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =4
-let g:netrw_dirhist_4='/Users/lcitschan/.config/nvim'
-let g:netrw_dirhist_3='/Users/lcitschan/workspace/go/src/github.com/LcitsChan/hello'
-let g:netrw_dirhist_2='/Users/lcitschan/.config/nvim/syntax'
-let g:netrw_dirhist_1='/Users/lcitschan/.config/nvim'

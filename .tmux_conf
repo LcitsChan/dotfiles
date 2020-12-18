@@ -1,0 +1,69 @@
+# --------------------
+# bind keys
+# --------------------
+
+bind-key h   select-pane -L
+bind-key j   select-pane -D
+bind-key k   select-pane -U
+bind-key l   select-pane -R
+
+bind-key -r H resize-pane -L 5
+bind-key -r J resize-pane -D 5
+bind-key -r K resize-pane -U 5
+bind-key -r L resize-pane -R 5
+
+bind-key -r "<" swap-window -d -t -1
+bind-key -r ">" swap-window -d -t +1
+
+# --------------------
+# status bart
+# --------------------
+
+LIGHT_TEXT='#[fg=white,bg=black]'
+DARK_TEXT='#[fg=black,bg=white]'
+
+RIGHT_DARK_ARROW="${DARK_TEXT}"
+RIGHT_LIGHT_ARROW="${LIGHT_TEXT}"
+
+LEFT_DARK_ARROW="$DARK_TEXT"
+LEFT_LIGHT_ARROW="$LIGHT_TEXT"
+L_USER="${DARK_TEXT}  ${USER} ${RIGHT_LIGHT_ARROW}"
+
+set -g status on
+set -g status-interval 2
+set -g status-justify centre
+set -g default-terminal "screen-256color"
+set -g window-status-fg '#8B7B8B'
+set -g window-status-bg black
+set -g window-status-current-fg white
+set -g window-status-current-bg black
+set -g @net_speed_interfaces "eth0"
+set -g @download_speed_format "%5s"
+set -g @upload_speed_format "%5s"
+set -g @net_speed_format "D:%8s U:%8s"
+set -g status-style fg=white,bg=black
+set -g status-left-length 60
+set -g status-right-length 60
+set -g status-left '#{L_USER}\
+                    #{LIGHT_TEXT}#S #{RIGHT_DARK_ARROW}\
+                    #{DARK_TEXT}#I:#{window_name} #{RIGHT_LIGHT_ARROW}\
+                    #{LIGHT_TEXT}P:#P #{RIGHT_DARK_ARROW}\
+                    #{DARK_TEXT}tmux #{RIGHT_LIGHT_ARROW}'
+set -g status-right '#{cpu_percentage}\
+                    #{LEFT_LIGHT_ARROW}#{DARK_TEXT} #{net_speed}\
+                    #{LEFT_DARK_ARROW}#{LIGHT_TEXT} #{=21:pane_title} \
+                    #{DARK_TEXT} %H:%M %d-%b-%y  '
+
+set -g allow-rename off
+
+# --------------------
+# plugins
+# --------------------
+
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-cpu'
+set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
+set -g @plugin 'tmux-plugins/tmux-net-speed'
+
+run '~/.tmux/plugins/tpm/tpm'
