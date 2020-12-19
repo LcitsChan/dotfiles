@@ -11,10 +11,16 @@ fi
 # --------------------
 #  brew
 # --------------------
-#
+
 export HOMEBREW_NO_AUTO_UPDATE=true
-export PATH=/usr/local/bin:$PATH
-export PATH=/usr/local/opt/curl/bin:$PATH
+case `uname` in
+  Darwin)
+  export PATH=/usr/local/bin:$PATH
+  export PATH=/usr/local/opt/curl/bin:$PATH
+  ;;
+  Linux)
+  ;;
+esac
 
 
 # --------------------
@@ -25,8 +31,14 @@ alias vim="nvim"
 alias ra=ranger
 alias tw="tmux new -A -s workspace"
 # switch `uname`
-alias code='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
-alias pc='/usr/local/bin/proxychains4'
+case `uname` in
+  Darwin)
+  alias code='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
+  alias pc='/usr/local/bin/proxychains4'
+  ;;
+  Linux)
+  ;;
+esac
 
 
 # --------------------
@@ -40,17 +52,20 @@ export GO111MODULE=on
 
 
 # JAVA
-export CPPFLAGS="-I/usr/local/opt/openjdk@8/include"
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk-8.jdk/Contents/Home/
 # Android 
-export ANDROID_HOME=~/Library/Android/sdk
+case `uname` in
+  Darwin)
+  export CPPFLAGS="-I/usr/local/opt/openjdk@8/include"
+  export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk-8.jdk/Contents/Home/
+  export ANDROID_HOME=~/Library/Android/sdk
+  ;;
+  Linux)
+  ;;
+esac
 export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 export ANDROID_JAVA_HOME=$JAVA_HOME
 export PATH=${PATH}:~/development/flutter/bin
-
-
-# switch `uname`
 
 
 # --------------------
@@ -69,10 +84,6 @@ export FZF_ALT_C_COMMAND="fd --type d -H || find . -type d"
 export FZF_COMPLETION_TRIGGER='\'
 export FZF_TMUX=1
 export FZF_TMUX_HEIGHT='80%'
-
-frg() {
-  
-}
 
 
 # --------------------
@@ -95,6 +106,7 @@ export LC_ALL=en_US.UTF-8
 ulimit -S -n 1024
 export VISUAL=nvim
 export EDITOR=$VISUAL
+
 
 # --------------------
 # Zinit
@@ -125,7 +137,7 @@ zinit depth=1 lucid light-mode for \
 # Plugins
 # --------------------
 
-# pyenv       
+# pyenv
 export PYENV_ROOT=$HOME/.pyenv
 # nvm
 export NVM_DIR=$HOME/.nvm
@@ -156,7 +168,6 @@ zinit depth=1 lucid light-mode for \
   zsh-users/zsh-autosuggestions \
   wait'1' zsh-users/zsh-syntax-highlighting \
   multisrc"shell/{completion,key-bindings}.zsh" pick"/dev/null" junegunn/fzf \
-
 
 
 zinit wait'4' lucid light-mode for \
@@ -204,8 +215,10 @@ fi
 
 [[ $- == *i* ]] && source "$FZF_HOME/shell/completion.zsh" 2> /dev/null
 
+
+# --------------------
 # GIT heart FZF
-# -------------
+# --------------------
 
 is_in_git_repo() {
   git rev-parse HEAD > /dev/null 2>&1
@@ -215,6 +228,7 @@ fzf-down() {
   fzf --height 50% "$@" --border --preview-window nohidden
 }
 
+# status
 _gf() {
   is_in_git_repo || return
   git -c color.status=always status --short |
@@ -223,6 +237,7 @@ _gf() {
   cut -c4- | sed 's/.* -> //'
 }
 
+# branch
 _gb() {
   is_in_git_repo || return
   git branch -a --color=always | grep -v '/HEAD\s' | sort |
@@ -232,6 +247,7 @@ _gb() {
   sed 's#^remotes/##'
 }
 
+# tag
 _gt() {
   is_in_git_repo || return
   git tag --sort -version:refname |
@@ -239,6 +255,7 @@ _gt() {
     --preview 'git show --color=always {} | head -'$LINES
 }
 
+# log
 _gh() {
   is_in_git_repo || return
   git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
@@ -248,6 +265,7 @@ _gh() {
   grep -o "[a-f0-9]\{7,\}"
 }
 
+# remote
 _gr() {
   is_in_git_repo || return
   git remote -v | awk '{print $1 "\t" $2}' | uniq |
@@ -255,7 +273,6 @@ _gr() {
     --preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%cd %h%d %s" {1} | head -200' |
   cut -d$'\t' -f1
 }
-# source "$FZF_HOME/shell/key-bindings.zsh"
 
 
 # --------------------
