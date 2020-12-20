@@ -11,58 +11,67 @@ endif
 " Plugins
 " -------------------- 
 call plug#begin('~/.vim/plugged')
-                                                          " editor enhance
+                                                          " -- editor enhance
 Plug 'junegunn/fzf.vim'                                   " Enhance fzf: more vim command support
 Plug 'airblade/vim-rooter'                                " Changes Vim working directory to project root
 " Plug 'yuki-ycino/fzf-preview.vim', {
 "  \'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/vim-peekaboo'                              " The content of the registers Viewer
-Plug 'hotoo/highlight-cursor-word.vim'                    " Highlight words which under text-cursor(caret)
-Plug 'lfv89/vim-interestingwords'                         " Highlighting and navigating through different words in a buffer.
-Plug 'brooth/far.vim'
+Plug 'brooth/far.vim'                                     " Find and replace
 Plug 'majutsushi/tagbar'                                  " A class outline viewer
-Plug 'liuchengxu/vista.vim'                                  " Viewer for LSP symbols
+Plug 'liuchengxu/vista.vim'                               " Viewer for LSP symbols
 Plug 'mbbill/undotree'                                    " The undo history visualizer
 Plug 'neoclide/coc.nvim', {'branch': 'release'}           " Coc
 Plug 'mhinz/vim-startify'                                 " Start Page
 Plug 'farmergreg/vim-lastplace'                           " Reopen files at your last edit position'
-                                                          " explorer
+                                                          " -- explorer
 Plug 'francoiscabrol/ranger.vim'                          " Ranger file manager support, deps on bclose
 Plug 'rbgrouleff/bclose.vim'                              " Deleting a buffer without closing the window
 "Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
-                                                          " productivity
+                                                          " -- productivity
 Plug 'lambdalisue/suda.vim'                               " Do stuff when forget vim with sudo
 Plug 'vim-scripts/ReplaceWithRegister'                    " Replace text with the contents of a register
-Plug 'tomtom/tcomment_vim'
+Plug 'tomtom/tcomment_vim'                                " Comment easy way
 Plug 'tpope/vim-surround'                                 " Quoting / Parenthesizing
 Plug 'tpope/vim-repeat'                                   " Enhance . repeat(expr, count)
 Plug 'gcmt/wildfire.vim'                                  " Smart selection of the closest text object
 Plug 'junegunn/goyo.vim'                                  " Markdown: focus mode
-Plug 'junegunn/limelight.vim'                                  " Dim
 Plug 'SirVer/ultisnips'                                   " Snippets utils
 Plug 'mg979/vim-visual-multi'                             " Multi cursor
-Plug 'liuchengxu/vim-which-key'
+Plug 'liuchengxu/vim-which-key'                           " Keybinding viewer
 Plug 'psliwka/vim-smoothie'                               " Smooth scrolling
+Plug 'voldikss/vim-floaterm'                              " Floating builtin term
+                                                          " -- highlight
+Plug 'junegunn/limelight.vim'                             " Dimmer of code block
 Plug 'RRethy/vim-illuminate'                              " Highlight other words under the cursor
-Plug 'voldikss/vim-floaterm'
-                                                          " format code
+Plug 'blueyed/vim-diminactive'                            " Dim inactive windows
+Plug 'hotoo/highlight-cursor-word.vim'                    " Highlight words which under text-cursor(caret)
+Plug 'lfv89/vim-interestingwords'                         " Highlighting and navigating through different words in a buffer.
+                                                          " -- format code
 Plug 'godlygeek/tabular'                                  " Text filtering and alignment
 Plug 'junegunn/vim-easy-align'                            " Alignment
 Plug 'jiangmiao/auto-pairs'                               " Auto pairs for symbol
-                                                          " svn
+                                                          " -- svn
 Plug 'airblade/vim-gitgutter'                             " Shows a git diff in the sign column.
 Plug 'junegunn/gv.vim'                                    " Git commit browse
 Plug 'tpope/vim-fugitive'                                 " Fugitive is the premier Vim plugin for Git
-                                                          " language support
+                                                          " -- language support
 Plug 'dart-lang/dart-vim-plugin'                          " Dart language Support
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }        " Go plugin
-                                                          " colorscheme
-Plug 'vim-airline/vim-airline'                            " Lean & mean status/tabline for vim
-Plug 'vim-airline/vim-airline-themes'                     " Statusbar Theme:  base on airline
+                                                          " -- colorscheme
+"Plug 'vim-airline/vim-airline'                            " Lean & mean status/tabline for vim
+"Plug 'vim-airline/vim-airline-themes'                     " Statusbar Theme:  base on airline
+Plug 'itchyny/lightline.vim'
 Plug 'altercation/vim-colors-solarized'                   " Theme: Solarized implementation
 Plug 'dracula/vim', { 'as': 'dracula' }                   " Dark Theme
-Plug 'junegunn/seoul256.vim'                                    " 
-Plug 'ap/vim-css-color'                                    " 
+Plug 'junegunn/seoul256.vim'                              " Theme seoul256
+Plug 'trevordmiller/nova-vim'
+Plug 'ap/vim-css-color'                                   " Realtime render color
+                                                          " -- markdown
+Plug 'plasticboy/vim-markdown'                            " Markdown Vim Mode
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'mzlogin/vim-markdown-toc'
+Plug 'dhruvasagar/vim-table-mode'
 call plug#end()
 
 
@@ -71,34 +80,20 @@ call plug#end()
 " -------------------- 
                                                                " - [fzf]
 set rtp+=/usr/local/opt/fzf
-                                                               " - [vista]
-map tb :Vista!!<CR>
-map tbb :Vista finder<CR>
                                                                " - [francoiscabrol/ranger]
 let g:ranger_map_keys = 0
-map tr :RangerCurrentFileExistingOrNewTab<CR>
-map tw :RangerWorkingDirectoryExistingOrNewTab<CR>
 let g:ranger_replace_netrw = 0                                 " open ranger when vim open a directory
                                                                " - [SirVer/ultisnips]
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-inoremap <c-n> <nop>
 let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-                                                               " - [Tabularize]
-if exists(":Tabularize")
-  vmap <Leader>= :Tabularize /"<CR>
-endif
                                                                " - [mbbill/undotree]
-nnoremap tu :UndotreeToggle<CR>
 if has("persistent_undo")
     set undodir=~/.config/nvim/tmp/undo
     set undofile
 endif
-                                                               " - [tomtom/tcomment_vim]
-" nmap <leader>/ gcc
-" vmap <leader>/ gc
                                                                " GitGutter
 let g:gitgutter_highlight_linenrs = 1
 let g:gitgutter_sign_allow_clobber = 1
@@ -123,14 +118,28 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_solarized_bg = 'dark'
 "let g:airline_theme='dracula'
-let g:airline_theme='seoul256'
+" let g:airline_theme='seoul256'
+let g:airline_theme='nova'
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
+" let g:lightline = {
+"       \ 'colorscheme': 'nova',
+"       \ }
+let g:lightline = {
+      \ 'colorscheme': 'nova',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
 
 set background=dark
 " colorscheme dracula
-colorscheme seoul256
+" colorscheme seoul256
+colorscheme nova
 let g:solarized_termcolors=256
 
                                                                  " - Behavior
@@ -198,7 +207,6 @@ set incsearch                    " Shows the match while typing
 set hlsearch                     " Highlight found searches
 set noshowmatch                  " Do not show matching brackets by flickering
 set noshowmode                   " We show the mode with airline or lightline
-map <LEADER><CR> :nohlsearch<CR>
 
                                  " - Error prompt
 set noerrorbells                 " No beeps
@@ -215,60 +223,7 @@ set history=700                  " The command-lines that you enter are remember
 set splitright                   " Vertical windows should be split to right
 set splitbelow                   " Horizontal windows should split to bottom
 
-" --------------------
-" keymaps
-" -------------------- 
 
-" Navigation
-map j gj
-map k gk
-map J 5j
-map K 5k
-
-" Quit and Save
-noremap <silent> Q :q<CR>
-noremap <silent> <C-Q> :qa<CR>
-noremap <silent> <C-S> :w<CR>
-
-
-" Explorer
-map tt :CocCommand explorer<CR>
-
-" Edit vim config
-"map <LEADER>rc :e $MYVIMRC<CR>
-map <LEADER>rv :source $MYVIMRC<CR>
-
-" Smart way to move between windows
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-h> <C-W>h
-nnoremap <C-l> <C-W>l
-
-" Resize splits with arrow keys
-nnoremap <up> :res +5<CR>
-nnoremap <down> :res -5<CR>
-nnoremap <left> :vertical resize-5<CR>
-nnoremap <right> :vertical resize+5<CR>
-
-" Create new window
-nnoremap th :set nosplitright<CR>:vsplit<CR>:set splitright<CR><>
-nnoremap tl :set splitright<CR>:vsplit<CR>
-nnoremap tk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
-nnoremap tj :set splitbelow<CR>:split<CR>
-
-
-" System Clipboard
-" set clipboard=unnamedplus       " Don't use this, dd or other operating make system clipboard dirty
-nnoremap Y y$
-" set copy/paste with system clipboard
-" noremap <LEADER>y "+y
-vnoremap <LEADER>y "+y
-noremap <LEADER>p "+P
-vnoremap <LEADER>p "+P
-
-
-" Templete for replacement 
-" map <LEADER><LEADER> /<++><CR>:nohlsearch<CR>c4l
 """"""""""""""""""""""""""""""""""""""""""
 
 " --------------------
@@ -276,19 +231,15 @@ vnoremap <LEADER>p "+P
 " -------------------- 
 source ~/.config/nvim/plugin-config/startify.vim
 source ~/.config/nvim/plugin-config/coc.vim
-source ~/.config/nvim/plugin-config/which-key.vim
+source ~/.config/nvim/keys/mappings.vim
+source ~/.config/nvim/keys/which-key.vim
 source ~/.config/nvim/plugin-config/fzf.vim
 source ~/.config/nvim/plugin-config/diff.vim
 source ~/.config/nvim/plugin-config/vim-go.vim
 source ~/.config/nvim/plugin-config/floaterm.vim
 source ~/.config/nvim/plugin-config/vim-easy-align.vim
 source ~/.config/nvim/plugin-config/limelight.vim
-
-" ext for auto pair,only workspace on coc floating window
-" inoremap <C-l> <Right>
-" inoremap <C-h> <Left>
-" inoremap <C-j> <Down>
-" inoremap <C-k> <Up>
+source ~/.config/nvim/plugin-config/markdown.vim
 
 " Mnemonic
 " zz
@@ -296,9 +247,11 @@ source ~/.config/nvim/plugin-config/limelight.vim
 " Insert mode: <C-V><TAB>
 " :tern
 " :retab
+" :help i_CTRL-J
 
 " Experimental
-highlight SpecialKey ctermfg=white guifg=white
-highlight Whitespace ctermfg=white guifg=white
+highlight NonText ctermfg=59 guifg=#727272
+highlight! link SignColumn Normal
 
 let g:vista_default_executive = 'coc'
+set runtimepath^=/Users/lcitschan/workspace/nvim/coc-error-lens

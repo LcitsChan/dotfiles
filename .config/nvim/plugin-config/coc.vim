@@ -7,12 +7,14 @@
 
 let g:coc_global_extensions = [
   \'coc-explorer', 
-  \'coc-fzf-preview',
   \'coc-vimlsp',
   \'coc-json',
+  \'coc-sh',
   \'coc-pyright',
   \'coc-flutter',
+  \'coc-diagnostic',
   \'coc-yank'] 
+  " \'coc-fzf-preview',
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -25,13 +27,16 @@ set shortmess+=c
 " diagnostics appear/become resolved.
 set signcolumn=yes
 
-" TODO Add <C-j> <C-k> support
 " Use tab for trigger navigation in suggestion
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+inoremap <silent><expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <silent><expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -94,8 +99,3 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" Better navigation
-inoremap <expr> <c-j> ("\<C-n>")
-inoremap <expr> <c-k> ("\<C-p>")
-
-nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
