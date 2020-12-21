@@ -6,7 +6,7 @@
   "list.nextKeymap": "<C-j>",
   "list.previousKeymap": "<C-k>",
   "suggest.floatEnable": true,
-  "suggest.enablePreselect": false,
+  "suggest.enablePreselect": true,
   "suggest.noselect": true,
   "suggest.autoTrigger": "always",
   "suggest.enablePreview": true,
@@ -39,6 +39,9 @@
     "variable": ""
   },
   "codeLens.enable": true,
+  "snippets.textmateSnippetsRoots": [
+    "~/.config/nvim/snippets/"
+  ],
   "explorer.width": 38,
   "explorer.quitOnOpen": true,
   "explorer.sources": [

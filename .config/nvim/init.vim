@@ -239,7 +239,6 @@ source ~/.config/nvim/plugin-config/vim-go.vim
 source ~/.config/nvim/plugin-config/floaterm.vim
 source ~/.config/nvim/plugin-config/vim-easy-align.vim
 source ~/.config/nvim/plugin-config/limelight.vim
-source ~/.config/nvim/plugin-config/markdown.vim
 
 " Mnemonic
 " zz

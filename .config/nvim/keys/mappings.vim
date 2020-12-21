@@ -44,6 +44,6 @@ noremap <LEADER>yp "+p
 noremap <LEADER>yP "+P
 
 " Templete for replacement 
-map <LEADER><LEADER> /<+placeholder+><CR>:nohlsearch<CR>c15l
-imap ,,, <+placeholder+> 
-nmap ,,, i<+placeholder+> 
+map <LEADER><LEADER> /<+ph+><CR>:nohlsearch<CR>c6l
+imap ,,, <+ph+> 
+nmap ,,, i<+ph+> 

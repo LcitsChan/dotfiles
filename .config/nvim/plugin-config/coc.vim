@@ -13,6 +13,7 @@ let g:coc_global_extensions = [
   \'coc-pyright',
   \'coc-flutter',
   \'coc-diagnostic',
+  \'coc-snippets',
   \'coc-yank'] 
   " \'coc-fzf-preview',
 
