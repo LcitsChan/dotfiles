@@ -15,10 +15,11 @@ fi
 export HOMEBREW_NO_AUTO_UPDATE=true
 case `uname` in
   Darwin)
-  export PATH=/usr/local/bin:$PATH
+  [ -e /usr/local/bin/brew ] && eval $(/usr/local/bin/brew shellenv)
   export PATH=/usr/local/opt/curl/bin:$PATH
   ;;
   Linux)
+  [ -e $HOME/.linuxbrew/bin/brew ] && eval $($HOME/.linuxbrew/bin/brew shellenv)
   ;;
 esac
 
@@ -27,7 +28,7 @@ esac
 # Alias
 # --------------------
 
-alias vim="nvim"
+(( $+commands[nvim] )) && alias vim=nvim
 alias ra=ranger
 alias tw="tmux new -A -s workspace"
 # switch `uname`
