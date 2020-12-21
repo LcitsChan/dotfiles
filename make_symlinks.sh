@@ -37,3 +37,4 @@ make_link $DOTDIR/nvim $HOME/.config/nvim
 make_link $DOTDIR/ranger $HOME/.config/ranger
 make_link $DOTDIR/tmux/.tmux.conf $HOME/.tmux.conf
 make_link $DOTDIR/zsh/.zshrc $HOME/.zshrc
+make_link $DOTDIR/zsh/.p10k.zsh $HOME/.p10k.zsh
