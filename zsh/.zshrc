@@ -167,17 +167,18 @@ zinit depth=1 lucid light-mode for \
   Aloxaf/fzf-tab \
   zsh-users/zsh-history-substring-search \
   zsh-users/zsh-autosuggestions \
-  wait'1' zsh-users/zsh-syntax-highlighting \
+  wait'1' zdharma/fast-syntax-highlighting \
   multisrc"shell/{completion,key-bindings}.zsh" pick"/dev/null" junegunn/fzf \
-
 
 zinit wait'4' lucid light-mode for \
   as'null' has'pyenv' if'command -v pyenv 1>/dev/null 2>&1' atload'eval "$(pyenv init -)"' \
     $PYENV_ROOT 
 
+zinit wait'2' lucid light-mode for \
+  as'null' has'fnm' atload'eval "$(fnm env)"' $HOME/.fnm 
 
-zinit wait'6' lucid light-mode for \
-  if'[[ -s "$NVM_DIR/nvm.sh" ]]' pick'nvm.sh' $NVM_DIR
+# zinit wait'6' lucid light-mode for \
+#   if'[[ -s "$NVM_DIR/nvm.sh" ]]' pick'nvm.sh' $NVM_DIR
 
 
 # --------------------
@@ -209,71 +210,21 @@ bin_doctor() {
 # FZF
 # --------------------
 
-FZF_HOME=/usr/local/opt/fzf
-if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}/usr/local/opt/fzf/bin"
-fi
-
-[[ $- == *i* ]] && source "$FZF_HOME/shell/completion.zsh" 2> /dev/null
-
-
-# --------------------
-# GIT heart FZF
-# --------------------
-
-is_in_git_repo() {
-  git rev-parse HEAD > /dev/null 2>&1
-}
-
-fzf-down() {
-  fzf --height 50% "$@" --border --preview-window nohidden
-}
-
-# status
-_gf() {
-  is_in_git_repo || return
-  git -c color.status=always status --short |
-  fzf-down -m --ansi --nth 2..,.. \
-    --preview '(git diff --color=always -- {-1} | sed 1,4d; cat {-1}) | head -500' |
-  cut -c4- | sed 's/.* -> //'
-}
-
-# branch
-_gb() {
-  is_in_git_repo || return
-  git branch -a --color=always | grep -v '/HEAD\s' | sort |
-  fzf-down --ansi --multi --tac --preview-window right:70% \
-    --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -'$LINES |
-  sed 's/^..//' | cut -d' ' -f1 |
-  sed 's#^remotes/##'
-}
-
-# tag
-_gt() {
-  is_in_git_repo || return
-  git tag --sort -version:refname |
-  fzf-down --multi --preview-window right:70% \
-    --preview 'git show --color=always {} | head -'$LINES
-}
-
-# log
-_gh() {
-  is_in_git_repo || return
-  git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
-  fzf-down --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
-    --header 'Press CTRL-S to toggle sort' \
-    --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always | head -'$LINES |
-  grep -o "[a-f0-9]\{7,\}"
-}
-
-# remote
-_gr() {
-  is_in_git_repo || return
-  git remote -v | awk '{print $1 "\t" $2}' | uniq |
-  fzf-down --tac \
-    --preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%cd %h%d %s" {1} | head -200' |
-  cut -d$'\t' -f1
-}
+case `uname` in
+  Darwin)
+  FZF_HOME=/usr/local/opt/fzf
+  if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
+    export PATH="${PATH:+${PATH}:}/usr/local/opt/fzf/bin"
+  fi
+  ;;
+  Linux)
+  ;;
+esac
+# [ -d $HOME/.zext ] && for zf in $HOME/.zext
+# do 
+#   [ -f $zh ] && source $zf
+# done
+source ~/.zext/fzf.zsh
 
 
 # --------------------
