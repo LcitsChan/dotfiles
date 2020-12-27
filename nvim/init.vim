@@ -1,8 +1,5 @@
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &packpath = &runtimepath
-
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
@@ -10,7 +7,7 @@ endif
 " -------------------- 
 " Plugins
 " -------------------- 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
                                                           " -- editor enhance
 Plug 'junegunn/fzf.vim'                                   " Enhance fzf: more vim command support
 Plug 'airblade/vim-rooter'                                " Changes Vim working directory to project root
@@ -41,6 +38,8 @@ Plug 'mg979/vim-visual-multi'                             " Multi cursor
 Plug 'liuchengxu/vim-which-key'                           " Keybinding viewer
 Plug 'psliwka/vim-smoothie'                               " Smooth scrolling
 Plug 'voldikss/vim-floaterm'                              " Floating builtin term
+Plug 'AndrewRadev/switch.vim'                             " 
+let g:switch_mapping = "gs"
                                                           " -- highlight
 Plug 'junegunn/limelight.vim'                             " Dimmer of code block
 Plug 'RRethy/vim-illuminate'                              " Highlight other words under the cursor
@@ -80,6 +79,7 @@ call plug#end()
 " -------------------- 
                                                                " - [fzf]
 set rtp+=/usr/local/opt/fzf
+"set rtp+=~/.linuxbrew/opt/fzf
                                                                " - [francoiscabrol/ranger]
 let g:ranger_map_keys = 0
 let g:ranger_replace_netrw = 0                                 " open ranger when vim open a directory
@@ -118,7 +118,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_solarized_bg = 'dark'
 "let g:airline_theme='dracula'
-" let g:airline_theme='seoul256'
+"let g:airline_theme='seoul256'
 let g:airline_theme='nova'
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
@@ -234,6 +234,7 @@ source ~/.config/nvim/plugin-config/coc.vim
 source ~/.config/nvim/keys/mappings.vim
 source ~/.config/nvim/keys/which-key.vim
 source ~/.config/nvim/plugin-config/fzf.vim
+source ~/.config/nvim/plugin-config/far.vim
 source ~/.config/nvim/plugin-config/diff.vim
 source ~/.config/nvim/plugin-config/vim-go.vim
 source ~/.config/nvim/plugin-config/floaterm.vim
@@ -253,4 +254,3 @@ highlight NonText ctermfg=59 guifg=#727272
 highlight! link SignColumn Normal
 
 let g:vista_default_executive = 'coc'
-set runtimepath^=/Users/lcitschan/workspace/nvim/coc-error-lens

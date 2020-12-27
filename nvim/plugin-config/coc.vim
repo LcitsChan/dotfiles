@@ -11,6 +11,7 @@ let g:coc_global_extensions = [
   \'coc-json',
   \'coc-sh',
   \'coc-pyright',
+  \'coc-prettier',
   \'coc-flutter',
   \'coc-diagnostic',
   \'coc-snippets',
@@ -99,4 +100,9 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+hi HighlightedyankRegion term=bold ctermbg=0 guibg=#13354A
+
+" Prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 

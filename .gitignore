@@ -1,2 +1,6 @@
 *.pyo
+*.pyc
+nvim/plugged/
+plugged/
 tmp
+nvim/.netrwhist
