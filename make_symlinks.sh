@@ -8,17 +8,16 @@ if [ ! -e $BACKUPDIR ]; then
 fi
 
 make_link() {
-  echo "==="
+  echo "===> $(basename "$2")"
   if [ ! -e $1 ]; then
     echo "$1 not exit"
-    echo "===\n"
     return
   fi
   ldd=$(dirname $2)
   if [ ! -d $ldd ]; then
     mkdir -p $ldd
   fi
-  if [ -e $2 ]; then
+  if [ -e $2 ] && [ ! -L $2 ]; then
     bk_date="$(date '+%Y%m%d%H%M%S')"
     bk_name="${BACKUPDIR}/$(basename "$2").${bk_date}"
     $(
@@ -30,11 +29,21 @@ make_link() {
   set -x;
   ln -sfn $1 $2
   )
-  echo "==="
 }
 
 make_link $DOTDIR/nvim $HOME/.config/nvim
 make_link $DOTDIR/ranger $HOME/.config/ranger
 make_link $DOTDIR/tmux/.tmux.conf $HOME/.tmux.conf
 make_link $DOTDIR/zsh/.zshrc $HOME/.zshrc
+make_link $DOTDIR/zsh/zext $HOME/.zext
 make_link $DOTDIR/zsh/.p10k.zsh $HOME/.p10k.zsh
+make_link $DOTDIR/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml
+case `uname` in
+  Darwin)
+  make_link $DOTDIR/yabai/yabairc $HOME/.config/yabai/yabairc
+  make_link $DOTDIR/skhd/skhdrc $HOME/.config/skhd/skhdrc
+  make_link $DOTDIR/spacebar/spacebarrc $HOME/.config/spacebar/spacebarrc
+  ;;
+  Linux)
+  ;;
+esac
