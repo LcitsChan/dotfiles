@@ -1,0 +1,16 @@
+[user]
+  name = LcitsChan
+  email = ctairong@gmail.com
+[color]
+  ui = auto
+[filter "lfs"]
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+[core]
+  excludesfile = ~/.gitignore_global
+  pager = delta
+[commit]
+  template = ~/.gitmessage
+

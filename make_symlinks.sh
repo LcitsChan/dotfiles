@@ -38,6 +38,9 @@ make_link $DOTDIR/zsh/.zshrc $HOME/.zshrc
 make_link $DOTDIR/zsh/zext $HOME/.zext
 make_link $DOTDIR/zsh/.p10k.zsh $HOME/.p10k.zsh
 make_link $DOTDIR/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml
+make_link $DOTDIR/git/gitconfig $HOME/.gitconfig
+make_link $DOTDIR/git/gitmessage $HOME/.gitmessage
+make_link $DOTDIR/git/gitignore_global $HOME/.gitignore_global
 case `uname` in
   Darwin)
   make_link $DOTDIR/yabai/yabairc $HOME/.config/yabai/yabairc
