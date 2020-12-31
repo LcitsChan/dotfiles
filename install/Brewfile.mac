@@ -1,0 +1,8 @@
+tap "homebrew/cask-fonts"
+tap "cmacrae/formulae"
+tap "koekeishiya/formulae"
+brew "cmacrae/formulae/spacebar"
+brew "koekeishiya/formulae/skhd"
+brew "koekeishiya/formulae/yabai"
+cask "alacritty"
+cask "font-jetbrains-mono-nerd-font"

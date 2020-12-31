@@ -4,3 +4,4 @@ nvim/plugged/
 plugged/
 tmp
 nvim/.netrwhist
+*.lock.json
