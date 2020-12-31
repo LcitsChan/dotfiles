@@ -70,24 +70,6 @@ export PATH=${PATH}:~/development/flutter/bin
 
 
 # --------------------
-# Tools
-# --------------------
-
-# fzf
-FZF_S_ENGINE_GIT="git ls-file --cached --othters --exclude-standard"
-FZF_S_ENGINE_FD="fd --type f --color=never"
-FZF_S_ENGINE_FIND="find * -type f"
-export FZF_DEFAULT_COMMAND="$FZF_S_ENGINE_GIT || $FZF_S_ENGINE_FD || $FZF_S_ENGINE_FIND"
-export FZF_DEFAULT_OPTS="-m --height 40% --layout=reverse --border --preview '[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file  || (bat --style=numbers --color=always --line-range :300 {} || cat {}) 2> /dev/null' --preview-window='right:hidden:wrap' --bind 'ctrl-p:toggle-preview,ctrl-i:preview-up,ctrl-u:preview-page-down'"
-export FZF_CTRL_T_COMMAND="fd -H || find ."
-export FZF_CTRL_T_OPTS="--height 40% --layout=reverse"
-export FZF_ALT_C_COMMAND="fd --type d -H || find . -type d"
-export FZF_COMPLETION_TRIGGER='\'
-export FZF_TMUX=1
-export FZF_TMUX_HEIGHT='80%'
-
-
-# --------------------
 # History
 # --------------------
 
@@ -207,23 +189,9 @@ bin_doctor() {
 
 
 # --------------------
-# FZF
+# Extra
 # --------------------
 
-case `uname` in
-  Darwin)
-  FZF_HOME=/usr/local/opt/fzf
-  if [[ ! "$PATH" == */usr/local/opt/fzf/bin* ]]; then
-    export PATH="${PATH:+${PATH}:}/usr/local/opt/fzf/bin"
-  fi
-  ;;
-  Linux)
-  ;;
-esac
-# [ -d $HOME/.zext ] && for zf in $HOME/.zext
-# do 
-#   [ -f $zh ] && source $zf
-# done
 source ~/.zext/fzf.zsh
 
 

@@ -78,8 +78,13 @@ call plug#end()
 " Plugin setting
 " -------------------- 
                                                                " - [fzf]
-set rtp+=/usr/local/opt/fzf
-"set rtp+=~/.linuxbrew/opt/fzf
+if !empty(glob('/usr/local/opt/fzf'))
+  set rtp+=/usr/local/opt/fzf
+elseif !empty(glob('/home/linuxbrew/.linuxbrew/opt/fzf'))
+  set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
+elseif !empty(glob('~/.linuxbrew/opt/fzf'))
+  set rtp+=~/.linuxbrew/opt/fzf
+endif
                                                                " - [francoiscabrol/ranger]
 let g:ranger_map_keys = 0
 let g:ranger_replace_netrw = 0                                 " open ranger when vim open a directory
@@ -240,6 +245,7 @@ source ~/.config/nvim/plugin-config/vim-go.vim
 source ~/.config/nvim/plugin-config/floaterm.vim
 source ~/.config/nvim/plugin-config/vim-easy-align.vim
 source ~/.config/nvim/plugin-config/limelight.vim
+source ~/.config/nvim/plugin-config/markdown.vim
 
 " Mnemonic
 " zz
