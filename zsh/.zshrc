@@ -19,6 +19,7 @@ case `uname` in
   export PATH=/usr/local/opt/curl/bin:$PATH
   ;;
   Linux)
+  [ -e /home/linuxbrew/.linuxbrew/bin/brew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
   [ -e $HOME/.linuxbrew/bin/brew ] && eval $($HOME/.linuxbrew/bin/brew shellenv)
   ;;
 esac
