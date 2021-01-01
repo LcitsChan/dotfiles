@@ -60,19 +60,18 @@ yabai -m rule --add app="^System Information$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Activity Monitor$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Path Finder$" manage=off
 yabai -m rule --add app="^TeamViewer$" sticky=off layer=above manage=off
-yabai -m rule --add app="Fantastical" manage=off
-yabai -m rule --add app="^Spotify$" manage=off
 yabai -m rule --add app="^iTerm2$" sticky=on manage=off layer=above grid=200:30:1:118:28:80 opacity=0.9
 yabai -m rule --add app="^Terminal$" sticky=on manage=off
-yabai -m rule --add app="^Flux$" manage=off
 yabai -m rule --add app="^Time Out$" manage=off
-yabai -m rule --add app="^perl_client_app$" manage=off
 yabai -m rule --add app="^console$" manage=off
 yabai -m rule --add app="^Harvest$" manage=off
-yabai -m rule --add app="^CiscoSparkHelper$" manage=off
 yabai -m rule --add app="^Logi Options$" manage=off
-yabai -m rule --add app="^Cisco Webex Start$" manage=off
 yabai -m rule --add app="^Private Internet Access$" manage=off
+
+yabai -m rule --add app="^Microsoft To Do$" space=2
+
+music='^(Spotify|NeteaseMusic|iTunes)$'
+yabai -m rule --add app="${music}" manage=off space=3
 
 killall limelight &> /dev/null
 limelight &> /dev/null &

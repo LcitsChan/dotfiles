@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # install brew dependencies
 echo "===> install brew dependencies"
 if command -v brew 1>/dev/null 2>&1
