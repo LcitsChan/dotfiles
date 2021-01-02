@@ -247,14 +247,6 @@ source ~/.config/nvim/plugin-config/vim-easy-align.vim
 source ~/.config/nvim/plugin-config/limelight.vim
 source ~/.config/nvim/plugin-config/markdown.vim
 
-" Mnemonic
-" zz
-" << / >>
-" Insert mode: <C-V><TAB>
-" :tern
-" :retab
-" :help i_CTRL-J
-
 " Experimental
 highlight NonText ctermfg=59 guifg=#727272
 highlight! link SignColumn Normal
