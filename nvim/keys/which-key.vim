@@ -64,7 +64,7 @@ let g:which_key_map.f = {
       \ 'f' : [':Farr --source=vimgrep'    , '★ file'],
       \ 'p' : [':Farr --source=rgnvim'     , '★ project'],
       \ 'F' : [':Farf --source=vimgrep'    , '★ file (only find)'],
-      \ 'P' : [':Farf --source=vimgrep'    , '★ project (only find)'],
+      \ 'P' : [':Farf --source=rgnvim'     , '★ project (only find)'],
       \ }
 
 " s for search
@@ -144,10 +144,11 @@ let g:which_key_map.y = {
       \ 'name' : '+yank' ,
       \ 'l' : [':CocList yank'    , '★ yank list'],
       \ }
-" nnoremap <leader>yf yiw/<c-r>"<cr>
-" aleader
-nnoremap <leader>ys g*<C-O>
-nnoremap <leader>yf *<C-O>
-vnoremap <leader>yf y/<C-R>"<CR><C-O>
+
+" g is for git
+let g:which_key_map.g = {
+      \ 'name' : '+git' ,
+      \ 'f' : [':GitGutterFold'    , '★ fold unchanged'],
+      \ }
 
 call which_key#register('<Space>', "g:which_key_map")

@@ -73,6 +73,11 @@ Plug 'mzlogin/vim-markdown-toc'
 Plug 'dhruvasagar/vim-table-mode'
 call plug#end()
 
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q
+  \| endif
+
 
 " -------------------- 
 " Plugin setting
@@ -252,3 +257,9 @@ highlight NonText ctermfg=59 guifg=#727272
 highlight! link SignColumn Normal
 
 let g:vista_default_executive = 'coc'
+
+set foldmethod=syntax
+set foldlevel=99
+set foldenable
+set viewoptions=cursor,folds,slash,unix
+
