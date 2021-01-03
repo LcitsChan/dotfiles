@@ -1,0 +1,101 @@
+" --------------------
+" Leader key
+" --------------------
+let mapleader=" "
+let localleader=","
+
+
+" --------------------
+" Plugins
+" --------------------
+set surround
+set multiple-cursors
+set commentary
+set ReplaceWithRegister
+set highlightedyank
+
+let g:highlightedyank_highlight_duration = "500"
+
+
+" --------------------
+" Basic setting
+" --------------------
+set wildmenu
+set showmode
+set so=100
+
+set number
+set relativenumber
+
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+set visualbell
+set noerrorbells
+
+
+" --------------------
+" Basic Mapping
+" --------------------
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+noremap <C-j> <Down>
+noremap <C-k> <Up>
+noremap <Leader><CR> :nohl<CR>
+
+" Create new window
+nnoremap tl :vsplit<CR>
+nnoremap tj :split<CR>
+
+" System Clipboard
+nnoremap Y y$
+nnoremap <Leader>yy "+yy
+nnoremap <Leader>yY "+y$
+vnoremap <Leader>yy "+y
+noremap <Leader>yp "+p
+noremap <Leader>yP "+P
+
+" Searching
+nnoremap <Leader>ys g*<C-O>
+nnoremap <Leader>yf *<C-O>
+vnoremap <Leader>yf y/<C-R>"<CR><C-O>
+
+" Templete for replacement
+map <Leader><Leader> / <CR>:nohlsearch<CR>c6l
+imap ,,, <+ph+>
+nmap ,,, i<+ph+><Esc>
+
+
+" --------------------
+" Action Mapping
+" --------------------
+" Toggle Tool Windows
+map tt <Action>(ActivateProjectToolWindow)
+map ti <Action>(ActivateTerminalToolWindow)
+
+" Goto Action
+map <Leader>e <Action>(RecentFiles)
+map <Leader>ae <Action>(SearchEverywhere)
+map <Leader>ac <Action>(GotoClass)
+map <Leader>af <Action>(GotoFile)
+map <Leader>as <Action>(GotoSymbol)
+map <Leader>aa <Action>(GotoAction)
+
+" Searching
+map <Leader>ss <Action>(FindInPath)
+map <Leader>ff <Action>(Replace)
+
+" Selection
+vmap <BS> <Action>(EditorUnSelectWord)
+map <CR> <Action>(EditorSelectWord)
+
+" Document
+map gh <Action>(QuickJavaDoc)
+
+" --------------------
+"  Basic common
+" --------------------
+map ,r <Action>(Run)
+map ,s <Action>(Stop)
