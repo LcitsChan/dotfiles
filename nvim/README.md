@@ -21,6 +21,7 @@
   * [Yank/Paste](#yankpaste)
   * [Searching](#searching-1)
 * [Plugins](#plugins)
+  * [Selection](#selection)
   * [Find and Replace](#find-and-replace)
   * [Markdown](#markdown)
 
@@ -158,6 +159,23 @@ $ yarn global add neovig
 
 ## Plugins
 
+### Selection
+
+* [wildfire.vim]() 
+* [vim-visual-multi]() 
+
+| trigger           | action                                  | mode |
+|-------------------|-----------------------------------------|------|
+| <kbd>\<CR></kbd>  | extend selection                        | n/v  |
+| <kbd>\<BS></kbd>  | shrink selection                        | v    |
+| <kbd>\<C-N></kbd> | start multi select                      | n/v  |
+| n                 | select next match text                  | v-m  |
+| N                 | select previous occurrence              | v-m  |
+| [                 | move to previous occurrence             | v-m  |
+| ]                 | move to next occurrence                 | v-m  |
+| q                 | skip current and select next occurrence | v-m  |
+| Q                 | remove current selected                 | v-m  |
+
 ### Find and Replace
 
 * [far.vim](https://github.com/brooth/far.vim) 
@@ -179,15 +197,15 @@ $ yarn global add neovig
 
 | trigger                     | action            | mode |
 |-----------------------------|-------------------|------|
-| <kbd>\<localleader></kbd>pp | open md preview   | n/v  |
-| <kbd>\<localleader></kbd>pc | close md preview  | n/v  |
-| <kbd>\<localleader></kbd>t  | toggge table mode | n/v  |
-| <kbd>\<localleader></kbd>k  | tag kbd           | n/v  |
-| <kbd>\<localleader></kbd>b  | bold              | n/v  |
-| <kbd>\<localleader></kbd>e  | em                | n/v  |
-| <kbd>\<localleader></kbd>tl | text link         | n/v  |
-| <kbd>\<localleader></kbd>ml | image link        | n/v  |
-| <kbd>\<localleader></kbd>c  | code block        | v    |
+| <kbd>\<LocalLeader></kbd>pp | open md preview   | n/v  |
+| <kbd>\<LocalLeader></kbd>pc | close md preview  | n/v  |
+| <kbd>\<LocalLeader></kbd>t  | toggge table mode | n/v  |
+| <kbd>\<LocalLeader></kbd>k  | tag kbd           | n/v  |
+| <kbd>\<LocalLeader></kbd>b  | bold              | n/v  |
+| <kbd>\<LocalLeader></kbd>e  | em                | n/v  |
+| <kbd>\<LocalLeader></kbd>tl | text link         | n/v  |
+| <kbd>\<LocalLeader></kbd>ml | image link        | n/v  |
+| <kbd>\<LocalLeader></kbd>c  | code block        | v    |
 | kd                          | tag kbd           | i    |
 | b                           | bold              | i    |
 | em                          | em                | i    |

@@ -17,36 +17,38 @@ augroup go
   autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
   " :GoBuild and :GoTestCompile
-  autocmd FileType go nmap <localleader>b :<C-u>call <SID>build_go_files()<CR>
+  autocmd FileType go nmap <LocalLeader>b :<C-u>call <SID>build_go_files()<CR>
 
   " :GoTest
-  autocmd FileType go nmap <localleader>t  <Plug>(go-test)
+  autocmd FileType go nmap <LocalLeader>t  <Plug>(go-test)
 
   " :GoRun
-  autocmd FileType go nmap <localleader>r  S<Plug>(go-run)
+  autocmd FileType go nmap <LocalLeader>r  S<Plug>(go-run)
 
   " :GoDoc
-  autocmd FileType go nmap <localleader>d <Plug>(go-doc)
+  autocmd FileType go nmap <LocalLeader>d <Plug>(go-doc)
 
   " :GoCoverageToggle
-  autocmd FileType go nmap <localleader>c <Plug>(go-coverage-toggle)
+  autocmd FileType go nmap <LocalLeader>c <Plug>(go-coverage-toggle)
 
   " :GoInfo
-  autocmd FileType go nmap <localleader>i <Plug>(go-info)
+  autocmd FileType go nmap <LocalLeader>i <Plug>(go-info)
 
   " :GoMetaLinter
-  autocmd FileType go nmap <localleader>l <Plug>(go-metalinter)
+  autocmd FileType go nmap <LocalLeader>l <Plug>(go-metalinter)
 
   " :GoDef but opens in a vertical split
-  autocmd FileType go nmap <localleader>v <Plug>(go-def-vertical)
+  autocmd FileType go nmap <LocalLeader>v <Plug>(go-def-vertical)
   " :GoDef but opens in a horizontal split
-  autocmd FileType go nmap <localleader>s <Plug>(go-def-split)
+  autocmd FileType go nmap <LocalLeader>s <Plug>(go-def-split)
 
   " :GoAlternate  commands :A, :AV, :AS and :AT
   autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
   autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
   autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
   autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+
+  autocmd FileType go setlocal foldmethod=syntax
 augroup END
 
 " build_go_files is a custom function that builds or compiles the test file.

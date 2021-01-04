@@ -10,12 +10,17 @@ let g:coc_global_extensions = [
   \'coc-vimlsp',
   \'coc-json',
   \'coc-sh',
+  \'coc-tsserver',
+  \'coc-eslint',
+  \'coc-vetur',
   \'coc-pyright',
   \'coc-prettier',
   \'coc-flutter',
   \'coc-diagnostic',
   \'coc-snippets',
   \'coc-yank'] 
+
+  " \'coc-tslint',
   " \'coc-fzf-preview',
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable

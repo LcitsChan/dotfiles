@@ -258,7 +258,7 @@ highlight! link SignColumn Normal
 
 let g:vista_default_executive = 'coc'
 
-set foldmethod=syntax
+set foldmethod=indent
 set foldlevel=99
 set foldenable
 set viewoptions=cursor,folds,slash,unix

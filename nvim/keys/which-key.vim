@@ -1,11 +1,11 @@
 let g:which_key_map = {}
 
-nnoremap <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
-vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
+nnoremap <silent> <Leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
+vnoremap <silent> <Leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 
 " - [general]
-map <LEADER><CR> :nohlsearch<CR>
+map <Leader><CR> :nohlsearch<CR>
 inoremap <c-n> <nop>
 " - [coc]
 map tt :CocCommand explorer<CR>
@@ -22,8 +22,8 @@ endif
 " - [undotree]
 nnoremap tu :UndotreeToggle<CR>
 " - [tomtom/tcomment_vim]
-" nmap <leader>/ gcc
-" vmap <leader>/ gc
+" nmap <Leader>/ gcc
+" vmap <Leader>/ gc
 
 
 

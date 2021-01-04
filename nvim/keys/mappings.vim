@@ -1,6 +1,6 @@
 " Edit vim config
-map <LEADER>rc :e $MYVIMRC<CR>
-map <LEADER>rv :source $MYVIMRC<CR>
+map <Leader>rc :e $MYVIMRC<CR>
+map <Leader>rv :source $MYVIMRC<CR>
 
 " Navigation
 noremap j gj
@@ -34,18 +34,18 @@ nnoremap tj :set splitbelow<CR>:split<CR>
 
 " System Clipboard
 nnoremap Y y$
-nnoremap <LEADER>yy "+yy
-nnoremap <LEADER>yY "+y$
-vnoremap <LEADER>yy "+y
-noremap <LEADER>yp "+p
-noremap <LEADER>yP "+P
+nnoremap <Leader>yy "+yy
+nnoremap <Leader>yY "+y$
+vnoremap <Leader>yy "+y
+noremap <Leader>yp "+p
+noremap <Leader>yP "+P
 
 " Searching
-nnoremap <leader>ys g*<C-O>
-nnoremap <leader>yf *<C-O>
-vnoremap <leader>yf y/<C-R>"<CR><C-O>
+nnoremap <Leader>ys g*<C-O>
+nnoremap <Leader>yf *<C-O>
+vnoremap <Leader>yf y/<C-R>"<CR><C-O>
 
 " Templete for replacement 
-map <LEADER><LEADER> /<+ph+><CR>:nohlsearch<CR>c6l
+map <Leader><Leader> /<+ph+><CR>:nohlsearch<CR>c6l
 imap ,,, <+ph+> 
 nmap ,,, i<+ph+> 
