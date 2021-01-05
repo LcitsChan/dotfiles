@@ -33,7 +33,6 @@ Plug 'tpope/vim-surround'                                 " Quoting / Parenthesi
 Plug 'tpope/vim-repeat'                                   " Enhance . repeat(expr, count)
 Plug 'gcmt/wildfire.vim'                                  " Smart selection of the closest text object
 Plug 'junegunn/goyo.vim'                                  " Markdown: focus mode
-Plug 'SirVer/ultisnips'                                   " Snippets utils
 Plug 'mg979/vim-visual-multi'                             " Multi cursor
 Plug 'liuchengxu/vim-which-key'                           " Keybinding viewer
 Plug 'psliwka/vim-smoothie'                               " Smooth scrolling
@@ -52,8 +51,10 @@ Plug 'junegunn/vim-easy-align'                            " Alignment
 Plug 'jiangmiao/auto-pairs'                               " Auto pairs for symbol
                                                           " -- svn
 Plug 'airblade/vim-gitgutter'                             " Shows a git diff in the sign column.
-Plug 'junegunn/gv.vim'                                    " Git commit browse
 Plug 'tpope/vim-fugitive'                                 " Fugitive is the premier Vim plugin for Git
+Plug 'tpope/vim-rhubarb'                                  " GitHub extension for fugitive.vim
+Plug 'junegunn/gv.vim'                                    " Git commit browse
+Plug 'rhysd/git-messenger.vim'                            " Reveal the commit messages under the cursor
                                                           " -- language support
 Plug 'dart-lang/dart-vim-plugin'                          " Dart language Support
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }        " Go plugin
@@ -93,12 +94,6 @@ endif
                                                                " - [francoiscabrol/ranger]
 let g:ranger_map_keys = 0
 let g:ranger_replace_netrw = 0                                 " open ranger when vim open a directory
-                                                               " - [SirVer/ultisnips]
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsExpandTrigger="<c-e>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
                                                                " - [mbbill/undotree]
 if has("persistent_undo")
     set undodir=~/.config/nvim/tmp/undo

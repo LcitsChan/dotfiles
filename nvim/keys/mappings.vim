@@ -5,8 +5,6 @@ map <Leader>rv :source $MYVIMRC<CR>
 " Navigation
 noremap j gj
 noremap k gk
-noremap J 5j
-noremap K 5k
 
 " Quit and Save
 noremap <silent> Q :q<CR>

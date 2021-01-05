@@ -9,6 +9,7 @@
   * [Install additional support](#install-additional-support)
   * [List of programs required](#list-of-programs-required)
 * [Tips and tricks](#tips-and-tricks)
+  * [Basic](#basic)
   * [Word/Line completion](#wordline-completion)
   * [Searching](#searching)
   * [Indenting](#indenting)
@@ -21,6 +22,7 @@
   * [Yank/Paste](#yankpaste)
   * [Searching](#searching-1)
 * [Plugins](#plugins)
+  * [Git](#git)
   * [Selection](#selection)
   * [Find and Replace](#find-and-replace)
   * [Markdown](#markdown)
@@ -57,12 +59,26 @@ $ yarn global add neovig
 
 ## Tips and tricks
 
+### Basic
+
+| trigger           | action                                | mode |
+|-------------------|---------------------------------------|------|
+| <kbd>\<C-I></kbd> | same as: <kbd>\<Tab></kbd>            | i/x  |
+| <kbd>\<C-H></kbd> | same as: <kbd>\<BS></kbd>             | i/x  |
+| <kbd>\<C-M></kbd> | same as: <kbd>\<CR></kbd>             | i/x  |
+| <kbd>\<C-J></kbd> | linefeed, same as: <kbd>\<NL></kbd>   | i/x  |
+| <kbd>\<C-[></kbd> | same as: <kbd>\<Esc></kbd>            | i/x  |
+| <kbd>\<C-C></kbd> | same as: <kbd>\<Esc></kbd>            | i/x  |
+| <kbd>\<C-O></kbd> | execute cmd and return to Insert mode | i    |
+| <kbd>\<C-A></kbd> | increasing number                     | n    |
+| <kbd>\<C-X></kbd> | decreasing number                     | n    |
+
 ### Word/Line completion
 
-| trigger | action                      | mode |
-|---------|-----------------------------|------|
-| <kbd>\<C-W></kbd>   | erases word [begin, curror] | i/x  |
-| <kbd>\<C-U></kbd>   | erases word [begin, curror] | i/x  |
+| trigger           | action                      | mode |
+|-------------------|-----------------------------|------|
+| <kbd>\<C-W></kbd> | erases word                 | i/x  |
+| <kbd>\<C-U></kbd> | erases word [begin, curror] | i/x  |
 
 ### Searching
 
@@ -78,10 +94,10 @@ $ yarn global add neovig
 
 ### Indenting
 
-| trigger                   | action                                | mode |
-|---------------------------|---------------------------------------|------|
-| <kbd>\<C-T></kbd> / <kbd>\<C-D></kbd>               | indent current line forward, backward | i    |
-| <kbd>></kbd> / <kbd><</kbd> | indent selection                      | v    |
+| trigger                               | action                                | mode |
+|---------------------------------------|---------------------------------------|------|
+| <kbd>\<C-T></kbd> / <kbd>\<C-D></kbd> | indent current line forward, backward | i    |
+| <kbd>></kbd> / <kbd><</kbd>           | indent selection                      | v    |
 
 ### Folding
 
@@ -158,6 +174,12 @@ $ yarn global add neovig
 | <kbd>\<Leader></kbd>yf | search selected text                   | v    |
 
 ## Plugins
+
+### Git
+
+| trigger                | action                   | mode |
+|------------------------|--------------------------|------|
+| <kbd>\<Leader></kbd>gf | fold all unchanged lines | n/v  |
 
 ### Selection
 

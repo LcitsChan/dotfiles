@@ -22,10 +22,10 @@ endif
 " - [undotree]
 nnoremap tu :UndotreeToggle<CR>
 " - [tomtom/tcomment_vim]
-" nmap <Leader>/ gcc
-" vmap <Leader>/ gc
-
-
+nmap <Leader>/ gcc
+vmap <Leader>/ gc
+" snippets
+imap <C-E> <Plug>(coc-snippets-expand-jump)
 
 let g:which_key_map['e'] = [ ':Buffers'   , 'recent visited' ]
 " conflit : 
@@ -45,11 +45,10 @@ let g:which_key_map['e'] = [ ':Buffers'   , 'recent visited' ]
 
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,
-      \ '1' : ['b1'        , '  buffer 1']        ,
-      \ '2' : ['b2'        , '  buffer 2']        ,
       \ 'd' : ['bd'        , '★ delete-buffer']   ,
-      \ 'c' : ['%bd|e#'    , '★ delete-buffers but this']   ,
+      \ 'o' : ['%bd|e#'    , '★ delete-buffers but this']   ,
       \ 'D' : ['bd!'       , '  force delete-buffer']   ,
+      \ 'c' : [':DiffOrig' , '★ show diff']   ,
       \ 'f' : ['bfirst'    , '  first-buffer']    ,
       \ 'h' : ['Startify'  , '  home-buffer']     ,
       \ 'l' : ['blast'     , '  last-buffer']     ,
@@ -71,28 +70,21 @@ let g:which_key_map.f = {
 let g:which_key_map.s = {
       \ 'name' : '+search' ,
       \ '/' : [':History/'                              , '★ history'],
-      \ ';' : [':FzfPreviewCommandPalette'              , '★ commands'],
       \ 'a' : [':Ag'                                    , '★ text Ag'],
-      \ 'b' : [':CocCommand fzf-preview.BufferLines'    , '  current buffer'],
-      \ 'B' : [':CocCommand fzf-preview.Buffers'        , '  open buffers'],
+      \ 'b' : [':BLines'                                , '  current buffer'],
       \ 'c' : [':Commits'                               , '  commits'],
       \ 'C' : [':BCommits'                              , '  buffer commits'],
-      \ 'd' : [':CocCommand fzf-preview.DirectoryFiles' , '  directories'],
-      \ 'f' : [':CocCommand fzf-preview.ProjectFiles'   , '  files'],
-      \ 'g' : [':CocCommand fzf-preview.GitFiles'       , '  git files'],
-      \ 'G' : [':GFiles?'                               , '★ modified git files'],
+      \ 'g' : [':GFiles?'                               , '★ modified git files'],
       \ 'h' : [':History'                               , '★ file history'],
       \ 'H' : [':History:'                              , '  command history'],
       \ 'l' : [':Lines'                                 , '  lines'] ,
-      \ 'm' : [':CocCommand fzf-preview.Marks'          , '  list marks'],
-      \ 'M' : [':Maps'                                  , '  normal maps'] ,
+      \ 'm' : [':Maps'                                  , '  normal maps'] ,
       \ 'p' : [':Helptags'                              , '  help tags'] ,
       \ 'P' : [':Tags'                                  , '  project tags'],
-      \ 'q' : [':CocCommand fzf-preview.QuickFix'       , '  quickfix list'],
       \ 's' : [':CocList snippets'                      , '★ snippets'],
       \ 'S' : [':Colors'                                , '  color schemes'],
-      \ 't' : [':Rg'                                    , '  text Rg'],
-      \ 'T' : [':BTags'                                 , '  buffer tags'],
+      \ 'r' : [':Rg'                                    , '  text Rg'],
+      \ 't' : [':BTags'                                 , '  buffer tags'],
       \ 'w' : [':Windows'                               , '★ search windows'],
       \ 'y' : [':Filetypes'                             , '  file types'],
       \ 'z' : [':FZF'                                   , '★ FZF'],
@@ -148,7 +140,22 @@ let g:which_key_map.y = {
 " g is for git
 let g:which_key_map.g = {
       \ 'name' : '+git' ,
-      \ 'f' : [':GitGutterFold'    , '★ fold unchanged'],
+      \ 'b' : [':Git blame'                        , '* blame'],
+      \ 'B' : [':GBrowse'                          , '  browse'],
+      \ 'c' : [':Gvdiffsplit'                      , '* diff compare'],
+      \ 'd' : [':Git diff'                         , '  diff'],
+      \ 'f' : [':GitGutterFold'                    , '★ fold unchanged'],
+      \ 'g' : [':Gstatus'                          , '  status'],
+      \ 'H' : ['<Plug>(GitGutterPreviewHunk)'      , '  preview hunk'],
+      \ 'j' : ['<Plug>(GitGutterNextHunk)'         , '  next hunk'],
+      \ 'k' : ['<Plug>(GitGutterPrevHunk)'         , '  prev hunk'],
+      \ 'l' : [':Git log'                          , '  log'],
+      \ 'm' : ['<Plug>(git-messenger)'             , '  message'],
+      \ 'M' : [':Git mergetool'                    , '  Mergetool'],
+      \ 's' : ['<Plug>(GitGutterStageHunk)'        , '  stage hunk'],
+      \ 'u' : ['<Plug>(GitGutterUndoHunk)'         , '  undo hunk'],
+      \ 'v' : [':GV'                               , '  view commits'],
+      \ 'V' : [':GV!'                              , '  view buffer commits'],
       \ }
 
 call which_key#register('<Space>', "g:which_key_map")

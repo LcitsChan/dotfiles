@@ -19,4 +19,8 @@ let g:fzf_colors =
 
 command! -bang -nargs=* Lines call fzf#vim#lines(<q-args>, {'options': ['--preview-window=hidden']}, <bang>0)
 command! -bang -nargs=* BLines call fzf#vim#buffer_lines(<q-args>, {'options': ['--preview-window=hidden']}, <bang>0)
-
+command! -bar -bang Colors call fzf#vim#colors({'options': ['--preview-window=hidden']}, <bang>0)
+command! -bar -bang Helptags call fzf#vim#helptags({'options': ['--preview-window=hidden']}, <bang>0)
+command! -bar -bang Windows call fzf#vim#windows({'options': ['--preview-window=hidden']}, <bang>0)
+command! -bar -bang Maps call fzf#vim#maps("n", {'options': ['--preview-window=hidden']}, <bang>0)
+command! -bar -bang Filetypes call fzf#vim#filetypes({'options': ['--preview-window=hidden']}, <bang>0)
