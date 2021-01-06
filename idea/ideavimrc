@@ -49,6 +49,9 @@ noremap <Leader><CR> :nohl<CR>
 nnoremap tl :vsplit<CR>
 nnoremap tj :split<CR>
 
+" Quit
+nnoremap Q :q<CR>
+
 " System Clipboard
 nnoremap Y y$
 nnoremap <Leader>yy "+yy
@@ -56,6 +59,7 @@ nnoremap <Leader>yY "+y$
 vnoremap <Leader>yy "+y
 noremap <Leader>yp "+p
 noremap <Leader>yP "+P
+nmap <Leader>yl <Action>(PasteMultiple)
 
 " Searching
 nnoremap <Leader>ys g*<C-O>
@@ -71,31 +75,93 @@ nmap ,,, i<+ph+><Esc>
 " --------------------
 " Action Mapping
 " --------------------
-" Toggle Tool Windows
-map tt <Action>(ActivateProjectToolWindow)
-map ti <Action>(ActivateTerminalToolWindow)
 
-" Goto Action
-map <Leader>e <Action>(RecentFiles)
-map <Leader>ae <Action>(SearchEverywhere)
-map <Leader>ac <Action>(GotoClass)
-map <Leader>af <Action>(GotoFile)
-map <Leader>as <Action>(GotoSymbol)
-map <Leader>aa <Action>(GotoAction)
+" Selection
+map <CR> <Action>(EditorSelectWord)
+vmap <BS> <Action>(EditorUnSelectWord)
 
 " Searching
 map <Leader>ss <Action>(FindInPath)
 map <Leader>ff <Action>(Replace)
 
-" Selection
-vmap <BS> <Action>(EditorUnSelectWord)
-map <CR> <Action>(EditorSelectWord)
+" Workflow
+map <Leader>ef <Action>(ShowNavBar)
 
-" Document
-map gh <Action>(QuickJavaDoc)
+" Workbench
+nmap <Leader>ww <Action>(HideAllWindows)
+nmap <Leader>wl <Action>(JumpToLastWindow)
+nmap <Leader>wz <Action>(ToggleZenMode)
+nmap <Leader>wd <Action>(ToggleDistractionFreeMode)
+nmap <Leader>wp <Action>(TogglePresentationMode)
+nmap <Leader>wn <Action>(EditorGutterToggleGlobalLineNumbers)
+
+" Goto
+map <Leader>ae <Action>(SearchEverywhere)
+map <Leader>ac <Action>(GotoClass)
+map <Leader>af <Action>(GotoFile)
+map <Leader>al <Action>(FileStructurePopup)
+map <Leader>as <Action>(GotoSymbol)
+map <Leader>aa <Action>(GotoAction)
+map <Leader>p <Action>(GotoAction)
+
+" Recent
+map <Leader>ee <Action>(RecentFiles)
+map <Leader>er <Action>(RecentChangedFiles)
+map <Leader>el <Action>(RecentLocations)
+map <Leader>et <Action>(ShowRecentTests)
+map <Leader>ec <Action>(RecentChanges)
+
+" Refactor
+map <Leader>rf <Action>(Refactorings.QuickListPopupAction)
+map <Leader>rn <Action>(RenameElement)
+nmap <Leader>rc <Action>(ReformatCode)
+nmap <Leader>rF <Action>(ShowReformatFileDialog)
+vmap <Leader>rc <Action>(ShowReformatFileDialog)
+
+" Menu
+map <Leader>m <Action>(ShowPopupMenu)
+
+" Coding
+map ta <Action>(ShowIntentionActions)
+imap <C-A> <Action>(ShowIntentionActions)
+imap <C-I> <Action>(CodeCompletion)
+imap <C-P> <Action>(ParameterInfo)
+imap <C-E> <Action>(EditorChooseLookupItemReplace)
+
+" Local History
+nmap tu <Action>(LocalHistory.ShowHistory)
+vmap tu <Action>(LocalHistory.ShowSelectionHistory)
+
+" Hierarchy
+nmap <Leader>tb <Action>(TypeHierarchy)
+nmap <Leader>ts <Action>(ActivateStructureToolWindow)
+
+" Navigate Error
+map <Leader>ej <Action>(GotoNextError)
+map <Leader>ek <Action>(GotoPreviousError)
+
+" Open preference
+nmap <Leader>, <Action>(TemplateProjectProperties)
+
+" Git
+nmap <Leader>gd <Action>(Compare.SameVersion)
+nmap <Leader>gD <Action>(Compare.LastVersion)
+nmap <Leader>gc <Action>(Git.CompareWithBranch)
+nmap <Leader>gm <Action>(Vcs.QuickListPopupAction)
+nmap <Leader>gp <Action>(ActivateVersionControlToolWindow)
+nmap <Leader>gB <Action>(Git.Branches)
+nmap <Leader>gb <Action>(Annotate)
+
+" Toggle Tool Windows
+map tt <Action>(ActivateProjectToolWindow)
+map ti <Action>(ActivateTerminalToolWindow)
 
 " --------------------
-"  Basic common
+" Android Development
 " --------------------
 map ,r <Action>(Run)
 map ,s <Action>(Stop)
+map ,g <Action>(ActivateGradleToolWindow)
+map ,b <Action>(ActivateBuildToolWindow)
+map ,t <Action>(ActivateTODOToolWindow)
+
