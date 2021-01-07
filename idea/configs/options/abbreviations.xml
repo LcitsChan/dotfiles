@@ -1,0 +1,67 @@
+<application>
+  <component name="AbbreviationManager">
+    <abbreviations>
+      <action id="ShowSettings">
+        <abbreviation name="pref" />
+      </action>
+      <action id="ActivateStructureToolWindow">
+        <abbreviation name="st" />
+      </action>
+      <action id="ActivateResourcesExplorerToolWindow">
+        <abbreviation name="rm" />
+      </action>
+      <action id="ActivateProjectProblemsToolWindow">
+        <abbreviation name="pp" />
+      </action>
+      <action id="ActivateTerminalToolWindow">
+        <abbreviation name="ti" />
+      </action>
+      <action id="ActivateProjectToolWindow">
+        <abbreviation name="pj" />
+      </action>
+      <action id="ActivateAndroidProfilerToolWindow">
+        <abbreviation name="pf" />
+      </action>
+      <action id="ActivateDartAnalysisToolWindow">
+        <abbreviation name="da" />
+      </action>
+      <action id="ActivateTODOToolWindow">
+        <abbreviation name="td" />
+      </action>
+      <action id="ActivateDeviceFileExplorerToolWindow">
+        <abbreviation name="df" />
+      </action>
+      <action id="ActivateLayoutInspectorToolWindow">
+        <abbreviation name="li" />
+      </action>
+      <action id="ActivateProblemsViewToolWindow">
+        <abbreviation name="pv" />
+      </action>
+      <action id="ActivateFlutterInspectorToolWindow">
+        <abbreviation name="fi" />
+      </action>
+      <action id="ActivateBuildVariantsToolWindow">
+        <abbreviation name="bv" />
+      </action>
+      <action id="ActivateGradleToolWindow">
+        <abbreviation name="gd" />
+      </action>
+      <action id="EditorDown" />
+      <action id="ActivateFlutterPerformanceToolWindow">
+        <abbreviation name="fp" />
+      </action>
+      <action id="ActivateEventLogToolWindow">
+        <abbreviation name="el" />
+      </action>
+      <action id="ActivateLogcatToolWindow">
+        <abbreviation name="lc" />
+      </action>
+      <action id="ActivateFlutterOutlineToolWindow">
+        <abbreviation name="fo" />
+      </action>
+      <action id="ActivateDatabaseInspectorToolWindow">
+        <abbreviation name="db" />
+      </action>
+    </abbreviations>
+  </component>
+</application>

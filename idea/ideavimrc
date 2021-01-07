@@ -114,6 +114,7 @@ map <Leader>ec <Action>(RecentChanges)
 " Refactor
 map <Leader>rf <Action>(Refactorings.QuickListPopupAction)
 map <Leader>rn <Action>(RenameElement)
+map <Leader>ro <Action>(OptimizeImports)
 nmap <Leader>rc <Action>(ReformatCode)
 nmap <Leader>rF <Action>(ShowReformatFileDialog)
 vmap <Leader>rc <Action>(ShowReformatFileDialog)
@@ -164,4 +165,3 @@ map ,s <Action>(Stop)
 map ,g <Action>(ActivateGradleToolWindow)
 map ,b <Action>(ActivateBuildToolWindow)
 map ,t <Action>(ActivateTODOToolWindow)
-
