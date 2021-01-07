@@ -1,0 +1,21 @@
+<templateSet group="Dart">
+  <template name="dsonins" value="@JsonSerializable()&#10;class $className$ {&#10;&#10;    factory $className$.fromJson(Map&lt;String,dynamic&gt; json) =&gt; _$$$className$FromJson(json);&#10;    Map&lt;String, dynamic&gt; toJson() =&gt; _$$$className$ToJson(this);&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="className" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="DART" value="true" />
+    </context>
+  </template>
+  <template name="dson" value="import 'package:json_annotation/json_annotation.dart';&#10;&#10;part '$fileName$.g.dart';&#10;@JsonSerializable()&#10;class $className$ {&#10;&#10;    factory $className$.fromJson(Map&lt;String,dynamic&gt; json) =&gt; _$$$className$FromJson(json);&#10;    Map&lt;String, dynamic&gt; toJson() =&gt; _$$$className$ToJson(this);&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="fileName" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="false" />
+    <variable name="className" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="DART" value="true" />
+    </context>
+  </template>
+  <template name="dsonfac" value="factory $className$.fromJson(Map&lt;String,dynamic&gt; json) =&gt; _$$$className$FromJson(json);&#10;Map&lt;String, dynamic&gt; toJson() =&gt; _$$$className$ToJson(this);" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="className" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="DART" value="true" />
+    </context>
+  </template>
+</templateSet>

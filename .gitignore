@@ -5,3 +5,4 @@ plugged/
 tmp
 nvim/.netrwhist
 *.lock.json
+idea/configs/options/editor.xml

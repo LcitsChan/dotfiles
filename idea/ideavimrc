@@ -51,6 +51,7 @@ nnoremap tj :split<CR>
 
 " Quit
 nnoremap Q :q<CR>
+nnoremap W :w<CR>
 
 " System Clipboard
 nnoremap Y y$
@@ -112,17 +113,19 @@ map <Leader>et <Action>(ShowRecentTests)
 map <Leader>ec <Action>(RecentChanges)
 
 " Refactor
-map <Leader>rf <Action>(Refactorings.QuickListPopupAction)
+map <Leader>rr <Action>(Refactorings.QuickListPopupAction)
 map <Leader>rn <Action>(RenameElement)
 map <Leader>ro <Action>(OptimizeImports)
 nmap <Leader>rc <Action>(ReformatCode)
-nmap <Leader>rF <Action>(ShowReformatFileDialog)
-vmap <Leader>rc <Action>(ShowReformatFileDialog)
+map <Leader>rf <Action>(ShowReformatFileDialog)
 
 " Menu
 map <Leader>m <Action>(ShowPopupMenu)
 
 " Coding
+map gi <Action>(GotoImplementation)
+map gs <Action>(GotoSuperMethod)
+map gy <Action>(GotoTypeDeclaration)
 map ta <Action>(ShowIntentionActions)
 imap <C-A> <Action>(ShowIntentionActions)
 imap <C-I> <Action>(CodeCompletion)
@@ -153,15 +156,37 @@ nmap <Leader>gp <Action>(ActivateVersionControlToolWindow)
 nmap <Leader>gB <Action>(Git.Branches)
 nmap <Leader>gb <Action>(Annotate)
 
-" Toggle Tool Windows
+" Android Development
+map <Leader>dr <Action>(Run)
+map <Leader>dR <Action>(ChooseRunConfiguration)
+map <Leader>dt <Action>(android.deploy.ApplyChanges)
+map <Leader>dh <Action>(android.deploy.CodeSwap)
+map <Leader>dd <Action>(Debug)
+map <Leader>da <Action>(AndroidConnectDebuggerAction)
+map <Leader>ds <Action>(Stop)
+map <Leader>dc <Action>(RunConfiguration)
+map <Leader>dp <Action>(Android.ChooseProfileConfiguration)
+
+" Tool windows
 map tt <Action>(ActivateProjectToolWindow)
 map ti <Action>(ActivateTerminalToolWindow)
+map <Leader>vb <Action>(ActivateBuildToolWindow)
+map <Leader>vd <Action>(ActivateDebugToolWindow)
+map <Leader>vg <Action>(ActivateGradleToolWindow)
+map <Leader>vt <Action>(ActivateTODOToolWindow)
+map <Leader>vr <Action>(ActivateRunToolWindow)
+map <Leader>vp <Action>(ActivateAndroidProfilerToolWindow)
 
-" --------------------
-" Android Development
-" --------------------
-map ,r <Action>(Run)
-map ,s <Action>(Stop)
-map ,g <Action>(ActivateGradleToolWindow)
-map ,b <Action>(ActivateBuildToolWindow)
-map ,t <Action>(ActivateTODOToolWindow)
+" Debug
+map [b <Action>(ShowExecutionPoint)
+map [s <Action>(StepOver)
+map [d <Action>(StepInto)
+map [f <Action>(ForceStepInto)
+map [w <Action>(StepOut)
+map [r <Action>(Resume)
+map [e <Action>(EvaluateExpression
+map [a <Action>(ToggleLineBreakpoint)
+map [v <Action>(ViewBreakpoints)
+
+" Others
+map <Leader>sc <Action>(NewScratchFile)

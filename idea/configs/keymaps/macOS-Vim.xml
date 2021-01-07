@@ -38,6 +38,10 @@
     <keyboard-shortcut first-keystroke="shift meta f12" />
     <keyboard-shortcut first-keystroke="ctrl f12" />
   </action>
+  <action id="MaximizeToolWindow">
+    <keyboard-shortcut first-keystroke="shift meta quote" />
+    <keyboard-shortcut first-keystroke="ctrl comma" second-keystroke="ctrl comma" />
+  </action>
   <action id="NextEditorTab">
     <keyboard-shortcut first-keystroke="shift ctrl l" />
     <keyboard-shortcut first-keystroke="shift ctrl k" />
@@ -48,6 +52,17 @@
   </action>
   <action id="QuickJavaDoc">
     <mouse-shortcut keystroke="control button2" />
+  </action>
+  <action id="ReformatCode">
+    <keyboard-shortcut first-keystroke="meta alt l" />
+    <keyboard-shortcut first-keystroke="ctrl comma" second-keystroke="c" />
+  </action>
+  <action id="ShowPopupMenu">
+    <keyboard-shortcut first-keystroke="ctrl comma" second-keystroke="m" />
+  </action>
+  <action id="ShowReformatFileDialog">
+    <keyboard-shortcut first-keystroke="shift meta alt l" />
+    <keyboard-shortcut first-keystroke="ctrl comma" second-keystroke="f" />
   </action>
   <action id="ShowSettings" />
   <action id="TypeHierarchy" />

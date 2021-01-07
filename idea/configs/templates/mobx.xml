@@ -1,0 +1,24 @@
+<templateSet group="mobx">
+  <template name="mobx" value="import 'package:mobx/mobx.dart';&#10;&#10;part '$fileName$.g.dart';&#10;class $className$ = _$className$ with _$$$className$;&#10;&#10;abstract class _$className$ with Store {&#10;  $input$&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="fileName" expression="fileNameWithoutExtension()" defaultValue="" alwaysStopAt="false" />
+    <variable name="className" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="input" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="DART" value="true" />
+    </context>
+  </template>
+  <template name="mobser" value="$anno$&#10;$type$ $variableName$;&#10;$END$" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="type" expression="&quot;type&quot;" defaultValue="" alwaysStopAt="true" />
+    <variable name="variableName" expression="&quot;variableName&quot;" defaultValue="" alwaysStopAt="true" />
+    <variable name="anno" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="DART" value="true" />
+    </context>
+  </template>
+  <template name="mobserS" value="@observable&#10;String $filed$;" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="filed" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="DART" value="true" />
+    </context>
+  </template>
+</templateSet>

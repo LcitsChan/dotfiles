@@ -3,6 +3,7 @@ let g:vim_markdown_folding_disabled = 1
 augroup markdown
   autocmd FileType markdown TableModeEnable
   autocmd FileType markdown noremap <LocalLeader>t :TableModeToggle<CR>
+  autocmd FileType markdown noremap <LocalLeader>f :TableFormat<CR>
   autocmd FileType markdown noremap <LocalLeader>pp :MarkdownPreview<CR>
   autocmd FileType markdown noremap <LocalLeader>pc :MarkdownPreviewStop<CR>
   autocmd FileType markdown nmap <LocalLeader>k ysiw<kbd>
@@ -12,7 +13,7 @@ augroup markdown
   autocmd FileType markdown nmap <LocalLeader>il ysiw]i!<Esc>f]a()<Esc>
 
   autocmd FileType markdown vmap <LocalLeader>k S<kbd>
-  autocmd FileType markdown vmap <LocalLeader>b S*lysiw*f*l
+  autocmd FileType markdown vmap <LocalLeader>b S<mbold><Esc>:%s/<\(\/\)\?mbold>/**/g<CR>
   autocmd FileType markdown vmap <LocalLeader>e S`f`
   autocmd FileType markdown vmap <LocalLeader>tl S]f]a()<Esc>
   autocmd FileType markdown vmap <LocalLeader>il S]i!<Esc>f]a()<Esc>
