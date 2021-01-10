@@ -45,6 +45,11 @@ noremap <C-j> <Down>
 noremap <C-k> <Up>
 noremap <Leader><CR> :nohl<CR>
 
+noremap L $
+noremap H ^
+noremap j gj
+noremap k gk
+
 " Create new window
 nnoremap tl :vsplit<CR>
 nnoremap tj :split<CR>
@@ -95,6 +100,7 @@ nmap <Leader>wz <Action>(ToggleZenMode)
 nmap <Leader>wd <Action>(ToggleDistractionFreeMode)
 nmap <Leader>wp <Action>(TogglePresentationMode)
 nmap <Leader>wn <Action>(EditorGutterToggleGlobalLineNumbers)
+nmap <Leader>wg <Action>(EditorToggleShowGutterIcons)
 
 " Goto
 map <Leader>ae <Action>(SearchEverywhere)
@@ -127,6 +133,7 @@ map gi <Action>(GotoImplementation)
 map gs <Action>(GotoSuperMethod)
 map gy <Action>(GotoTypeDeclaration)
 map ta <Action>(ShowIntentionActions)
+map K <Action>(QuickJavaDoc)
 imap <C-A> <Action>(ShowIntentionActions)
 imap <C-I> <Action>(CodeCompletion)
 imap <C-P> <Action>(ParameterInfo)
@@ -153,7 +160,8 @@ nmap <Leader>gD <Action>(Compare.LastVersion)
 nmap <Leader>gc <Action>(Git.CompareWithBranch)
 nmap <Leader>gm <Action>(Vcs.QuickListPopupAction)
 nmap <Leader>gp <Action>(ActivateVersionControlToolWindow)
-nmap <Leader>gB <Action>(Git.Branches)
+nmap <Leader>gm <Action>(Git.Branches)
+nmap <Leader>gB <Action>(Github.Open.In.Browser)
 nmap <Leader>gb <Action>(Annotate)
 
 " Android Development
@@ -171,11 +179,15 @@ map <Leader>dp <Action>(Android.ChooseProfileConfiguration)
 map tt <Action>(ActivateProjectToolWindow)
 map ti <Action>(ActivateTerminalToolWindow)
 map <Leader>vb <Action>(ActivateBuildToolWindow)
+map <Leader>vc <Action>(ActivateCodotaToolWindow)
 map <Leader>vd <Action>(ActivateDebugToolWindow)
 map <Leader>vg <Action>(ActivateGradleToolWindow)
 map <Leader>vt <Action>(ActivateTODOToolWindow)
 map <Leader>vr <Action>(ActivateRunToolWindow)
 map <Leader>vp <Action>(ActivateAndroidProfilerToolWindow)
+map <Leader>vo <Action>(ActivateFlutterOutlineToolWindow)
+map <Leader>vi <Action>(ActivateFlutterInspectorToolWindow)
+map <Leader>vu <Action>(ActivateFlutterPerformanceToolWindow)
 
 " Debug
 map [b <Action>(ShowExecutionPoint)
@@ -188,5 +200,24 @@ map [e <Action>(EvaluateExpression
 map [a <Action>(ToggleLineBreakpoint)
 map [v <Action>(ViewBreakpoints)
 
+" Translation
+map <Leader>i <Action>($EditorTranslateAction
+map <Leader>I <Action>($TranslateDocumentationAction)
+
+" Online Search
+nmap <Leader>uu viw<Action>(LaunchSearchAction_Google)"+y
+vmap <Leader>uu <Action>(LaunchSearchAction_Google)
+nmap <Leader>ug viw<Action>(LaunchSearchActionGit_hub)<Esc>
+vmap <Leader>ug <Action>(LaunchSearchActionGit_hub)
+nmap <Leader>us viw<Action>(LaunchSearchAction_SearchCode)<Esc>
+vmap <Leader>us <Action>(LaunchSearchAction_SearchCode)
+nmap <leader>ur viw<Action>(LaunchSearchActionG_repCode)<Esc>
+vmap <leader>ur <Action>(LaunchSearchActionG_repCode)
+
+" Sample Search
+map <leader>ns <Action>(OpenCodotaSearch)
+
 " Others
 map <Leader>sc <Action>(NewScratchFile)
+map <Leader>up <Action>(WelcomeScreen.Plugins)
+map <Leader>uv <Action>(Rainbow.ScopeHighlightingAction)

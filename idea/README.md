@@ -23,8 +23,11 @@
   * [Android Development](#android-development)
   * [Tool windows](#tool-windows)
   * [Debug](#debug)
+  * [Translation](#translation)
+  * [Online Search](#online-search)
   * [Others](#others)
 * [Mnemonic](#mnemonic)
+* [Plugins](#plugins)
 * [Tips and tricks](#tips-and-tricks)
 
 <!-- vim-markdown-toc -->
@@ -104,6 +107,7 @@
 | <kbd>Leader</kbd>wz     | zen mode                             | n      |
 | <kbd>Leader</kbd>wp     | presentation mode                    | n      |
 | <kbd>**Leader**</kbd>wn | show line numbers                    | n      |
+| <kbd>**Leader**</kbd>wg | show gutter icons                    | n      |
 
 ### Goto
 
@@ -150,6 +154,7 @@
 | **gi**         | goto implementation        | n/v  |
 | **gs**         | goto super method          | n/v  |
 | **gy**         | goto type declaration      | n/v  |
+| **K**          | show document              | n/v  |
 | <kbd>C-A</kbd> | show intention actions     | i    |
 | <kbd>C-I</kbd> | code completion            | i    |
 | <kbd>C-P</kbd> | show params info           | i    |
@@ -186,7 +191,8 @@
 | <kbd>Leader</kbd>gc | compare with branch            | n    |
 | <kbd>Leader</kbd>gm | show vcs actions menu          | n    |
 | <kbd>Leader</kbd>gb | git blame                      | n    |
-| <kbd>Leader</kbd>gB | git Branches                   | n    |
+| <kbd>Leader</kbd>gB | open remote repository         | n    |
+| <kbd>Leader</kbd>gm | git Branches                   | n    |
 
 ### Android Development
 
@@ -203,16 +209,20 @@
 
 ### Tool windows
 
-| trigger             | action   | mode |
-|---------------------|----------|------|
-| tt                  | Project  | n/v  |
-| ti                  | Terminal | n/v  |
-| <kbd>Leader</kbd>vb | Build    | n/v  |
-| <kbd>Leader</kbd>vd | Debug    | n/v  |
-| <kbd>Leader</kbd>vg | Gradle   | n/v  |
-| <kbd>Leader</kbd>vr | Run      | n/v  |
-| <kbd>Leader</kbd>vt | TODO     | n/v  |
-| <kbd>Leader</kbd>vp | Profiler | n/v  |
+| trigger             | action              | mode |
+|---------------------|---------------------|------|
+| tt                  | Project             | n/v  |
+| ti                  | Terminal            | n/v  |
+| <kbd>Leader</kbd>vb | Build               | n/v  |
+| <kbd>Leader</kbd>vc | Codota              | n/v  |
+| <kbd>Leader</kbd>vd | Debug               | n/v  |
+| <kbd>Leader</kbd>vg | Gradle              | n/v  |
+| <kbd>Leader</kbd>vr | Run                 | n/v  |
+| <kbd>Leader</kbd>vt | TODO                | n/v  |
+| <kbd>Leader</kbd>vp | Profiler            | n/v  |
+| <kbd>Leader</kbd>vo | Flutter Outline     | n/v  |
+| <kbd>Leader</kbd>vi | Flutter Inspector   | n/v  |
+| <kbd>Leader</kbd>vu | Flutter Performance | n/v  |
 
 ### Debug
 
@@ -228,11 +238,31 @@
 | [a      | toggle line breakpoint       | n/v  |
 | [v      | show breakpoints tool window | n/v  |
 
+### Translation
+
+| trigger            | action                      | mode |
+|--------------------|-----------------------------|------|
+| <kbd>Leader</kbd>i | translate word under cursor | n    |
+| <kbd>Leader</kbd>i | translate selection         | v    |
+| <kbd>Leader</kbd>I | translate document          | n/v  |
+
+### Online Search 
+
+| trigger             | action                               | mode |
+|---------------------|--------------------------------------|------|
+| <kbd>Leader</kbd>uu | google word under cursor / selection | n    |
+| <kbd>Leader</kbd>ug | search on Github                     | n/v  |
+| <kbd>Leader</kbd>us | search code on SearchCode            | n/v  |
+| <kbd>Leader</kbd>ur | search code on GrepCode              | n/v  |
+| <kbd>Leader</kbd>uc | search code on Codota                | n/v  |
+
 ### Others
 
-| trigger             | action              | mode |
-|---------------------|---------------------|------|
-| <kbd>Leader</kbd>sc | create scratch file | n/v  |
+| trigger             | action                     | mode |
+|---------------------|----------------------------|------|
+| <kbd>Leader</kbd>ns | create scratch file        | n/v  |
+| <kbd>Leader</kbd>up | search plugins             | n/v  |
+| <kbd>Leader</kbd>uv | highlight scope in brakets | n/v  |
 
 
 ## Mnemonic
@@ -249,6 +279,17 @@
 | <kbd>Leader</kbd>w | workbench            |
 | [                  | debug                |
 
+## Plugins
+
+* [IdeaVIM]()
+* [Statistic]()
+* [Codota]()
+* [Rainbow Brackets]()
+* [checkStyle]()
+* [findbugs]()
+* [pmd]()
+* [Translation]()
+* [OnlineSearch]()
 
 ## Tips and tricks
 
