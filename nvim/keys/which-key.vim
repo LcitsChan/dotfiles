@@ -26,6 +26,11 @@ nmap <Leader>/ gcc
 vmap <Leader>/ gc
 " snippets
 imap <C-E> <Plug>(coc-snippets-expand-jump)
+" translator
+nnoremap <silent><expr> <C-J> translator#window#float#has_scroll() ?
+                            \ translator#window#float#scroll(1) : "\<C-J>"
+nnoremap <silent><expr> <C-K> translator#window#float#has_scroll() ?
+                            \ translator#window#float#scroll(0) : "\<C-K>"
 
 let g:which_key_map['e'] = [ ':Buffers'   , 'recent visited' ]
 " conflit : 
@@ -157,5 +162,11 @@ let g:which_key_map.g = {
       \ 'v' : [':GV'                               , '  view commits'],
       \ 'V' : [':GV!'                              , '  view buffer commits'],
       \ }
+
+nmap <silent> <Leader>uu viw<Plug>SearchVisual
+vmap <silent> <Leader>uu <Plug>SearchVisual
+
+nmap <silent> <Leader>i viw<Plug>TranslateWV
+vmap <silent> <Leader>i <Plug>TranslateWV
 
 call which_key#register('<Space>', "g:which_key_map")

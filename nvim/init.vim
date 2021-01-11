@@ -70,8 +70,13 @@ Plug 'ap/vim-css-color'                                   " Realtime render colo
                                                           " -- markdown
 Plug 'plasticboy/vim-markdown'                            " Markdown Vim Mode
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-Plug 'mzlogin/vim-markdown-toc'
-Plug 'dhruvasagar/vim-table-mode'
+Plug 'mzlogin/vim-markdown-toc'                           " Markdown TOC
+Plug 'dhruvasagar/vim-table-mode'                         " Markdown table tool
+                                                          " -- tools
+Plug 'voldikss/vim-browser-search'                        " Online Search
+Plug 'voldikss/vim-translator'                            " Translator
+Plug 'neoclide/jsonc.vim'                                 " Jsonc syntax support
+
 call plug#end()
 
 autocmd VimEnter *
@@ -246,6 +251,7 @@ source ~/.config/nvim/plugin-config/floaterm.vim
 source ~/.config/nvim/plugin-config/vim-easy-align.vim
 source ~/.config/nvim/plugin-config/limelight.vim
 source ~/.config/nvim/plugin-config/markdown.vim
+source ~/.config/nvim/plugin-config/tools.vim
 
 " Experimental
 highlight NonText ctermfg=59 guifg=#727272
@@ -257,4 +263,6 @@ set foldmethod=indent
 set foldlevel=99
 set foldenable
 set viewoptions=cursor,folds,slash,unix
+
+autocmd BufRead,BufNewFile setting.json set filetype=jsonc
 

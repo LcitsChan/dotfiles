@@ -5,11 +5,14 @@ map <Leader>rv :source $MYVIMRC<CR>
 " Navigation
 noremap j gj
 noremap k gk
+noremap L $
+noremap H ^
 
 " Quit and Save
-noremap <silent> Q :q<CR>
-noremap <silent> <C-Q> :qa<CR>
-noremap <silent> <C-S> :w<CR>
+noremap <Leader>qq :q<CR>
+" noremap Q :q!<CR>
+noremap <C-Q> :qa<CR>
+noremap <C-S> :w<CR>
 
 " Easy way to navigate between windows
 nnoremap <C-j> <C-W>j

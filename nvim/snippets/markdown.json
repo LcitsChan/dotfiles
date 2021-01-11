@@ -1,12 +1,12 @@
 {
   "Add Link": {
     "prefix": "tl",
-    "body": ["[$1]($2) ", "", "$3"],
+    "body": ["[$1]($2)$3"],
     "description": "Text Link"
   },
   "Image Link": {
     "prefix": "il",
-    "body": ["![$1]($2) ", "", "$3"],
+    "body": ["![$1]($2)$3"],
     "description": "Image Link"
   },
   "Heading1": {
@@ -41,12 +41,12 @@
   },
   "Checkbox": {
     "prefix": "cb",
-    "body": ["- [ ] $1 ", "$2"],
+    "body": ["- [ ] $1 "],
     "description": "Checkbox"
   },
   "Only Checkbox": {
     "prefix": "c",
-    "body": ["[ ] $1 ", "$2"],
+    "body": ["[ ] $1 "],
     "description": "Only Checkbox"
   },
   "Bold": {

@@ -1,8 +1,6 @@
 {
   "coc.preferences.extensionUpdateCheck": "weekly",
-  "coc.preferences.formatOnSaveFiletypes": [
-    "json"
-  ],
+  "coc.preferences.formatOnSaveFiletypes": ["json"],
   "list.nextKeymap": "<C-j>",
   "list.previousKeymap": "<C-k>",
   "suggest.floatEnable": true,
@@ -39,9 +37,7 @@
     "variable": ""
   },
   "codeLens.enable": true,
-  "snippets.textmateSnippetsRoots": [
-    "~/.config/nvim/snippets/"
-  ],
+  "snippets.textmateSnippetsRoots": ["~/.config/nvim/snippets/"],
   "explorer.width": 38,
   "explorer.quitOnOpen": true,
   "explorer.sources": [
@@ -79,12 +75,8 @@
   "languageserver": {
     "golang": {
       "command": "gopls",
-      "rootPatterns": [
-        "go.mod"
-      ],
-      "filetypes": [
-        "go"
-      ]
+      "rootPatterns": ["go.mod"],
+      "filetypes": ["go"]
     }
   },
   "sh.enable": true,

@@ -1,9 +1,6 @@
 " -------------------- 
 " Coc extensions
 " -------------------- 
-" [hidden] TextEdit might fail if hidden is not set.
-" [nobackup, nowritebackup] Some servers have issues with backup files, see #649.
-" Make sure [hidden, nobackup, nowritebackup] was settled
 
 let g:coc_global_extensions = [
   \'coc-explorer', 
