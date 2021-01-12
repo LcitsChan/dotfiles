@@ -50,12 +50,18 @@ noremap H ^
 noremap j gj
 noremap k gk
 
+" Folding
+nmap za <Action>(CollapseSelection)
+
+" Comment
+map <Leader>/ <Action>(CommentByLineComment)
+
 " Create new window
 nnoremap tl :vsplit<CR>
 nnoremap tj :split<CR>
 
 " Quit
-nnoremap Q :q<CR>
+nnoremap <Leader>qq :q<CR>
 nnoremap W :w<CR>
 
 " System Clipboard
@@ -117,6 +123,7 @@ map <Leader>er <Action>(RecentChangedFiles)
 map <Leader>el <Action>(RecentLocations)
 map <Leader>et <Action>(ShowRecentTests)
 map <Leader>ec <Action>(RecentChanges)
+map <Leader>ep <Action>(ManageRecentProjects)
 
 " Refactor
 map <Leader>rr <Action>(Refactorings.QuickListPopupAction)
@@ -133,9 +140,13 @@ map gi <Action>(GotoImplementation)
 map gs <Action>(GotoSuperMethod)
 map gy <Action>(GotoTypeDeclaration)
 map ta <Action>(ShowIntentionActions)
+nmap <C-O> <Action>(Back)
+nmap <C-I> <Action>(Forward)
+nmap g; <Action>(JumpToLastChange)
+nmap g, <Action>(JumpToNextChange)
 map K <Action>(QuickJavaDoc)
 imap <C-A> <Action>(ShowIntentionActions)
-imap <C-I> <Action>(CodeCompletion)
+imap <C-K> <Action>(CodeCompletion)
 imap <C-P> <Action>(ParameterInfo)
 imap <C-E> <Action>(EditorChooseLookupItemReplace)
 
@@ -155,6 +166,7 @@ map <Leader>ek <Action>(GotoPreviousError)
 nmap <Leader>, <Action>(TemplateProjectProperties)
 
 " Git
+nmap <Leader>gg <Action>(QuickList.Menu Git)
 nmap <Leader>gd <Action>(Compare.SameVersion)
 nmap <Leader>gD <Action>(Compare.LastVersion)
 nmap <Leader>gc <Action>(Git.CompareWithBranch)
@@ -188,6 +200,7 @@ map <Leader>vp <Action>(ActivateAndroidProfilerToolWindow)
 map <Leader>vo <Action>(ActivateFlutterOutlineToolWindow)
 map <Leader>vi <Action>(ActivateFlutterInspectorToolWindow)
 map <Leader>vu <Action>(ActivateFlutterPerformanceToolWindow)
+map <Leader>vv <Action>(QuickList.Menu Tool Window)
 
 " Debug
 map [b <Action>(ShowExecutionPoint)

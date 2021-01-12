@@ -111,14 +111,15 @@
 
 ### Goto
 
-| trigger             | action                 | mode |
-|---------------------|------------------------|------|
-| <kbd>Leader</kbd>ae | goto search everywhere | n/v  |
-| <kbd>Leader</kbd>ac | goto class             | n/v  |
-| <kbd>Leader</kbd>af | goto file              | n/v  |
-| <kbd>Leader</kbd>as | goto symbol            | n/v  |
-| <kbd>Leader</kbd>aa | goto Action            | n/v  |
-| <kbd>Leader</kbd>p  | goto Action            | n/v  |
+| trigger                 | action                 | mode |
+|-------------------------|------------------------|------|
+| <kbd>Leader</kbd>ae     | goto search everywhere | n/v  |
+| <kbd>Leader</kbd>ac     | goto class             | n/v  |
+| <kbd>Leader</kbd>af     | goto file              | n/v  |
+| <kbd>Leader</kbd>as     | goto symbol            | n/v  |
+| <kbd>**Leader**</kbd>al | goto file structure    | n/v  |
+| <kbd>Leader</kbd>aa     | goto Action            | n/v  |
+| <kbd>Leader</kbd>p      | goto Action            | n/v  |
 
 ### Recent
 
@@ -129,6 +130,7 @@
 | <kbd>**Leader**</kbd>el | show recent navigate location | n/v  |
 | <kbd>Leader</kbd>et     | show recent tests             | n/v  |
 | <kbd>Leader</kbd>ec     | show recent change records    | n/v  |
+| <kbd>Leader</kbd>ep     | show recent projects          | n/v  |
 
 ### Refactor
 
@@ -186,6 +188,7 @@
 
 | trigger             | action                         | mode |
 |---------------------|--------------------------------|------|
+| <kbd>Leader</kbd>gg | show git menu                  | n    |
 | <kbd>Leader</kbd>gd | show diff from same version    | n    |
 | <kbd>Leader</kbd>gD | show diff from lastest version | n    |
 | <kbd>Leader</kbd>gc | compare with branch            | n    |
