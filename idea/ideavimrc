@@ -9,6 +9,7 @@ let localleader=","
 " Plugins
 " --------------------
 set surround
+set textobj-entire
 set multiple-cursors
 set commentary
 set ReplaceWithRegister
@@ -16,6 +17,10 @@ set highlightedyank
 
 let g:highlightedyank_highlight_duration = "500"
 
+" --------------------
+" Idea
+" --------------------
+set ideajoin
 
 " --------------------
 " Basic setting
