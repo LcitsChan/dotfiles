@@ -11,14 +11,8 @@ noremap H ^
 " Quit and Save
 noremap <Leader>qq :q<CR>
 " noremap Q :q!<CR>
-noremap <C-Q> :qa<CR>
-noremap <C-S> :w<CR>
-
-" Easy way to navigate between windows
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-h> <C-W>h
-nnoremap <C-l> <C-W>l
+noremap <Leader>qa :qa<CR>
+noremap <Leader>z :w<CR>
 
 " Resize splits with arrow keys
 nnoremap <up> :res -5<CR>

@@ -11,8 +11,6 @@ call plug#begin('~/.config/nvim/plugged')
                                                           " -- editor enhance
 Plug 'junegunn/fzf.vim'                                   " Enhance fzf: more vim command support
 Plug 'airblade/vim-rooter'                                " Changes Vim working directory to project root
-" Plug 'yuki-ycino/fzf-preview.vim', {
-"  \'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/vim-peekaboo'                              " The content of the registers Viewer
 Plug 'brooth/far.vim'                                     " Find and replace
 Plug 'majutsushi/tagbar'                                  " A class outline viewer
@@ -24,13 +22,15 @@ Plug 'farmergreg/vim-lastplace'                           " Reopen files at your
                                                           " -- explorer
 Plug 'francoiscabrol/ranger.vim'                          " Ranger file manager support, deps on bclose
 Plug 'rbgrouleff/bclose.vim'                              " Deleting a buffer without closing the window
-"Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
                                                           " -- productivity
 Plug 'lambdalisue/suda.vim'                               " Do stuff when forget vim with sudo
 Plug 'vim-scripts/ReplaceWithRegister'                    " Replace text with the contents of a register
 Plug 'tomtom/tcomment_vim'                                " Comment easy way
 Plug 'tpope/vim-surround'                                 " Quoting / Parenthesizing
 Plug 'tpope/vim-repeat'                                   " Enhance . repeat(expr, count)
+Plug 'kana/vim-textobj-user'                              " Base function for create text object
+Plug 'kana/vim-textobj-entire'                            " Text object for entire buffer
+Plug 'justinmk/vim-sneak'                                 " Jump to any location by two characters
 Plug 'gcmt/wildfire.vim'                                  " Smart selection of the closest text object
 Plug 'junegunn/goyo.vim'                                  " Markdown: focus mode
 Plug 'mg979/vim-visual-multi'                             " Multi cursor
@@ -45,6 +45,7 @@ Plug 'RRethy/vim-illuminate'                              " Highlight other word
 Plug 'blueyed/vim-diminactive'                            " Dim inactive windows
 Plug 'hotoo/highlight-cursor-word.vim'                    " Highlight words which under text-cursor(caret)
 Plug 'lfv89/vim-interestingwords'                         " Highlighting and navigating through different words in a buffer.
+Plug 'szw/vim-maximizer'                                  " Maximizes window
                                                           " -- format code
 Plug 'godlygeek/tabular'                                  " Text filtering and alignment
 Plug 'junegunn/vim-easy-align'                            " Alignment

@@ -26,11 +26,14 @@ nmap <Leader>/ gcc
 vmap <Leader>/ gc
 " snippets
 imap <C-E> <Plug>(coc-snippets-expand-jump)
-" translator
-nnoremap <silent><expr> <C-J> translator#window#float#has_scroll() ?
-                            \ translator#window#float#scroll(1) : "\<C-J>"
-nnoremap <silent><expr> <C-K> translator#window#float#has_scroll() ?
-                            \ translator#window#float#scroll(0) : "\<C-K>"
+
+" Easy way to navigate between windows
+nnoremap <silent> <C-h> <C-W>h
+nnoremap <silent> <C-l> <C-W>l
+nnoremap <silent><expr> <C-j> translator#window#float#has_scroll() ?
+                            \ translator#window#float#scroll(1) : "\<C-W>j"
+nnoremap <silent><expr> <C-k> translator#window#float#has_scroll() ?
+                            \ translator#window#float#scroll(0) : "\<C-W>k"
 
 let g:which_key_map['e'] = [ ':Buffers'   , 'recent visited' ]
 " conflit : 
@@ -145,9 +148,9 @@ let g:which_key_map.y = {
 " g is for git
 let g:which_key_map.g = {
       \ 'name' : '+git' ,
-      \ 'b' : [':Git blame'                        , '* blame'],
+      \ 'b' : [':Git blame'                        , '★ blame'],
       \ 'B' : [':GBrowse'                          , '  browse'],
-      \ 'c' : [':Gvdiffsplit'                      , '* diff compare'],
+      \ 'c' : [':Gvdiffsplit'                      , '★ diff compare'],
       \ 'd' : [':Git diff'                         , '  diff'],
       \ 'f' : [':GitGutterFold'                    , '★ fold unchanged'],
       \ 'g' : [':Gstatus'                          , '  status'],
@@ -161,6 +164,13 @@ let g:which_key_map.g = {
       \ 'u' : ['<Plug>(GitGutterUndoHunk)'         , '  undo hunk'],
       \ 'v' : [':GV'                               , '  view commits'],
       \ 'V' : [':GV!'                              , '  view buffer commits'],
+      \ }
+
+let g:maximizer_set_default_mapping = 0
+" w is for workbench
+let g:which_key_map.w = {
+      \ 'name' : '+workbench' ,
+      \ 'w' : [':MaximizerToggle!'    , '★ maximizer windows'],
       \ }
 
 nmap <silent> <Leader>uu viw<Plug>SearchVisual
