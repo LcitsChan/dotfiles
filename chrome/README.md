@@ -7,7 +7,7 @@
   * [Navigation](#navigation)
   * [History](#history)
   * [Tab](#tab)
-  * [Onmi Search](#onmi-search)
+  * [Omnibar Search](#omnibar-search)
   * [Bookmark](#bookmark)
   * [Translation](#translation)
   * [Website](#website)
@@ -15,6 +15,7 @@
     * [Bilibili](#bilibili)
 * [Chrome extensions](#chrome-extensions)
   * [Shortcut](#shortcut)
+  * [Extensions](#extensions)
 
 <!-- vim-markdown-toc -->
 
@@ -46,17 +47,21 @@
 | x       | close focus tab                | n    |
 | X       | restore recently closed tab    | n    |
 
-### Onmi Search
+### Omnibar Search
 
-| trigger | action                 | mode |
-|---------|------------------------|------|
-| og      | google                 | n    |
-| od      | duckduckgo             | n    |
-| ow      | bing                   | n    |
-| oy      | youtube                | n    |
-| ox      | recently close history | n    |
-| oh      | history                | n    |
-| tt      | history / bookmark     | n    |
+| trigger                         | action                  | mode |
+|---------------------------------|-------------------------|------|
+| <kbd>C-j</kbd> / <kbd>C-k</kbd> | navigate candidate      | c    |
+| <kbd>C-h</kbd> / <kbd>C-l</kbd> | navigate page           | c    |
+| <kbd>C-x</kbd>                  | switch omnibar position | c    |
+| og                              | google                  | n    |
+| od                              | duckduckgo              | n    |
+| ow                              | bing                    | n    |
+| oy                              | youtube                 | n    |
+| oh                              | github                  | n    |
+| ox                              | recently close history  | n    |
+| oH                              | history                 | n    |
+| tt                              | history / bookmark      | n    |
 
 ### Bookmark
 
@@ -112,3 +117,14 @@
 | <kbd>C-Q</kbd> | activate translate       | Google Translate |
 | <kbd>C-F</kbd> | activate instapaper text | Instapaper Text  |
 
+### Extensions
+
+> less is more...
+
+* [Google Translate](https://chrome.google.com/webstore/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb)
+* [Instapaper](https://chrome.google.com/webstore/detail/instapaper/ldjkgaaoikpmhmkelcgkgacicjfbofhh)
+* [Open in instapaper Text](https://chrome.google.com/webstore/detail/open-in-instapaper-text/lkdmfkbmdklogdfgcbcgdfhkmanmbhih)
+* [Surfingkeys](https://chrome.google.com/webstore/detail/surfingkeys/gfbliohnnapiefjpjlpjnehglfpaknnc)
+* [Octotree](https://chrome.google.com/webstore/detail/octotree-github-code-tree/bkhaagjahfmjljalopjnoealnfndnagc)
+* [LastPass](https://chrome.google.com/webstore/detail/lastpass-free-password-ma/hdokiejnpimakedhajhdlcegeplioahd)
+* [OneTab](https://chrome.google.com/webstore/detail/onetab/chphlpgkkbolifaimnlloiipkdnihall)
