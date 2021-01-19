@@ -54,11 +54,14 @@
 | <kbd>C-j</kbd> / <kbd>C-k</kbd> | navigate candidate      | c    |
 | <kbd>C-h</kbd> / <kbd>C-l</kbd> | navigate page           | c    |
 | <kbd>C-x</kbd>                  | switch omnibar position | c    |
-| og                              | google                  | n    |
-| od                              | duckduckgo              | n    |
-| ow                              | bing                    | n    |
-| oy                              | youtube                 | n    |
-| oh                              | github                  | n    |
+| ogg                             | google                  | n    |
+| odd                             | duckduckgo              | n    |
+| obi                             | bing                    | n    |
+| oyt                             | youtube                 | n    |
+| ogh                             | github                  | n    |
+| odh                             | docker hub              | n    |
+| oso                             | stackoverflow           | n    |
+| ofp                             | flutter pub             | n    |
 | ox                              | recently close history  | n    |
 | oH                              | history                 | n    |
 | tt                              | history / bookmark      | n    |
