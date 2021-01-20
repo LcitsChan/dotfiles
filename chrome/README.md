@@ -54,16 +54,17 @@
 | <kbd>C-j</kbd> / <kbd>C-k</kbd> | navigate candidate      | c    |
 | <kbd>C-h</kbd> / <kbd>C-l</kbd> | navigate page           | c    |
 | <kbd>C-x</kbd>                  | switch omnibar position | c    |
-| ogg                             | google                  | n    |
-| odd                             | duckduckgo              | n    |
-| obi                             | bing                    | n    |
-| oyt                             | youtube                 | n    |
-| ogh                             | github                  | n    |
-| odh                             | docker hub              | n    |
-| oso                             | stackoverflow           | n    |
-| ofp                             | flutter pub             | n    |
+| <kbd>Space</kbd>gg              | google                  | n    |
+| <kbd>Space</kbd>dd              | duckduckgo              | n    |
+| <kbd>Space</kbd>bi              | bing                    | n    |
+| <kbd>Space</kbd>yt              | youtube                 | n    |
+| <kbd>Space</kbd>gh              | github                  | n    |
+| <kbd>Space</kbd>wp              | wikipedia               | n    |
+| <kbd>Space</kbd>dh              | docker hub              | n    |
+| <kbd>Space</kbd>so              | stackoverflow           | n    |
+| <kbd>Space</kbd>pd              | pub.dev                 | n    |
 | ox                              | recently close history  | n    |
-| oH                              | history                 | n    |
+| oh                              | history                 | n    |
 | tt                              | history / bookmark      | n    |
 
 ### Bookmark
@@ -75,6 +76,8 @@
 | bd      | delete bookmark  | n    |
 
 ### Translation
+
+> `q` override old one, remove speech
 
 | trigger        | action                      | mode |
 |----------------|-----------------------------|------|
@@ -89,11 +92,11 @@
 
 | trigger             | action        | mode |
 |---------------------|---------------|------|
-| <kbd>prefix</kbd>h  | open github   | n    |
-| <kbd>prefix</kbd>y  | open youtube  | n    |
-| <kbd>prefix</kbd>b  | open bilibili | n    |
-| <kbd>prefix</kbd>p  | open pixiv    | n    |
-| <kbd>prefix</kbd>w  | open weibo    | n    |
+| <kbd>prefix</kbd>gh | open github   | n    |
+| <kbd>prefix</kbd>yt | open youtube  | n    |
+| <kbd>prefix</kbd>bl | open bilibili | n    |
+| <kbd>prefix</kbd>pi | open pixiv    | n    |
+| <kbd>prefix</kbd>wb | open weibo    | n    |
 | <kbd>prefix</kbd>tb | open taobao   | n    |
 | <kbd>prefix</kbd>jd | open jd       | n    |
 
@@ -105,6 +108,7 @@
 
 | trigger | action                | mode |
 |---------|-----------------------|------|
+| `dsp`D  | play / pause          | n    |
 | `dsp`F  | toggle web fullscreen | n    |
 
 ## Chrome extensions 
