@@ -292,14 +292,15 @@ openLink = (url, tabbed) => () => {
 
 // vipga*, vipga}
 quickOpenList = [
-  { alias: "bl", description: "Open BiliBili", url: "https://t.bilibili.com" },
-  { alias: "yt", description: "Open Youtube",  url: "https://youtube.com"    },
-  { alias: "gh", description: "Open GitHub",   url: "https://github.com"     },
-  { alias: "wb", description: "Open Weibo",    url: "https://weibo.com"      },
-  { alias: "pi", description: "Open pixiv",    url: "https://www.pixiv.net/" },
-  { alias: "tb", description: "Open Taobao",   url: "https://taobao.com"     },
-  { alias: "jd", description: "Open JD",       url: "https://jd.com"         },
-  { alias: "tw", description: "Open Twitter",  url: "https://twitter.com"    },
+  { alias: "bl", description: "Open BiliBili",        url: "https://t.bilibili.com"      },
+  { alias: "yt", description: "Open Youtube",         url: "https://youtube.com"         },
+  { alias: "gh", description: "Open GitHub",          url: "https://github.com"          },
+  { alias: "gt", description: "Open GitHub Trending", url: "https://github.com/trending" },
+  { alias: "wb", description: "Open Weibo",           url: "https://weibo.com"           },
+  { alias: "pi", description: "Open pixiv",           url: "https://www.pixiv.net/"      },
+  { alias: "tb", description: "Open Taobao",          url: "https://taobao.com"          },
+  { alias: "jd", description: "Open JD",              url: "https://jd.com"              },
+  { alias: "tw", description: "Open Twitter",         url: "https://twitter.com"         },
   // { alias: "",   description: "Open ",         url: ""                       },
 ];
 
@@ -336,16 +337,36 @@ cbSwitch = (clzName) => {
     sw.checked = !sw.checked;
   }
 };
+
+navHref = (url) => () => {
+  if (document.location.href !== url) {
+    document.location.href = url;
+  } 
+}
+
 const dsp = "D";
+const domainActions = {};
 
 // bilibili
-const biliActions = {};
-biliActions.play = () => {
+domainActions.bl = {};
+domainActions.bl.play = () => {
   btnClick(".bilibili-player-video-btn");
 };
-biliActions.webFullscreen = () => {
+domainActions.bl.webFullscreen = () => {
   btnClick(".bilibili-player-video-web-fullscreen");
 };
+
+// github trending
+domainActions.gt = {};
+domainActions.gt.dateRange = (i) => () => {
+  var hrefs = document.querySelectorAll('#select-menu-date .select-menu-item');
+  if (hrefs.length > i) {
+    if (document.location.href !== hrefs[i].href) {
+      document.location.href = hrefs[i].href;
+    } 
+  }
+}
+
 domain_spec_mappings = [
   {
     domain: /bilibili\.com/i,
@@ -353,12 +374,47 @@ domain_spec_mappings = [
       {
         alias: "D",
         description: "BiliBili - start / pause",
-        action: biliActions.play,
+        action: domainActions.bl.play,
       },
       {
         alias: "F",
         description: "BiliBili - toggle web fullscreen",
-        action: biliActions.webFullscreen,
+        action: domainActions.bl.webFullscreen,
+      },
+    ],
+  },
+  {
+    domain: /github\.com/i,
+    mappings: [
+      {
+        alias: "D",
+        description: "Trending Daily",
+        action: domainActions.gt.dateRange(0),
+      },
+      {
+        alias: "W",
+        description: "Trending Weekly",
+        action: domainActions.gt.dateRange(1),
+      },
+      {
+        alias: "M",
+        description: "Trending Monthly",
+        action: domainActions.gt.dateRange(2),
+      },
+      {
+        alias: "H",
+        description: "Trending Home",
+        action: navHref("https://github.com/trending"),
+      },
+      {
+        alias: "K",
+        description: "Trending Kotlin",
+        action: navHref("https://github.com/trending/kotlin"),
+      },
+      {
+        alias: "J",
+        description: "Trending Java",
+        action: navHref("https://github.com/trending/java"),
       },
     ],
   },
@@ -369,6 +425,8 @@ domain_spec_mappings.forEach((de) => {
     mapkey(dsp + e.alias, e.description, e.action, { domain: de.domain });
   });
 });
+
+
 
 // Remove annoying settings
 const unmaps = {
