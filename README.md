@@ -21,6 +21,7 @@ $ ./make_symlinks.sh
 * [git]()
 * [ranger]()
 * [alacritty]()
+* [chrome](./chrome/README.md)
 
 ## macOS
 

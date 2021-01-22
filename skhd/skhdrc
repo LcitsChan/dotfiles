@@ -29,13 +29,13 @@ lalt - u : yabai -m window --toggle split
 lalt - r : yabai -m space --rotate 90
 
 # 4.2 Swap windows
-ralt - e : yabai -m window --swap recent
+alt - e : yabai -m window --swap recent
 ralt - w : yabai -m window --swap north || yabai -m window --swap south
 ralt - s : yabai -m window --swap south || yabai -m window --swap north
 ralt - a : yabai -m window --swap west || yabai -m window --swap east
 ralt - d : yabai -m window --swap east || yabai -m window --swap west
-ralt - x : yabai -m space --mirror x-axis
-ralt - y : yabai -m space --mirror y-axis
+alt - x : yabai -m space --mirror x-axis
+alt - y : yabai -m space --mirror y-axis
 
 # 4.3 Warp
 shift + ralt - a : yabai -m window --warp west
@@ -67,7 +67,7 @@ alt - m : yabai -m window --focus stack.recent
 ctrl + alt - m : yabai -m window --focus stack.next || yabai -m window --focus stack.first
 
 # 4.7 Resize
-shift+ alt - h : \
+shift + alt - h : \
     yabai -m window --resize left:-40:0 || yabai -m window --resize right:-40:0
 
 shift + alt - j : \
