@@ -41,6 +41,7 @@
   <action id="MaximizeToolWindow">
     <keyboard-shortcut first-keystroke="shift meta quote" />
     <keyboard-shortcut first-keystroke="ctrl comma" second-keystroke="ctrl comma" />
+    <keyboard-shortcut first-keystroke="f3" />
   </action>
   <action id="NextEditorTab">
     <keyboard-shortcut first-keystroke="shift ctrl l" />
@@ -57,6 +58,22 @@
     <keyboard-shortcut first-keystroke="meta alt l" />
     <keyboard-shortcut first-keystroke="ctrl comma" second-keystroke="c" />
   </action>
+  <action id="ResizeToolWindowDown">
+    <keyboard-shortcut first-keystroke="shift meta down" />
+    <keyboard-shortcut first-keystroke="ctrl comma" second-keystroke="ctrl s" />
+  </action>
+  <action id="ResizeToolWindowLeft">
+    <keyboard-shortcut first-keystroke="shift meta left" />
+    <keyboard-shortcut first-keystroke="ctrl comma" second-keystroke="ctrl a" />
+  </action>
+  <action id="ResizeToolWindowRight">
+    <keyboard-shortcut first-keystroke="shift meta right" />
+    <keyboard-shortcut first-keystroke="ctrl comma" second-keystroke="ctrl d" />
+  </action>
+  <action id="ResizeToolWindowUp">
+    <keyboard-shortcut first-keystroke="shift meta up" />
+    <keyboard-shortcut first-keystroke="ctrl comma" second-keystroke="ctrl w" />
+  </action>
   <action id="ShowPopupMenu">
     <keyboard-shortcut first-keystroke="ctrl comma" second-keystroke="m" />
   </action>
@@ -65,6 +82,7 @@
     <keyboard-shortcut first-keystroke="ctrl comma" second-keystroke="f" />
   </action>
   <action id="ShowSettings" />
+  <action id="ToggleBookmark" />
   <action id="TypeHierarchy" />
   <action id="UsageGrouping.DirectoryStructure" />
   <action id="android.deploy.ApplyChanges">

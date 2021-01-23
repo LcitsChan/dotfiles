@@ -44,11 +44,11 @@ set noerrorbells
 " --------------------
 " Basic Mapping
 " --------------------
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-noremap <C-j> <Down>
-noremap <C-k> <Up>
-noremap <Leader><CR> :nohl<CR>
+inoremap        <C-j> <Down>
+inoremap        <C-k> <Up>
+noremap         <C-j> <Down>
+noremap         <C-k> <Up>
+noremap  <Leader><CR> :nohl<CR>
 
 noremap L $
 noremap H ^
@@ -70,13 +70,13 @@ nnoremap <Leader>qq :q<CR>
 nnoremap W :w<CR>
 
 " System Clipboard
-nnoremap Y y$
+nnoremap          Y y$
 nnoremap <Leader>yy "+yy
 nnoremap <Leader>yY "+y$
 vnoremap <Leader>yy "+y
-noremap <Leader>yp "+p
-noremap <Leader>yP "+P
-nmap <Leader>yl <Action>(PasteMultiple)
+noremap  <Leader>yp "+p
+noremap  <Leader>yP "+P
+nmap     <Leader>yl <Action>(PasteMultiple)
 
 " Searching
 nnoremap <Leader>ys g*<C-O>
@@ -84,17 +84,15 @@ nnoremap <Leader>yf *<C-O>
 vnoremap <Leader>yf y/<C-R>"<CR><C-O>
 
 " Templete for replacement
-map <Leader><Leader> / <CR>:nohlsearch<CR>c6l
-imap ,,, <+ph+>
-nmap ,,, i<+ph+><Esc>
-
+map <Leader><Leader> /<+ph+><CR>:nohlsearch<CR>c6l
+nmap             ,,, i<+ph+><Esc>
 
 " --------------------
 " Action Mapping
 " --------------------
 
 " Selection
-map <CR> <Action>(EditorSelectWord)
+map  <CR> <Action>(EditorSelectWord)
 vmap <BS> <Action>(EditorUnSelectWord)
 
 " Searching
@@ -120,7 +118,7 @@ map <Leader>af <Action>(GotoFile)
 map <Leader>al <Action>(FileStructurePopup)
 map <Leader>as <Action>(GotoSymbol)
 map <Leader>aa <Action>(GotoAction)
-map <Leader>p <Action>(GotoAction)
+map  <Leader>p <Action>(GotoAction)
 
 " Recent
 map <Leader>ee <Action>(RecentFiles)
@@ -131,25 +129,26 @@ map <Leader>ec <Action>(RecentChanges)
 map <Leader>ep <Action>(ManageRecentProjects)
 
 " Refactor
-map <Leader>rr <Action>(Refactorings.QuickListPopupAction)
-map <Leader>rn <Action>(RenameElement)
-map <Leader>ro <Action>(OptimizeImports)
+map  <Leader>rr <Action>(Refactorings.QuickListPopupAction)
+map  <Leader>rn <Action>(RenameElement)
+map  <Leader>ro <Action>(OptimizeImports)
 nmap <Leader>rc <Action>(ReformatCode)
-map <Leader>rf <Action>(ShowReformatFileDialog)
+map  <Leader>rf <Action>(ShowReformatFileDialog)
 
 " Menu
-map <Leader>m <Action>(ShowPopupMenu)
+map <Leader>mm <Action>(ShowPopupMenu)
+map <Leader>mf <Action>(QuickList.Menu Flutter)
 
 " Coding
-map gi <Action>(GotoImplementation)
-map gs <Action>(GotoSuperMethod)
-map gy <Action>(GotoTypeDeclaration)
-map ta <Action>(ShowIntentionActions)
+map     gi <Action>(GotoImplementation)
+map     gs <Action>(GotoSuperMethod)
+map     gy <Action>(GotoTypeDeclaration)
+map     ta <Action>(ShowIntentionActions)
 nmap <C-O> <Action>(Back)
 nmap <C-I> <Action>(Forward)
-nmap g; <Action>(JumpToLastChange)
-nmap g, <Action>(JumpToNextChange)
-map K <Action>(QuickJavaDoc)
+nmap    g; <Action>(JumpToLastChange)
+nmap    g, <Action>(JumpToNextChange)
+map      K <Action>(QuickJavaDoc)
 imap <C-A> <Action>(ShowIntentionActions)
 imap <C-K> <Action>(CodeCompletion)
 imap <C-P> <Action>(ParameterInfo)
@@ -193,8 +192,8 @@ map <Leader>dc <Action>(RunConfiguration)
 map <Leader>dp <Action>(Android.ChooseProfileConfiguration)
 
 " Tool windows
-map tt <Action>(ActivateProjectToolWindow)
-map ti <Action>(ActivateTerminalToolWindow)
+map         tt <Action>(ActivateProjectToolWindow)
+map         ti <Action>(ActivateTerminalToolWindow)
 map <Leader>vb <Action>(ActivateBuildToolWindow)
 map <Leader>vc <Action>(ActivateCodotaToolWindow)
 map <Leader>vd <Action>(ActivateDebugToolWindow)

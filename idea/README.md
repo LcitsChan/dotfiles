@@ -144,9 +144,10 @@
 
 ### Menu
 
-| trigger                | action    | mode |
-|------------------------|-----------|------|
-| <kbd>**Leader**</kbd>m | show menu | n/v  |
+| trigger                 | action            | mode |
+|-------------------------|-------------------|------|
+| <kbd>**Leader**</kbd>mm | show context menu | n/v  |
+| <kbd>**Leader**</kbd>mf | show flutter menu | n/v  |
 
 ### Coding
 
