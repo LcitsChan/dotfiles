@@ -35,7 +35,7 @@
 | <kbd>alt</kbd> - <kbd>j</kbd>                   | focus window below           |
 | <kbd>alt</kbd> - <kbd>k</kbd>                   | focus window above           |
 | <kbd>alt</kbd> - <kbd>l</kbd>                   | focus window right           |
-| <kbd>ralt</kbd> - <kbd>r</kbd>                  | focus recent window          |
+| <kbd>alt</kbd> - <kbd>r</kbd>                   | focus recent window          |
 | <kbd>alt</kbd> - <kbd>n</kbd>                   | focus window next            |
 | <kbd>alt</kbd> - <kbd>m</kbd>                   | focus recent window in stack |
 | <kbd>ctrl</kbd> + <kbd>alt</kbd> - <kbd>m</kbd> | focus window next in stack   |
@@ -44,10 +44,10 @@
 
 | trigger                        | action                   |
 |--------------------------------|--------------------------|
-| <kbd>ralt</kbd> - <kbd>a</kbd> | swap window left         |
-| <kbd>ralt</kbd> - <kbd>s</kbd> | swap window below        |
-| <kbd>ralt</kbd> - <kbd>w</kbd> | swap window above        |
-| <kbd>ralt</kbd> - <kbd>d</kbd> | swap window right        |
+| <kbd>alt</kbd> - <kbd>a</kbd> | swap window left         |
+| <kbd>alt</kbd> - <kbd>s</kbd> | swap window below        |
+| <kbd>alt</kbd> - <kbd>w</kbd> | swap window above        |
+| <kbd>alt</kbd> - <kbd>d</kbd> | swap window right        |
 | <kbd>alt</kbd> - <kbd>x</kbd>  | flip window horizontally |
 | <kbd>alt</kbd> - <kbd>y</kbd>  | flip window verticaly    |
 | <kbd>alt</kbd> - <kbd>e</kbd>  | swap recent window       |

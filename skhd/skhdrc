@@ -30,18 +30,18 @@ lalt - r : yabai -m space --rotate 90
 
 # 4.2 Swap windows
 alt - e : yabai -m window --swap recent
-ralt - w : yabai -m window --swap north || yabai -m window --swap south
-ralt - s : yabai -m window --swap south || yabai -m window --swap north
-ralt - a : yabai -m window --swap west || yabai -m window --swap east
-ralt - d : yabai -m window --swap east || yabai -m window --swap west
+alt - w : yabai -m window --swap north || yabai -m window --swap south
+alt - s : yabai -m window --swap south || yabai -m window --swap north
+alt - a : yabai -m window --swap west || yabai -m window --swap east
+alt - d : yabai -m window --swap east || yabai -m window --swap west
 alt - x : yabai -m space --mirror x-axis
 alt - y : yabai -m space --mirror y-axis
 
 # 4.3 Warp
-shift + ralt - a : yabai -m window --warp west
-shift + ralt - s : yabai -m window --warp south
-shift + ralt - w : yabai -m window --warp north
-shift + ralt - d : yabai -m window --warp east
+shift + alt - a : yabai -m window --warp west
+shift + alt - s : yabai -m window --warp south
+shift + alt - w : yabai -m window --warp north
+shift + alt - d : yabai -m window --warp east
 
 # 4.4 Insert
 ctrl + alt - h : yabai -m window --insert west
@@ -61,7 +61,7 @@ alt - h : yabai -m window --focus west
 alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
 alt - l : yabai -m window --focus east
-ralt - r : yabai -m window --focus recent
+alt - r : yabai -m window --focus recent
 alt - n : yabai -m window --focus next || yabai -m window --focus first
 alt - m : yabai -m window --focus stack.recent
 ctrl + alt - m : yabai -m window --focus stack.next || yabai -m window --focus stack.first
@@ -80,13 +80,13 @@ shift + alt - l : \
     yabai -m window --resize right:40:0 || yabai -m window --resize left:40:0
 
 # 4.8 Change space
-ctrl + ralt - 1: yabai -m window --space 1
-ctrl + ralt - 2: yabai -m window --space 2
-ctrl + ralt - 3: yabai -m window --space 3
-ctrl + ralt - 4: yabai -m window --space 4
-ctrl + ralt - 5: yabai -m window --space 5
-ctrl + ralt - 6: yabai -m window --space 6
+ctrl + alt - 1: yabai -m window --space 1
+ctrl + alt - 2: yabai -m window --space 2
+ctrl + alt - 3: yabai -m window --space 3
+ctrl + alt - 4: yabai -m window --space 4
+ctrl + alt - 5: yabai -m window --space 5
+ctrl + alt - 6: yabai -m window --space 6
 
 # 4.9 close
-ralt - q : yabai -m window --close
+alt - q : yabai -m window --close
 
