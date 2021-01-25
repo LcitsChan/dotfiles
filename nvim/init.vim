@@ -30,6 +30,7 @@ Plug 'tpope/vim-surround'                                 " Quoting / Parenthesi
 Plug 'tpope/vim-repeat'                                   " Enhance . repeat(expr, count)
 Plug 'kana/vim-textobj-user'                              " Base function for create text object
 Plug 'kana/vim-textobj-entire'                            " Text object for entire buffer
+Plug 'vim-scripts/argtextobj.vim'                         " Text object for args
 Plug 'justinmk/vim-sneak'                                 " Jump to any location by two characters
 Plug 'gcmt/wildfire.vim'                                  " Smart selection of the closest text object
 Plug 'junegunn/goyo.vim'                                  " Markdown: focus mode
@@ -59,6 +60,7 @@ Plug 'rhysd/git-messenger.vim'                            " Reveal the commit me
                                                           " -- language support
 Plug 'dart-lang/dart-vim-plugin'                          " Dart language Support
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }        " Go plugin
+Plug 'chr4/nginx.vim'                                     " Nginx syntax
                                                           " -- colorscheme
 "Plug 'vim-airline/vim-airline'                            " Lean & mean status/tabline for vim
 "Plug 'vim-airline/vim-airline-themes'                     " Statusbar Theme:  base on airline
