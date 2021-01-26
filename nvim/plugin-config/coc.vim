@@ -12,11 +12,12 @@ let g:coc_global_extensions = [
   \'coc-vetur',
   \'coc-pyright',
   \'coc-prettier',
-  \'coc-flutter',
+  \'coc-flutter-tools',
   \'coc-diagnostic',
   \'coc-snippets',
   \'coc-yank'] 
 
+  " \'coc-flutter',
   " \'coc-tslint',
   " \'coc-fzf-preview',
 
@@ -82,9 +83,6 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-reneme)
-
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
@@ -104,3 +102,11 @@ hi HighlightedyankRegion term=bold ctermbg=0 guibg=#13354A
 " Prettier
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
