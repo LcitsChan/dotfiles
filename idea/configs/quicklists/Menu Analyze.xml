@@ -1,0 +1,18 @@
+<list display="Menu Analyze" description="Duplicate Main menu &gt; Analyze">
+  <action id="InspectCode" />
+  <action id="CodeCleanup" />
+  <action id="SilentCodeCleanup" />
+  <action id="RunInspection" />
+  <action id="PopupHector" />
+  <action id="ViewOfflineInspection" />
+  <action id="InferNullity" />
+  <action id="InferAnnotations" />
+  <action id="ShowPackageDeps" />
+  <action id="ShowBackwardPackageDeps" />
+  <action id="ShowDependenciesOnTarget" />
+  <action id="ShowModulesDependencies" />
+  <action id="ShowPackageCycles" />
+  <action id="SliceBackward" />
+  <action id="SliceForward" />
+  <action id="Unscramble" />
+</list>

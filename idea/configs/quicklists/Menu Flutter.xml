@@ -1,0 +1,13 @@
+<list display="Menu Flutter">
+  <action id="Flutter.NewBloc" />
+  <action id="QuickList.$Separator$" />
+  <action id="flutter.gettingStarted" />
+  <action id="flutter.upgrade" />
+  <action id="flutter.doctor" />
+  <action id="flutter.pub.get" />
+  <action id="flutter.pub.upgrade" />
+  <action id="flutter.clean" />
+  <action id="flutter.devtools.open" />
+  <action id="flutter.androidstudio.open" />
+  <action id="flutter.xcode.open" />
+</list>

@@ -114,6 +114,8 @@ idea_link() {
       # templates
       make_link $CONFIGS/templates $i/templates
 
+      make_link $CONFIGS/quicklists $i/quicklists
+
       echo "[${i##*/}] End"
       echo ""
     fi

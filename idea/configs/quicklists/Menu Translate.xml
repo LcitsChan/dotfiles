@@ -1,0 +1,10 @@
+<list display="Menu Translate">
+  <action id="Android.OpenStringResourceEditor" />
+  <action id="$ChooseTranslatorAction" />
+  <action id="$ShowTranslationDialogAction" />
+  <action id="$EditorTranslateAction" />
+  <action id="$TranslateDocumentationAction" />
+  <action id="$TranslateAndReplaceAction" />
+  <action id="$ExclusiveTranslateAction" />
+  <action id="$InclusiveTranslateAction" />
+</list>

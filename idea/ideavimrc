@@ -137,7 +137,9 @@ map  <Leader>rf <Action>(ShowReformatFileDialog)
 
 " Menu
 map <Leader>mm <Action>(ShowPopupMenu)
+map <Leader>ma <Action>(QuickList.Menu Analyze)
 map <Leader>mf <Action>(QuickList.Menu Flutter)
+map <Leader>mt <Action>(QuickList.Menu Translate)
 
 " Coding
 map     gi <Action>(GotoImplementation)
@@ -218,7 +220,7 @@ map [a <Action>(ToggleLineBreakpoint)
 map [v <Action>(ViewBreakpoints)
 
 " Translation
-map <Leader>i <Action>($EditorTranslateAction
+map <Leader>i <Action>($EditorTranslateAction)
 map <Leader>I <Action>($TranslateDocumentationAction)
 
 " Online Search
