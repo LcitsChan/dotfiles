@@ -1,1 +1,2 @@
-# zsh config
+# Zsh(https://www.zsh.org/)
+

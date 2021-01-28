@@ -17,15 +17,15 @@ $ ./make_symlinks.sh
 
 * [vim](./nvim/README.md)
 * [idea](./idea/README.md)
-* [zsh]()
-* [git]()
-* [ranger]()
-* [alacritty]()
+* [zsh](./zsh/README.md)
+* [git](https://git-scm.com/)
+* [ranger](https://ranger.github.io/)
+* [alacritty](https://github.com/alacritty/alacritty)
 * [chrome](./chrome/README.md)
 
 ## macOS
 
-* [yabai]()
-* [spacebar]()
-* [skhd]()
+* [yabai](./yabai/README.md)
+* [spacebar](https://github.com/cmacrae/spacebar)
+* [skhd](./skhd/README.md)
 
