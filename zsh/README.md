@@ -1,2 +1,2 @@
-# Zsh(https://www.zsh.org/)
+# [Zsh](https://www.zsh.org/)
 

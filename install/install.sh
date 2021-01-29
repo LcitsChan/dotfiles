@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# install basic dependencies
+case `uname -a` in
+  *Ubuntu*)
+  sudo apt -q update
+  sudo apt install -q -y build-essential
+  ;;
+esac
+
 # install brew dependencies
 echo "===> install brew dependencies"
 if command -v brew 1>/dev/null 2>&1
