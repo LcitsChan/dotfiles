@@ -140,6 +140,7 @@ map <Leader>mm <Action>(ShowPopupMenu)
 map <Leader>ma <Action>(QuickList.Menu Analyze)
 map <Leader>mf <Action>(QuickList.Menu Flutter)
 map <Leader>mt <Action>(QuickList.Menu Translate)
+map <Leader>ml <Action>(QuickList.Menu Leetcode)
 
 " Coding
 map     gi <Action>(GotoImplementation)

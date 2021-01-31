@@ -6,16 +6,18 @@
   <action id="leetcode.OpenAction" />
   <action id="leetcode.editor.OpenSolutionAction" />
   <action id="leetcode.editor.SubmissionsAction" />
-  <action id="leetcode.StopTimeAction" />
-  <action id="leetcode.StartTimeAction" />
-  <action id="leetcode.editor.ResetTimeAction" />
+  <action id="QuickList.$Separator$" />
   <action id="leetcode.positionAction" />
+  <action id="leetcode.RefreshAction" />
   <action id="leetcode.ProgressAction" />
-  <action id="leetcode.ClearOneAction" />
   <action id="leetcode.PickAction" />
   <action id="leetcode.FindAction" />
-  <action id="leetcode.RefreshAction" />
+  <action id="leetcode.ClearOneAction" />
   <action id="leetcode.ConfigAction" />
+  <action id="QuickList.$Separator$" />
+  <action id="leetcode.StartTimeAction" />
+  <action id="leetcode.StopTimeAction" />
+  <action id="leetcode.editor.ResetTimeAction" />
   <action id="QuickList.$Separator$" />
   <action id="ActivateleetcodeToolWindow" />
 </list>
