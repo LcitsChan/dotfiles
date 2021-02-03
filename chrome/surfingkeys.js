@@ -169,6 +169,9 @@ remaps("se", "swp");
 remaps("ss", "sso");
 remaps("sy", "syt");
 unmap("sh");
+// previous/next page
+remaps("[[", "[");
+remaps("]]", "]");
 
 const searchEngines = {};
 
