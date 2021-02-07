@@ -153,7 +153,7 @@ nmap    g; <Action>(JumpToLastChange)
 nmap    g, <Action>(JumpToNextChange)
 map      K <Action>(QuickJavaDoc)
 imap <C-A> <Action>(ShowIntentionActions)
-imap <C-K> <Action>(CodeCompletion)
+imap <C-L> <Action>(CodeCompletion)
 imap <C-P> <Action>(ParameterInfo)
 imap <C-E> <Action>(EditorChooseLookupItemReplace)
 
@@ -193,6 +193,7 @@ map <Leader>da <Action>(AndroidConnectDebuggerAction)
 map <Leader>ds <Action>(Stop)
 map <Leader>dc <Action>(RunConfiguration)
 map <Leader>dp <Action>(Android.ChooseProfileConfiguration)
+map <Leader>df <Action>(Flutter.Toolbar.ReloadAction)
 
 " Tool windows
 map         tt <Action>(ActivateProjectToolWindow)
