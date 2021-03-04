@@ -6,5 +6,7 @@ case `uname -a` in
   sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
   sudo apt update
   sudo apt install docker-ce
+  sudo usermod -aG docker ${USER}
+  su - ${USER}
   ;;
 esac
