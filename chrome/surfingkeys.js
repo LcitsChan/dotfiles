@@ -353,10 +353,10 @@ const domainActions = {};
 // bilibili
 domainActions.bl = {};
 domainActions.bl.play = () => {
-  btnClick(".bilibili-player-video-btn");
+  btnClick(".squirtle-video-fullscreen");
 };
 domainActions.bl.webFullscreen = () => {
-  btnClick(".bilibili-player-video-web-fullscreen");
+  btnClick(".squirtle-video-pagefullscreen");
 };
 
 // github trending
