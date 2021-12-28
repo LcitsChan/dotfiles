@@ -45,8 +45,9 @@ yabai -m config right_padding                4
 yabai -m config window_gap                   8
 
 # spacebar
-SPACEBAR_HEIGHT=$(spacebar -m config height)
-yabai -m config external_bar all:0:$SPACEBAR_HEIGHT
+# SPACEBAR_HEIGHT=$(spacebar -m config height)
+# yabai -m config external_bar all:0:$SPACEBAR_HEIGHT
+yabai -m config external_bar all:0:26
 
 # float system preferences. Most of these just diable Yabai form resizing them.
 yabai -m rule --add app="^System Preferences$" sticky=on layer=above manage=off
@@ -73,7 +74,7 @@ yabai -m rule --add app="^Microsoft To Do$" space=2
 music='^(Spotify|NeteaseMusic|iTunes)$'
 yabai -m rule --add app="${music}" manage=off space=3
 
-idea_title_regex="(.* \(/.*\))|^(Specify Inspection Scope|Choose Content to Paste|Preferences for New Projects)$|^(Reformat File|Reformat Code|Preferences|Breakpoints|Rename).*"
+idea_title_regex="(.* \(/.*\))|^(Specify Inspection Scope|Choose Content to Paste|Preferences for New Projects|Welcome to Android Studio)$|^(Reformat File|Reformat Code|Preferences|Breakpoints|Rename).*"
 yabai -m rule --add app="^Android Studio$" title="${idea_title_regex}" manage=off
 
 killall limelight &> /dev/null

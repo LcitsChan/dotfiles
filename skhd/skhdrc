@@ -1,6 +1,6 @@
 # 1 Quick Open
-lcmd - return : open -n -a /Applications/Alacritty.app
-lalt - return : open -n -a /Applications/Google\ Chrome.app
+rcmd - return : open -n -a /Applications/Alacritty.app
+ralt - return : open -n -a /Applications/Google\ Chrome.app
 
 # 2 Display
 
@@ -21,6 +21,7 @@ ctrl - 7 : yabai -m space --focus next || yabai -m space --focus first
 ctrl - 8 : yabai -m space --create && yabai -m space --focus last
 # Destory: why 9, like kill -9, just for mnemonic
 ctrl + alt - 9 : yabai -m space --destroy
+# ctrl + alt - 9 : osascript ~/.dotfiles/skhd/scripts/close_space.scpt
 
 # 4 Window
 # 4.1 Arrangement
@@ -61,7 +62,7 @@ alt - h : yabai -m window --focus west
 alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
 alt - l : yabai -m window --focus east
-alt - r : yabai -m window --focus recent
+alt - r : yabai -m window --focus recent || yabai -m space --focus recent
 alt - n : yabai -m window --focus next || yabai -m window --focus first
 alt - m : yabai -m window --focus stack.recent
 ctrl + alt - m : yabai -m window --focus stack.next || yabai -m window --focus stack.first
