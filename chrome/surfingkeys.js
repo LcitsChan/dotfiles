@@ -370,6 +370,20 @@ domainActions.gt.dateRange = (i) => () => {
   }
 }
 
+// google search
+domainActions.gg = {};
+domainActions.gg.exchangeZh = () => {
+  let href = window.location.href
+  let url = new URL(href)
+  if (url.searchParams.has('lr')) {
+    url.searchParams.delete('lr')
+  } else {
+    url.searchParams.append('lr', 'lang_zh-CN')
+  }
+  navHref(url.href)()
+}
+
+
 domain_spec_mappings = [
   {
     domain: /bilibili\.com/i,
@@ -418,6 +432,16 @@ domain_spec_mappings = [
         alias: "J",
         description: "Trending Java",
         action: navHref("https://github.com/trending/java"),
+      },
+    ],
+  },
+  {
+    domain: /google\.com/i,
+    mappings: [
+      {
+        alias: "D",
+        description: "Google - exchange search lr(zh) ",
+        action: domainActions.gg.exchangeZh,
       },
     ],
   },
