@@ -36,9 +36,9 @@ noremap <Leader>yp "+p
 noremap <Leader>yP "+P
 
 " Searching
-nnoremap <Leader>ys g*<C-O>
-nnoremap <Leader>yf *<C-O>
-vnoremap <Leader>yf y/<C-R>"<CR><C-O>
+nnoremap <Leader>ys g*
+nnoremap <Leader>yf *
+vnoremap <Leader>yf y/<C-R>"<CR>
 
 " Templete for replacement 
 map <Leader><Leader> /<+ph+><CR>:nohlsearch<CR>c6l

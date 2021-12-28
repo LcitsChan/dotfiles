@@ -4,6 +4,8 @@ nnoremap <silent> <Leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
 vnoremap <silent> <Leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 
+nmap <Leader>? :tabnew $HOME/.dotfiles/nvim/README.md<CR>
+
 " - [general]
 map <Leader><CR> :nohlsearch<CR>
 inoremap <c-n> <nop>
@@ -68,7 +70,7 @@ let g:which_key_map.b = {
       \ '?' : ['Buffers'   , '★ fzf-buffer']      ,
       \ }
 
-" e is for recent/error
+" e is for recent/error/edit
 let g:which_key_map.e = {
       \ 'name' : '+recent/error' ,
       \ 'e' : [':Buffers',                          '★ recent buffers'],
@@ -77,6 +79,7 @@ let g:which_key_map.e = {
       \ 'd' : [':CocList diagnostics'                , '★ diagnostics'],
       \ 'J' : ['<Plug>(coc-diagnostic-next-error)', '  next error'],
       \ 'K' : ['<Plug>(coc-diagnostic-prev-error)', '  prev error'],
+      \ 'c' : [':tabnew $HOME/.dotfiles/nvim/init.vim', '  open config'],
       \ }
 
 " f is for find and replace
@@ -156,7 +159,7 @@ let g:which_key_map.g = {
 " y is for yank
 let g:which_key_map.y = {
       \ 'name' : '+yank' ,
-      \ 'r' : [':CocList yank'    , '★ yank list'],
+      \ 'l' : [':CocList yank'    , '★ yank list'],
       \ }
 
 " r is for refactor

@@ -19,6 +19,7 @@ Plug 'mbbill/undotree'                                    " The undo history vis
 Plug 'neoclide/coc.nvim', {'branch': 'release'}           " Coc
 Plug 'mhinz/vim-startify'                                 " Start Page
 Plug 'farmergreg/vim-lastplace'                           " Reopen files at your last edit position'
+Plug 'tommcdo/vim-exchange'                               " Exchange text, work like cx, cxx
                                                           " -- explorer
 Plug 'francoiscabrol/ranger.vim'                          " Ranger file manager support, deps on bclose
 Plug 'rbgrouleff/bclose.vim'                              " Deleting a buffer without closing the window
