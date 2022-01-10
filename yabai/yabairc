@@ -74,8 +74,8 @@ yabai -m rule --add app="^Microsoft To Do$" space=2
 music='^(Spotify|NeteaseMusic|iTunes)$'
 yabai -m rule --add app="${music}" manage=off space=3
 
-idea_title_regex="(.* \(/.*\))|^(Specify Inspection Scope|Choose Content to Paste|Preferences for New Projects|Welcome to Android Studio)$|^(Reformat File|Reformat Code|Preferences|Breakpoints|Rename).*"
-yabai -m rule --add app="^Android Studio$" title="${idea_title_regex}" manage=off
+idea_title_regex="(.* \(/.*\))|^(Specify Inspection Scope|Choose Content to Paste|Preferences for New Projects|Welcome to Android Studio)$|^(Reformat File|Reformat Code|Preferences|Breakpoints|Rename|Project Structure).*"
+yabai -m rule --add app="^(Android Studio|IntelliJ IDEA)$" title="${idea_title_regex}" manage=off
 
 killall limelight &> /dev/null
 limelight &> /dev/null &

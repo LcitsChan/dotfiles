@@ -27,7 +27,7 @@ ctrl + alt - 9 : yabai -m space --destroy
 # 4.1 Arrangement
 lalt - b : yabai -m space --balance
 lalt - u : yabai -m window --toggle split
-lalt - r : yabai -m space --rotate 90
+shift + alt - r : yabai -m space --rotate 90
 
 # 4.2 Swap windows
 alt - e : yabai -m window --swap recent
@@ -91,3 +91,6 @@ ctrl + alt - 6: yabai -m window --space 6
 # 4.9 close
 alt - q : yabai -m window --close
 
+ctrl + alt - p : yabai -m space --focus prev || yabai -m space --focus last
+ctrl + alt - n : yabai -m space --focus next || yabai -m space --focus first
+ctrl + alt - r : yabai -m space --focus recent
