@@ -1,3 +1,26 @@
+const {
+    aceVimMap,
+    mapkey,
+    imap,
+    imapkey,
+    getClickableElements,
+    vmapkey,
+    map,
+    vmap,
+    unmap,
+    vunmap,
+    cmap,
+    addSearchAlias,
+    removeSearchAlias,
+    tabOpenLink,
+    readText,
+    Clipboard,
+    Front,
+    Hints,
+    Visual,
+    RUNTIME
+} = api;
+
 // --------------------
 // Configuration
 // --------------------
@@ -270,7 +293,7 @@ mapSearchEngine("bi", "bing",       "w");
 mapSearchEngine("wp", "wikipedia",  "e");
 
 Object.values(searchEngines).forEach((item) => {
-  addSearchAliasX(
+  addSearchAlias(
     item.alias,
     item.engine,
     item.url,
