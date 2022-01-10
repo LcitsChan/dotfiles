@@ -4,16 +4,57 @@
 let mapleader=" "
 let localleader=","
 
-
 " --------------------
 " Plugins
 " --------------------
+set sneak
 set surround
 set textobj-entire
+set argtextobj
 set multiple-cursors
 set commentary
 set ReplaceWithRegister
 set highlightedyank
+set exchange
+set NERDTree  " https://github.com/JetBrains/ideavim/wiki/NERDTree-support
+set which-key
+set matchit
+set easymotion
+set keep-english-in-normal-and-restore-in-insert
+let keep_input_source_in_normal="com.apple.keylayout.ABC"
+
+set notimeout
+set timeoutlen=2000
+set nrformats+=alpha
+
+let g:WhichKeyDesc_a        = "<leader>a  Goto"
+let g:WhichKeyDesc_b        = "<leader>b  Debug"
+" let g:WhichKeyDesc_c        = "<leader>c  "
+let g:WhichKeyDesc_d        = "<leader>d  Development"
+let g:WhichKeyDesc_e        = "<leader>e  Recent"
+let g:WhichKeyDesc_f        = "<leader>f  Find/Replace"
+let g:WhichKeyDesc_g        = "<leader>g  Git"
+" let g:WhichKeyDesc_h        = "<leader>h  "
+let g:WhichKeyDesc_i        = "<leader>i  translate"
+let g:WhichKeyDesc_j        = "<leader>j  Down"
+let g:WhichKeyDesc_k        = "<leader>k  Up"
+" let g:WhichKeyDesc_l        = "<leader>l  "
+let g:WhichKeyDesc_m        = "<leader>m  Menu"
+let g:WhichKeyDesc_n        = "<leader>n  New"
+" let g:WhichKeyDesc_o        = "<leader>o  "
+let g:WhichKeyDesc_p        = "<leader>p  Command"
+let g:WhichKeyDesc_q        = "<leader>q  Quit"
+let g:WhichKeyDesc_r        = "<leader>r  Refactor"
+let g:WhichKeyDesc_s        = "<leader>s  Debugger"
+" let g:WhichKeyDesc_t        = "<leader>t  "
+let g:WhichKeyDesc_u        = "<leader>u  OnlineSearch"
+let g:WhichKeyDesc_v        = "<leader>v  Tool"
+let g:WhichKeyDesc_w        = "<leader>w  Window"
+let g:WhichKeyDesc_x        = "<leader>x  Mark"
+let g:WhichKeyDesc_y        = "<leader>y  Yank"
+let g:WhichKeyDesc_comma    = "<leader>,  Preference"
+" let g:WhichKeyDesc_z        = "<leader>z  "
+let g:WhichKey_DefaultDelay=600
 
 let g:highlightedyank_highlight_duration = "500"
 
@@ -48,7 +89,8 @@ inoremap        <C-j> <Down>
 inoremap        <C-k> <Up>
 noremap         <C-j> <Down>
 noremap         <C-k> <Up>
-noremap  <Leader><CR> :nohl<CR>
+noremap  <Leader><CR> :nohl<CR><ESC>
+let g:WhichKeyDesc_nohl = "<leader>⏎ Remove highlight"
 
 noremap L $
 noremap H ^
@@ -59,7 +101,9 @@ noremap k gk
 nmap za <Action>(CollapseSelection)
 
 " Comment
-map <Leader>/ <Action>(CommentByLineComment)
+nmap <Leader>/ <Action>(CommentByLineComment)
+vmap <Leader>/ <Action>(CommentByLineComment)<Esc>
+let g:WhichKeyDesc_comment = "<leader>/ Comment"
 
 " Create new window
 nnoremap tl :vsplit<CR>
@@ -72,20 +116,36 @@ nnoremap W :w<CR>
 " System Clipboard
 nnoremap          Y y$
 nnoremap <Leader>yy "+yy
-nnoremap <Leader>yY "+y$
 vnoremap <Leader>yy "+y
+let g:WhichKeyDesc_yy = "<leader>yy Yank line (system clipboard)"
+nnoremap <Leader>yY "+y$
+let g:WhichKeyDesc_yY = "<leader>yY Yank till line end (system clipboard)"
 noremap  <Leader>yp "+p
+let g:WhichKeyDesc_yp = "<leader>yp Paste (system clipboard)"
 noremap  <Leader>yP "+P
+let g:WhichKeyDesc_yP = "<leader>yP Paste backward (system clipboard)"
 nmap     <Leader>yl <Action>(PasteMultiple)
+let g:WhichKeyDesc_yl = "<leader>yl Yank list (clipboard clipboard)"
 
 " Searching
-nnoremap <Leader>ys g*<C-O>
-nnoremap <Leader>yf *<C-O>
-vnoremap <Leader>yf y/<C-R>"<CR><C-O>
+vnoremap * y/<C-R>"<CR><C-O>
 
 " Templete for replacement
-map <Leader><Leader> /<+ph+><CR>:nohlsearch<CR>c6l
-nmap             ,,, i<+ph+><Esc>
+nmap <Leader>fh ^/<+++ph+++><CR>:nohlsearch<CR>c10l
+let g:WhichKeyDesc_fh = "<leader>fh Replace placeholder"
+nmap <leader>;  a<+++ph+++><Esc>
+let g:WhichKeyDesc_semicolon = "<leader>; Set placeholder"
+" nmap <Leader>fd 0/TODO("Not yet implemented")<CR>:nohl<CR>cf)
+nmap <Leader>fd 0/TODO()<CR>:nohl<CR>cf)
+let g:WhichKeyDesc_fd = "<leader>fd Replace TODO"
+nmap <Leader>fD :%s/TODO()//g<CR>:nohl<CR>
+let g:WhichKeyDesc_fD = "<leader>fD Clear all TODO"
+
+imap fd <Esc>
+vmap fd <Esc>
+let g:WhichKeyDesc_escape = "fd"
+imap jk <C-O>
+le g:WhichKeyDesc_escape_onetime = "jk"
 
 " --------------------
 " Action Mapping
@@ -96,149 +156,341 @@ map  <CR> <Action>(EditorSelectWord)
 vmap <BS> <Action>(EditorUnSelectWord)
 
 " Searching
-map <Leader>ss <Action>(FindInPath)
-map <Leader>ff <Action>(Replace)
+map <Leader>fp <Action>(FindInPath)
+let g:WhichKeyDesc_fp = "<leader>fp Find in Path"
+map <Leader>fr <Action>(Replace)
+let g:WhichKeyDesc_fr = "<leader>fr Replace"
+map <Leader>fg <Action>(ReplaceInPath)
+let g:WhichKeyDesc_fg = "<leader>fg Replace in files"
 
-" Workflow
-map <Leader>ef <Action>(ShowNavBar)
 
 " Workbench
 nmap <Leader>ww <Action>(HideAllWindows)
+let g:WhichKeyDesc_ww = "<leader>ww Show/Hide all wins"
 nmap <Leader>wl <Action>(JumpToLastWindow)
+let g:WhichKeyDesc_wl = "<leader>wl Last window"
+nmap <Leader>wc <Action>(JumpToLastWindow)<Action>(HideActiveWindow)
+let g:WhichKeyDesc_wc = "<leader>wc Hide active window"
 nmap <Leader>wz <Action>(ToggleZenMode)
+let g:WhichKeyDesc_wz = "<leader>wz Zen Mode"
 nmap <Leader>wd <Action>(ToggleDistractionFreeMode)
+let g:WhichKeyDesc_wd = "<leader>wd Free Mode"
+nmap <Leader>wf <Action>(ToggleFullScreen)
+let g:WhichKeyDesc_wf = "<leader>wf Full Screen"
 nmap <Leader>wp <Action>(TogglePresentationMode)
+let g:WhichKeyDesc_wp = "<leader>wp Presentation Mode"
 nmap <Leader>wn <Action>(EditorGutterToggleGlobalLineNumbers)
+let g:WhichKeyDesc_wn = "<leader>wn Toggle line nums"
 nmap <Leader>wg <Action>(EditorToggleShowGutterIcons)
+let g:WhichKeyDesc_wg = "<leader>wg Toggle gutter"
+
 
 " Goto
-map <Leader>ae <Action>(SearchEverywhere)
+map <Leader>aa <Action>(SearchEverywhere)
+let g:WhichKeyDesc_aa = "<leader>aa Search all"
 map <Leader>ac <Action>(GotoClass)
+let g:WhichKeyDesc_ac = "<leader>ac Search class"
 map <Leader>af <Action>(GotoFile)
+let g:WhichKeyDesc_af = "<leader>af Search file"
 map <Leader>al <Action>(FileStructurePopup)
+let g:WhichKeyDesc_al = "<leader>al File structure"
+map <Leader>ar <Action>(RunAnything)
+let g:WhichKeyDesc_ar = "<leader>ar Run anything"
 map <Leader>as <Action>(GotoSymbol)
-map <Leader>aa <Action>(GotoAction)
+let g:WhichKeyDesc_as = "<leader>as Search symbol"
 map  <Leader>p <Action>(GotoAction)
+
 
 " Recent
 map <Leader>ee <Action>(RecentFiles)
+let g:WhichKeyDesc_ee = "<leader>ee Recent files"
 map <Leader>er <Action>(RecentChangedFiles)
+let g:WhichKeyDesc_er = "<leader>er Recent changed files"
 map <Leader>el <Action>(RecentLocations)
+let g:WhichKeyDesc_el = "<leader>el Recent locations"
 map <Leader>et <Action>(ShowRecentTests)
+let g:WhichKeyDesc_et = "<leader>et Recent test"
 map <Leader>ec <Action>(RecentChanges)
+let g:WhichKeyDesc_ec = "<leader>ec Recent changes"
 map <Leader>ep <Action>(ManageRecentProjects)
+let g:WhichKeyDesc_ep = "<leader>ep Recent projects"
+" Workflow
+map <Leader>ef <Action>(ShowNavBar)
+let g:WhichKeyDesc_ef = "<leader>ef NavBar"
+
 
 " Refactor
 map  <Leader>rr <Action>(Refactorings.QuickListPopupAction)
+let g:WhichKeyDesc_rr = "<leader>rr menu"
 map  <Leader>rn <Action>(RenameElement)
-map  <Leader>ro <Action>(OptimizeImports)
+let g:WhichKeyDesc_rn = "<leader>rn rename"
+map  <Leader>ri <Action>(OptimizeImports)
+let g:WhichKeyDesc_ri = "<leader>ri import"
 nmap <Leader>rc <Action>(ReformatCode)
+let g:WhichKeyDesc_rc = "<leader>rc reformat code"
 map  <Leader>rf <Action>(ShowReformatFileDialog)
+let g:WhichKeyDesc_rf = "<leader>rf reformat file"
+map  <Leader>rs <Action>(SurroundWith)
+let g:WhichKeyDesc_rs = "<leader>rs Surround with"
+
 
 " Menu
 map <Leader>mm <Action>(ShowPopupMenu)
+let g:WhichKeyDesc_mm = "<leader>mm Context menu"
 map <Leader>ma <Action>(QuickList.Menu Analyze)
+let g:WhichKeyDesc_ma = "<leader>ma Analyze"
 map <Leader>mf <Action>(QuickList.Menu Flutter)
+let g:WhichKeyDesc_mf = "<leader>mf Flutter"
 map <Leader>mt <Action>(QuickList.Menu Translate)
+let g:WhichKeyDesc_mt = "<leader>mt Translate"
 map <Leader>ml <Action>(QuickList.Menu Leetcode)
+let g:WhichKeyDesc_ml = "<leader>ml Leetcode"
+map <Leader>mn <Action>(Notifications)
+let g:WhichKeyDesc_mn = "<leader>mn Notifications"
+map <Leader>mv <Action>(VimActions)
+let g:WhichKeyDesc_mv = "<leader>mn Vim"
+
 
 " Coding
 map     gi <Action>(GotoImplementation)
+let g:WhichKeyDesc_nop_gi = "gi"
+map     gI <Action>(QuickImplementations)
+let g:WhichKeyDesc_nop_gI = "gI"
 map     gs <Action>(GotoSuperMethod)
+let g:WhichKeyDesc_nop_gs = "gs Super Method"
 map     gy <Action>(GotoTypeDeclaration)
+let g:WhichKeyDesc_nop_gy = "gy Type Declaration"
+map     gd <Action>(GotoDeclaration)
+let g:WhichKeyDesc_nop_gd = "gd Declaration"
+map     gh <Action>(ShowErrorDescription)
+let g:WhichKeyDesc_nop_gh = "gh Error"
 map     ta <Action>(ShowIntentionActions)
+map      K <Action>(QuickJavaDoc)
 nmap <C-O> <Action>(Back)
 nmap <C-I> <Action>(Forward)
-nmap    g; <Action>(JumpToLastChange)
-nmap    g, <Action>(JumpToNextChange)
-map      K <Action>(QuickJavaDoc)
 imap <C-A> <Action>(ShowIntentionActions)
+imap <C-S> <Action>(EditorCompleteStatement)
 imap <C-L> <Action>(CodeCompletion)
 imap <C-P> <Action>(ParameterInfo)
 imap <C-E> <Action>(EditorChooseLookupItemReplace)
+
+
+" Up then Down
+map <Leader>jm <Action>(MethodDown)
+let g:WhichKeyDesc_jm = "<leader>jm Method"
+map <Leader>km <Action>(MethodUp)
+let g:WhichKeyDesc_km = "<leader>km Method"
+
+map <Leader>ju <Action>(GotoNextElementUnderCaretUsage)
+let g:WhichKeyDesc_ju = "<leader>ju Usage"
+map <Leader>ku <Action>(GotoPrevElementUnderCaretUsage)
+let g:WhichKeyDesc_ku = "<leader>ku Usage"
+
+map <Leader>je <Action>(GotoNextError)
+let g:WhichKeyDesc_je = "<leader>je Error"
+map <Leader>ke <Action>(GotoPreviousError)
+let g:WhichKeyDesc_ke = "<leader>ke Error"
+
+nmap <Leader>kc <Action>(JumpToLastChange)
+let g:WhichKeyDesc_kc = "<leader>kc Change"
+nmap <Leader>jc <Action>(JumpToNextChange)
+let g:WhichKeyDesc_jc = "<leader>jc Change"
+
+map <Leader>jj <Action>(MoveStatementDown)
+let g:WhichKeyDesc_jj = "<leader>jj statement"
+map <Leader>kk <Action>(MoveStatementUp)
+let g:WhichKeyDesc_kk = "<leader>kk statement"
 
 " Local History
 nmap tu <Action>(LocalHistory.ShowHistory)
 vmap tu <Action>(LocalHistory.ShowSelectionHistory)
 
-" Hierarchy
-nmap <Leader>tb <Action>(TypeHierarchy)
-nmap <Leader>ts <Action>(ActivateStructureToolWindow)
-
-" Navigate Error
-map <Leader>ej <Action>(GotoNextError)
-map <Leader>ek <Action>(GotoPreviousError)
 
 " Open preference
-nmap <Leader>, <Action>(TemplateProjectProperties)
+nmap <Leader>,, <Action>(TemplateProjectProperties)
+nmap <Leader>,p <Action>(WelcomeScreen.Plugins)
+
 
 " Git
 nmap <Leader>gg <Action>(QuickList.Menu Git)
+let g:WhichKeyDesc_gg = "<leader>gg Menu"
 nmap <Leader>gd <Action>(Compare.SameVersion)
+let g:WhichKeyDesc_gd = "<leader>gd Diff same version"
 nmap <Leader>gD <Action>(Compare.LastVersion)
+let g:WhichKeyDesc_gD = "<leader>gD Diff last version"
 nmap <Leader>gc <Action>(Git.CompareWithBranch)
+let g:WhichKeyDesc_gc = "<leader>gc Compare branch"
 nmap <Leader>gm <Action>(Vcs.QuickListPopupAction)
-nmap <Leader>gp <Action>(ActivateVersionControlToolWindow)
-nmap <Leader>gm <Action>(Git.Branches)
+let g:WhichKeyDesc_gm = "<leader>gm Git list"
+nmap <Leader>gv <Action>(ActivateVersionControlToolWindow)
+let g:WhichKeyDesc_gv = "<leader>gv Git Tool"
+nmap <Leader>gb <Action>(Git.Branches)
+let g:WhichKeyDesc_gb = "<leader>gb Branches"
 nmap <Leader>gB <Action>(Github.Open.In.Browser)
-nmap <Leader>gb <Action>(Annotate)
+let g:WhichKeyDesc_gB = "<leader>gB Open in browser"
+nmap <Leader>ga <Action>(Annotate)
+let g:WhichKeyDesc_ga = "<leader>ga Annotate"
+
 
 " Android Development
 map <Leader>dr <Action>(Run)
+let g:WhichKeyDesc_dr = "<leader>dr Run"
+map <Leader>dw <Action>(RunClass)
+let g:WhichKeyDesc_dw = "<leader>dw Run class"
 map <Leader>dR <Action>(ChooseRunConfiguration)
+let g:WhichKeyDesc_dR = "<leader>dR Run config"
 map <Leader>dt <Action>(android.deploy.ApplyChanges)
+let g:WhichKeyDesc_dt = "<leader>dt Apply changes"
 map <Leader>dh <Action>(android.deploy.CodeSwap)
+let g:WhichKeyDesc_dh = "<leader>dh Code swap"
 map <Leader>dd <Action>(Debug)
+let g:WhichKeyDesc_dd = "<leader>dd Debug"
 map <Leader>da <Action>(AndroidConnectDebuggerAction)
+let g:WhichKeyDesc_da = "<leader>da Attach debug"
 map <Leader>ds <Action>(Stop)
+let g:WhichKeyDesc_ds = "<leader>ds Stop"
 map <Leader>dc <Action>(RunConfiguration)
+let g:WhichKeyDesc_dc = "<leader>dc Configuration"
 map <Leader>dp <Action>(Android.ChooseProfileConfiguration)
+let g:WhichKeyDesc_dp = "<leader>dp Choose config"
 map <Leader>df <Action>(Flutter.Toolbar.ReloadAction)
+let g:WhichKeyDesc_df = "<leader>df Flutter hot reload"
+map <Leader>dg <Action>(Android.SyncProject)
+let g:WhichKeyDesc_dg = "<leader>dg Sync with Gradle files"
+map <Leader>dk <Action>(ActivateKotlinBytecodeToolWindow)
+let g:WhichKeyDesc_dk = "<leader>dk Kotlin bytecode"
 
 " Tool windows
 map         tt <Action>(ActivateProjectToolWindow)
 map         ti <Action>(ActivateTerminalToolWindow)
 map <Leader>vb <Action>(ActivateBuildToolWindow)
+let g:WhichKeyDesc_vb = "<leader>vb Build"
 map <Leader>vc <Action>(ActivateCodotaToolWindow)
+let g:WhichKeyDesc_vc = "<leader>vc Codota"
 map <Leader>vd <Action>(ActivateDebugToolWindow)
+let g:WhichKeyDesc_vd = "<leader>vd Debug"
+map <Leader>ve <Action>(ActivateProblemsViewToolWindow)
+let g:WhichKeyDesc_ve = "<leader>ve Problems"
 map <Leader>vg <Action>(ActivateGradleToolWindow)
+let g:WhichKeyDesc_vg = "<leader>vg Gradle"
+map <Leader>vl <Action>(ActivateLogcatToolWindow)
+let g:WhichKeyDesc_vl = "<leader>vl Logcat"
 map <Leader>vt <Action>(ActivateTODOToolWindow)
+let g:WhichKeyDesc_vt = "<leader>vt TODO"
 map <Leader>vr <Action>(ActivateRunToolWindow)
+let g:WhichKeyDesc_vr = "<leader>vr Run"
 map <Leader>vp <Action>(ActivateAndroidProfilerToolWindow)
+let g:WhichKeyDesc_vp = "<leader>vp Android Profiler"
 map <Leader>vo <Action>(ActivateFlutterOutlineToolWindow)
+let g:WhichKeyDesc_vo = "<leader>vo Flutter Outline"
 map <Leader>vi <Action>(ActivateFlutterInspectorToolWindow)
+let g:WhichKeyDesc_vi = "<leader>vi Flutter Inspector"
 map <Leader>vu <Action>(ActivateFlutterPerformanceToolWindow)
+let g:WhichKeyDesc_vu = "<leader>vu Flutter Performance"
 map <Leader>vv <Action>(QuickList.Menu Tool Window)
+let g:WhichKeyDesc_vv = "<leader>vv menu"
+let g:WhichKeyDesc_vh = "<leader>vh Hierarchy"
+nmap <Leader>vhc <Action>(CallHierarchy)
+let g:WhichKeyDesc_vhc = "<leader>vhc Call Hierarchy"
+nmap <Leader>vhh <Action>(TypeHierarchy)
+let g:WhichKeyDesc_vhh = "<leader>vhh Type Hierarchy"
+nmap <Leader>vhm <Action>(MethodHierarchy)
+let g:WhichKeyDesc_vhm = "<leader>vhm Method Hierarchy"
+nmap <Leader>vs <Action>(ActivateStructureToolWindow)
+let g:WhichKeyDesc_vs = "<leader>vs Structure"
 
 " Debug
-map [b <Action>(ShowExecutionPoint)
-map [s <Action>(StepOver)
-map [d <Action>(StepInto)
-map [f <Action>(ForceStepInto)
-map [w <Action>(StepOut)
-map [r <Action>(Resume)
-map [e <Action>(EvaluateExpression
-map [a <Action>(ToggleLineBreakpoint)
-map [v <Action>(ViewBreakpoints)
+map <leader>sb <Action>(ShowExecutionPoint)
+let g:WhichKeyDesc_sb = "<leader>sb Show execution point"
+map <leader>ss <Action>(StepOver)
+let g:WhichKeyDesc_ss = "<leader>ss Stop over"
+map <leader>sd <Action>(StepInto)
+let g:WhichKeyDesc_sd = "<leader>sd Step into"
+map <leader>sf <Action>(ForceStepInto)
+let g:WhichKeyDesc_sf = "<leader>sf Force Step into"
+map <leader>sw <Action>(StepOut)
+let g:WhichKeyDesc_sw = "<leader>sw Stop out"
+map <leader>sr <Action>(Resume)
+let g:WhichKeyDesc_sr = "<leader>sr Resume"
+map <leader>se <Action>(EvaluateExpression
+let g:WhichKeyDesc_se = "<leader>se Evaluate expression"
+map <leader>sa <Action>(ToggleLineBreakpoint)
+let g:WhichKeyDesc_sa = "<leader>sa Toggle line breakpoint"
+map <leader>sv <Action>(ViewBreakpoints)
+let g:WhichKeyDesc_sv = "<leader>sv View breakpoints"
 
 " Translation
-map <Leader>i <Action>($EditorTranslateAction)
-map <Leader>I <Action>($TranslateDocumentationAction)
+map <Leader>ii <Action>($EditorTranslateAction)
+let g:WhichKeyDesc_ii = "<leader>ii Current cursor"
+map <Leader>im <Action>(QuickList.Menu Translate)
+let g:WhichKeyDesc_im = "<leader>im Menu"
+map <Leader>ir <Action>($TranslateAndReplaceAction)
+let g:WhichKeyDesc_ir = "<leader>ir Replace translated"
+map <Leader>id <Action>($TranslateDocumentationAction)
+let g:WhichKeyDesc_id = "<leader>id Document"
+map <Leader>it <Action>(ToggleRenderedDocPresentation)
+let g:WhichKeyDesc_it = "<leader>it Toggle rendered doc"
+map <Leader>ik <Action>(ToggleRenderedDocPresentation)?\/\*\*<CR>:nohl<CR><Action>($TranslateDocumentationAction)<Action>(ToggleRenderedDocPresentation)HH
+let g:WhichKeyDesc_ik = "<leader>ik Smart doc"
 
 " Online Search
-nmap <Leader>uu viw<Action>(LaunchSearchAction_Google)"+y
+nmap <Leader>uu viw<Action>(LaunchSearchAction_Google)<Esc>
 vmap <Leader>uu <Action>(LaunchSearchAction_Google)
+let g:WhichKeyDesc_uu = "<leader>uu Google"
 nmap <Leader>ug viw<Action>(LaunchSearchActionGit_hub)<Esc>
 vmap <Leader>ug <Action>(LaunchSearchActionGit_hub)
+let g:WhichKeyDesc_ug = "<leader>ug Github"
 nmap <Leader>us viw<Action>(LaunchSearchAction_SearchCode)<Esc>
 vmap <Leader>us <Action>(LaunchSearchAction_SearchCode)
+let g:WhichKeyDesc_us = "<leader>us SearchCode"
 nmap <leader>ur viw<Action>(LaunchSearchActionG_repCode)<Esc>
 vmap <leader>ur <Action>(LaunchSearchActionG_repCode)
+let g:WhichKeyDesc_ur = "<leader>ur Grep"
 
 " Sample Search
-map <leader>ns <Action>(OpenCodotaSearch)
+" map <leader>ns <Action>(OpenCodotaSearch)
+
+" New
+map <Leader>ns <Action>(NewScratchFile)
+let g:WhichKeyDesc_ns = "<leader>ns Scratch"
+map <Leader>nn <Action>(NewElement)
+let g:WhichKeyDesc_nn = "<leader>nf Menu"
+map <Leader>nf <Action>(NewFile)
+let g:WhichKeyDesc_nf = "<leader>nf File"
+map <Leader>nk <Action>(Kotlin.NewFile)
+let g:WhichKeyDesc_nk = "<leader>nk Kotlin"
+map <Leader>nj <Action>(NewClass)
+let g:WhichKeyDesc_nj = "<leader>nj Java"
+map <Leader>np <Action>(NewDir)
+let g:WhichKeyDesc_np = "<leader>np Package"
+
 
 " Others
-map <Leader>sc <Action>(NewScratchFile)
-map <Leader>up <Action>(WelcomeScreen.Plugins)
-map <Leader>uv <Action>(Rainbow.ScopeHighlightingAction)
+map <Leader>hh <Action>(Rainbow.ScopeHighlightingAction)
+let g:WhichKeyDesc_hh = "<leader>hh Highlight"
+map <Leader>hl <Action>(Rainbow.ScopeOutsideHighlightingRestrainAction)
+let g:WhichKeyDesc_hl = "<leader>hl Highlight Restrain"
+map <Leader>hc <Action>(EditorContextInfo)
+let g:WhichKeyDesc_hc = "<leader>hc Context info"
+map <Leader>ht <Action>(ExpressionTypeInfo)
+let g:WhichKeyDesc_ht = "<leader>ht Type info"
+
+map <C-n> <Plug>NextWholeOccurrence
+vmap <C-p> <Plug>RemoveOccurrence
+vmap <C-x> <Plug>SkipOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+
+nmap zr i//region <Esc>o//endregion<Esc>kA
+
+" repeat last leader command
+nnoremap <leader>. @q
+let g:WhichKeyDesc_dot = "<leader>. Repeat macro q"
+
+" Extract more other action can trigger by <Refactor menu>
+map <leader>xv <Action>(IntroduceVariable)
+map <leader>xc <Action>(IntroduceConstant)
+map <leader>xf <Action>(IntroduceField)
+map <leader>xp <Action>(IntroduceParameter)
+map <leader>xC <Action>(ExtractClass)
+map <leader>xm <Action>(ExtractMethod)
+map <leader>xi <Action>(ExtractInterface)
