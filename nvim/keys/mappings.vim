@@ -14,6 +14,10 @@ noremap <Leader>qq :q<CR>
 noremap <Leader>qa :qa<CR>
 noremap <Leader>z :w<CR>
 
+" Escape 
+inoremap fd <Esc>
+inoremap jk <C-o>
+
 " Resize splits with arrow keys
 nnoremap <up> :res -5<CR>
 nnoremap <down> :res +5<CR>

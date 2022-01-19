@@ -138,8 +138,8 @@ let g:which_key_map.l = {
 " g is for git
 let g:which_key_map.g = {
       \ 'name' : '+git' ,
-      \ 'b' : [':Git blame'                        , '★ blame'],
-      \ 'B' : [':GBrowse'                          , '  browse'],
+      \ 'a' : [':Git blame'                        , '★ blame(annotate)'],
+      \ 'b' : [':GBrowse'                          , '  browse'],
       \ 'c' : [':Gvdiffsplit'                      , '★ diff compare'],
       \ 'd' : [':Git diff'                         , '  diff'],
       \ 'f' : [':GitGutterFold'                    , '★ fold unchanged'],
