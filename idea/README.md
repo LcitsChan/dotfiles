@@ -29,6 +29,7 @@
 * [Mnemonic](#mnemonic)
 * [Plugins](#plugins)
 * [Tips and tricks](#tips-and-tricks)
+* [Links of configs](#links-of-configs)
 
 <!-- vim-markdown-toc -->
 
@@ -84,8 +85,8 @@
 
 | trigger             | action       | mode |
 |---------------------|--------------|------|
-| <kbd>Leader</kbd>ss | find in path | n/v  |
-| <kbd>Leader</kbd>ff | replace      | n/v  |
+| <kbd>Leader</kbd>fs | find in path | n/v  |
+| <kbd>Leader</kbd>fr | replace      | n/v  |
 
 ### Workflow
 
@@ -230,17 +231,17 @@
 
 ### Debug
 
-| trigger | action                       | mode |
-|---------|------------------------------|------|
-| [b      | show execution breakpoint    | n/v  |
-| [s      | step over                    | n/v  |
-| [d      | step into                    | n/v  |
-| [f      | force step into              | n/v  |
-| [w      | step over                    | n/v  |
-| [r      | resume                       | n/v  |
-| [e      | evaluate expression          | n/v  |
-| [a      | toggle line breakpoint       | n/v  |
-| [v      | show breakpoints tool window | n/v  |
+| trigger             | action                       | mode |
+|---------------------|------------------------------|------|
+| <kbd>Leader</kbd>sb | show execution breakpoint    | n/v  |
+| <kbd>Leader</kbd>ss | step over                    | n/v  |
+| <kbd>Leader</kbd>sd | step into                    | n/v  |
+| <kbd>Leader</kbd>sf | force step into              | n/v  |
+| <kbd>Leader</kbd>sw | step over                    | n/v  |
+| <kbd>Leader</kbd>sr | resume                       | n/v  |
+| <kbd>Leader</kbd>se | evaluate expression          | n/v  |
+| <kbd>Leader</kbd>sa | toggle line breakpoint       | n/v  |
+| <kbd>Leader</kbd>sv | show breakpoints tool window | n/v  |
 
 ### Translation
 
@@ -281,7 +282,7 @@
 | <kbd>Leader</kbd>t | structure            |
 | <kbd>Leader</kbd>v | tool windows         |
 | <kbd>Leader</kbd>w | workbench            |
-| [                  | debug                |
+| <kbd>Leader</kbd>s | debug                |
 
 ## Plugins
 
@@ -298,3 +299,39 @@
 ## Tips and tricks
 
 * Inject Language
+
+## Links of configs
+```l:q
+.
+├── codestyles
+│   ├── Square.xml
+│   └── SquareAndroid.xml
+├── colors
+│   └── Nova.icls
+├── inspection
+│   └── Square.xml
+├── keymaps
+│   └── macOS-Vim.xml
+├── options
+│   ├── abbreviations.xml
+│   ├── code.style.schemes.xml
+│   ├── colors.scheme.xml
+│   ├── editor.codeinsight.xml
+│   ├── editor.xml
+│   ├── keymap.xml
+│   ├── laf.xml
+│   ├── ui.lnf.xml
+│   └── vim_settings.xml
+├── quicklists
+│   ├── Menu\ Analyze.xml
+│   ├── Menu\ Flutter.xml
+│   ├── Menu\ Git.xml
+│   ├── Menu\ Leetcode.xml
+│   ├── Menu\ Tool\ Window.xml
+│   └── Menu\ Translate.xml
+└── templates
+    ├── Dart.xml
+    ├── Flutter.xml
+    ├── Timber.xml
+    └── mobx.xml
+```

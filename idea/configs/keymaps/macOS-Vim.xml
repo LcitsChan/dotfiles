@@ -26,10 +26,15 @@
     <keyboard-shortcut first-keystroke="ctrl p" />
     <keyboard-shortcut first-keystroke="ctrl k" />
   </action>
+  <action id="FileStructurePopup">
+    <keyboard-shortcut first-keystroke="ctrl i" />
+  </action>
   <action id="FocusEditor">
     <keyboard-shortcut first-keystroke="escape" />
     <keyboard-shortcut first-keystroke="ctrl open_bracket" />
+    <keyboard-shortcut first-keystroke="meta o" />
   </action>
+  <action id="GotoClass" />
   <action id="HideActiveWindow">
     <keyboard-shortcut first-keystroke="shift escape" />
     <keyboard-shortcut first-keystroke="ctrl d" />
@@ -73,6 +78,10 @@
   <action id="ResizeToolWindowUp">
     <keyboard-shortcut first-keystroke="shift meta up" />
     <keyboard-shortcut first-keystroke="ctrl comma" second-keystroke="ctrl w" />
+  </action>
+  <action id="Scala.ShowImplicits">
+    <keyboard-shortcut first-keystroke="shift ctrl alt equals" />
+    <keyboard-shortcut first-keystroke="shift ctrl alt add" />
   </action>
   <action id="ShowPopupMenu">
     <keyboard-shortcut first-keystroke="ctrl comma" second-keystroke="m" />

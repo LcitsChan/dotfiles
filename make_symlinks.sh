@@ -92,7 +92,8 @@ idea_link() {
   local CONFIGS="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/idea/configs"
   for i in $HOME/Library/Preferences/AndroidStudio* \
            $HOME/.AndroidStudio*/config \
-           $HOME/Library/ApplicationSupport/Google/AndroidStudio* 
+           $HOME/Library/ApplicationSupport/Google/AndroidStudio* \
+           $HOME/Library/ApplicationSupport/JetBrains/IdeaIC*
   do
     if [[ -d $i ]]; then
       echo "[${i##*/}] Linking"

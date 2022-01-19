@@ -87,7 +87,8 @@ set noerrorbells
 " --------------------
 inoremap        <C-j> <Down>
 inoremap        <C-k> <Up>
-noremap         <C-j> <Down>
+" noremap         <C-j> <Down>
+noremap         <C-j> i<CR><Esc>^
 noremap         <C-k> <Up>
 noremap  <Leader><CR> :nohl<CR><ESC>
 let g:WhichKeyDesc_nohl = "<leader>⏎ Remove highlight"
@@ -222,6 +223,8 @@ let g:WhichKeyDesc_ef = "<leader>ef NavBar"
 " Refactor
 map  <Leader>rr <Action>(Refactorings.QuickListPopupAction)
 let g:WhichKeyDesc_rr = "<leader>rr menu"
+map  <Leader>ra <Action>(GotoNextError)<Action>(ShowIntentionActions)
+let g:WhichKeyDesc_ra = "<leader>ra fix"
 map  <Leader>rn <Action>(RenameElement)
 let g:WhichKeyDesc_rn = "<leader>rn rename"
 map  <Leader>ri <Action>(OptimizeImports)
@@ -259,6 +262,8 @@ let g:WhichKeyDesc_nop_gI = "gI"
 map     gs <Action>(GotoSuperMethod)
 let g:WhichKeyDesc_nop_gs = "gs Super Method"
 map     gy <Action>(GotoTypeDeclaration)
+let g:WhichKeyDesc_nop_gy = "gy Type Declaration"
+map     gY <Action>(QuickTypeDefinition)
 let g:WhichKeyDesc_nop_gy = "gy Type Declaration"
 map     gd <Action>(GotoDeclaration)
 let g:WhichKeyDesc_nop_gd = "gd Declaration"
@@ -357,6 +362,8 @@ map <Leader>df <Action>(Flutter.Toolbar.ReloadAction)
 let g:WhichKeyDesc_df = "<leader>df Flutter hot reload"
 map <Leader>dg <Action>(Android.SyncProject)
 let g:WhichKeyDesc_dg = "<leader>dg Sync with Gradle files"
+map <Leader>db <Action>(MakeGradleProject)
+let g:WhichKeyDesc_db = "<leader>db Make projects"
 map <Leader>dk <Action>(ActivateKotlinBytecodeToolWindow)
 let g:WhichKeyDesc_dk = "<leader>dk Kotlin bytecode"
 
@@ -489,8 +496,10 @@ let g:WhichKeyDesc_dot = "<leader>. Repeat macro q"
 " Extract more other action can trigger by <Refactor menu>
 map <leader>xv <Action>(IntroduceVariable)
 map <leader>xc <Action>(IntroduceConstant)
-map <leader>xf <Action>(IntroduceField)
+map <leader>xl <Action>(IntroduceField)
 map <leader>xp <Action>(IntroduceParameter)
 map <leader>xC <Action>(ExtractClass)
 map <leader>xm <Action>(ExtractMethod)
+map <leader>xf <Action>(ExtractFunction)
+map <leader>xF <Action>(ExtractFunctionToScope)
 map <leader>xi <Action>(ExtractInterface)
