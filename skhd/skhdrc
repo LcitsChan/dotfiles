@@ -38,11 +38,12 @@ alt - d : yabai -m window --swap east || yabai -m window --swap west
 alt - x : yabai -m space --mirror x-axis
 alt - y : yabai -m space --mirror y-axis
 
+
 # 4.3 Warp
-shift + alt - a : yabai -m window --warp west
-shift + alt - s : yabai -m window --warp south
-shift + alt - w : yabai -m window --warp north
-shift + alt - d : yabai -m window --warp east
+shift + alt - a : yabai -m window --warp west || yabai -m window --resize left:40:0
+shift + alt - s : yabai -m window --warp south || yabai -m window --resize bottom:0:-40
+shift + alt - w : yabai -m window --warp north || yabai -m window --resize top:0:40
+shift + alt - d : yabai -m window --warp east || yabai -m window --resize right:-40:0
 
 # 4.4 Insert
 ctrl + alt - h : yabai -m window --insert west
@@ -53,15 +54,18 @@ ctrl + alt - i : yabai -m window --insert stack
 
 # 4.5 Zoom
 lalt - f : yabai -m window --toggle zoom-fullscreen
+shift + lalt - f : yabai -m window --grid 1:1:1:1:1:1
 lalt - v : yabai -m window --toggle zoom-parent
 lalt - o : yabai -m window --toggle float && yabai -m window --grid 12:8:1:1:6:10
 lalt - p : yabai -m window --grid 12:8:1:1:6:10
+lalt - i : yabai -m window --resize top_left:-40:-40 && yabai -m window --resize bottom_right:40:40
+ralt - i : yabai -m window --resize top_left:40:40 && yabai -m window --resize bottom_right:-40:-40
 
 # 4.6 Navigate
-alt - h : yabai -m window --focus west
-alt - j : yabai -m window --focus south
-alt - k : yabai -m window --focus north
-alt - l : yabai -m window --focus east
+alt - h : yabai -m window --focus west || yabai -m window --move rel:-20:0
+alt - j : yabai -m window --focus south || yabai -m window --move rel:0:20
+alt - k : yabai -m window --focus north || yabai -m window --move rel:0:-20
+alt - l : yabai -m window --focus east || yabai -m window --move rel:20:0
 alt - r : yabai -m window --focus recent || yabai -m space --focus recent
 alt - n : yabai -m window --focus next || yabai -m window --focus first
 alt - m : yabai -m window --focus stack.recent
@@ -91,6 +95,10 @@ ctrl + alt - 6: yabai -m window --space 6
 # 4.9 close
 alt - q : yabai -m window --close
 
+# 4.10 sticky
+shift + lalt - p : yabai -m window --toggle sticky
+
+# space
 ctrl + alt - p : yabai -m space --focus prev || yabai -m space --focus last
 ctrl + alt - n : yabai -m space --focus next || yabai -m space --focus first
 ctrl + alt - r : yabai -m space --focus recent

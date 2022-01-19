@@ -53,7 +53,7 @@ yabai -m config external_bar all:0:26
 yabai -m rule --add app="^System Preferences$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Karabiner-Elements$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Karabiner-EventViewer$" sticky=on layer=above manage=off
-yabai -m rule --add app="^Finder$" sticky=on layer=above manage=off
+yabai -m rule --add app="^Finder$" sticky=on manage=off # don't set above, conflict with Time Machine
 yabai -m rule --add app="^Keka$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Alfred Preferences$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Disk Utility$" sticky=on layer=above manage=off
@@ -65,6 +65,7 @@ yabai -m rule --add app="^iTerm2$" sticky=on manage=off layer=above grid=200:30:
 yabai -m rule --add app="^Terminal$" sticky=on manage=off
 yabai -m rule --add app="^Time Out$" manage=off
 yabai -m rule --add app="^console$" manage=off
+yabai -m rule --add app="^Tencent Lemon$" manage=off
 yabai -m rule --add app="^Harvest$" manage=off
 yabai -m rule --add app="^Logi Options$" manage=off
 yabai -m rule --add app="^Private Internet Access$" manage=off
@@ -74,8 +75,7 @@ yabai -m rule --add app="^Microsoft To Do$" space=2
 music='^(Spotify|NeteaseMusic|iTunes)$'
 yabai -m rule --add app="${music}" manage=off space=3
 
-idea_title_regex="(.* \(/.*\))|^(Specify Inspection Scope|Choose Content to Paste|Preferences for New Projects|Welcome to Android Studio)$|^(Reformat File|Reformat Code|Preferences|Breakpoints|Rename|Project Structure).*"
-yabai -m rule --add app="^(Android Studio|IntelliJ IDEA)$" title="${idea_title_regex}" manage=off
+yabai -m rule --add app="^(Android Studio|IntelliJ IDEA)$" manage=off
 
 killall limelight &> /dev/null
 limelight &> /dev/null &
