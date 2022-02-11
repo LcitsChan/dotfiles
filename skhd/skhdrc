@@ -1,10 +1,33 @@
+# Modes
+:: default : yabai -m config window_border off
+:: r_mode : yabai -m config window_border on && yabai -m config active_window_border_color 0xff00ff00 # resize
+:: i_mode : yabai -m config window_border on && yabai -m config active_window_border_color 0xffff0000 # insert
+:: w_mode : yabai -m config window_border on && yabai -m config active_window_border_color 0xff0000ff # warp/window
+:: s_mode : yabai -m config window_border on && yabai -m config active_window_border_color 0xfff0f0f0 # swap
+:: escape_mode : yabai -m config window_border on && yabai -m config active_window_border_color 0xffff00ff
+
+r_mode, i_mode, w_mode, s_mode, escape_mode < alt - d ; default
+default, i_mode, w_mode, s_mode, escape_mode < alt - r ; r_mode
+r_mode < alt - r ; default
+default, r_mode, i_mode, w_mode, escape_mode < alt - s ; s_mode
+s_mode < alt - s ; default
+default, r_mode, i_mode, s_mode, escape_mode < alt - w ; w_mode
+w_mode < alt - w ; default
+default, r_mode, w_mode, s_mode, escape_mode < alt - i ; i_mode
+i_mode < alt - i ; default
+default, r_mode, i_mode, w_mode, s_mode < alt - 0x21 ; escape_mode # alt - [
+escape_mode < alt - 0x21 ; default
+
 # 1 Quick Open
-rcmd - return : open -n -a /Applications/Alacritty.app
-ralt - return : open -n -a /Applications/Google\ Chrome.app
+default, i_mode < rcmd - return : open -n -b "io.alacritty"
+default, i_mode < ralt - return : open -n -b "com.google.Chrome"
 
 # 2 Display
 
 # 3 Space
+alt - p : yabai -m space --focus prev || yabai -m space --focus last
+alt - n : yabai -m space --focus next || yabai -m space --focus first
+alt - 0x29 : yabai -m space --focus recent # alt - ;
 
 # Navigate
 ctrl - 1 : yabai -m space --focus 1
@@ -13,92 +36,89 @@ ctrl - 3 : yabai -m space --focus 3
 ctrl - 4 : yabai -m space --focus 4
 ctrl - 5 : yabai -m space --focus 5
 ctrl - 6 : yabai -m space --focus 6
+ctrl - 7 : yabai -m space --focus 7
+ctrl - 8 : yabai -m space --focus 8
+ctrl - 9 : yabai -m space --focus 9
 
 # Create and destroy
 # Seveveven
-ctrl - 7 : yabai -m space --focus next || yabai -m space --focus first
+ctrl + alt - 7 : yabai -m space --focus next || yabai -m space --focus first
 # Create: Cr-eight
-ctrl - 8 : yabai -m space --create && yabai -m space --focus last
+ctrl + alt - 8 : yabai -m space --create && yabai -m space --focus last
 # Destory: why 9, like kill -9, just for mnemonic
 ctrl + alt - 9 : yabai -m space --destroy
 # ctrl + alt - 9 : osascript ~/.dotfiles/skhd/scripts/close_space.scpt
 
 # 4 Window
 # 4.1 Arrangement
-lalt - b : yabai -m space --balance
-lalt - u : yabai -m window --toggle split
-shift + alt - r : yabai -m space --rotate 90
+alt - b : yabai -m space --balance
+alt - u : yabai -m window --toggle split
 
 # 4.2 Swap windows
-alt - e : yabai -m window --swap recent
-alt - w : yabai -m window --swap north || yabai -m window --swap south
-alt - s : yabai -m window --swap south || yabai -m window --swap north
-alt - a : yabai -m window --swap west || yabai -m window --swap east
-alt - d : yabai -m window --swap east || yabai -m window --swap west
+s_mode < r : yabai -m space --rotate 270
+s_mode < s : yabai -m window --swap recent
+s_mode < k : yabai -m window --swap north || yabai -m window --swap south
+s_mode < j : yabai -m window --swap south || yabai -m window --swap north
+s_mode < h : yabai -m window --swap west || yabai -m window --swap east
+s_mode < l : yabai -m window --swap east || yabai -m window --swap west
 alt - x : yabai -m space --mirror x-axis
 alt - y : yabai -m space --mirror y-axis
 
-
 # 4.3 Warp
-shift + alt - a : yabai -m window --warp west || yabai -m window --resize left:40:0
-shift + alt - s : yabai -m window --warp south || yabai -m window --resize bottom:0:-40
-shift + alt - w : yabai -m window --warp north || yabai -m window --resize top:0:40
-shift + alt - d : yabai -m window --warp east || yabai -m window --resize right:-40:0
+w_mode < h : yabai -m window --warp west || yabai -m window --resize left:40:0
+w_mode < j : yabai -m window --warp south || yabai -m window --resize bottom:0:-40
+w_mode < k : yabai -m window --warp north || yabai -m window --resize top:0:40
+w_mode < l : yabai -m window --warp east || yabai -m window --resize right:-40:0
 
 # 4.4 Insert
-ctrl + alt - h : yabai -m window --insert west
-ctrl + alt - j : yabai -m window --insert south
-ctrl + alt - k : yabai -m window --insert north
-ctrl + alt - l : yabai -m window --insert east
-ctrl + alt - i : yabai -m window --insert stack
+i_mode < h : yabai -m window --insert west
+i_mode < j : yabai -m window --insert south
+i_mode < k : yabai -m window --insert north
+i_mode < l : yabai -m window --insert east
+i_mode < i : yabai -m window --insert stack
 
 # 4.5 Zoom
-lalt - f : yabai -m window --toggle zoom-fullscreen
-shift + lalt - f : yabai -m window --grid 1:1:1:1:1:1
-lalt - v : yabai -m window --toggle zoom-parent
-lalt - o : yabai -m window --toggle float && yabai -m window --grid 12:8:1:1:6:10
-lalt - p : yabai -m window --grid 12:8:1:1:6:10
-lalt - i : yabai -m window --resize top_left:-40:-40 && yabai -m window --resize bottom_right:40:40
-ralt - i : yabai -m window --resize top_left:40:40 && yabai -m window --resize bottom_right:-40:-40
+alt - f : yabai -m window --grid 1:1:1:1:1:1 || yabai -m window --toggle zoom-fullscreen
+shift + alt - f : yabai -m window --toggle native-fullscreen
+alt - v : yabai -m window --toggle zoom-parent
+alt - o : yabai -m window --toggle float && yabai -m window --grid 12:8:1:1:6:10
+alt - z : yabai -m window --grid 12:8:1:1:6:10
 
 # 4.6 Navigate
-alt - h : yabai -m window --focus west || yabai -m window --move rel:-20:0
-alt - j : yabai -m window --focus south || yabai -m window --move rel:0:20
-alt - k : yabai -m window --focus north || yabai -m window --move rel:0:-20
-alt - l : yabai -m window --focus east || yabai -m window --move rel:20:0
-alt - r : yabai -m window --focus recent || yabai -m space --focus recent
-alt - n : yabai -m window --focus next || yabai -m window --focus first
-alt - m : yabai -m window --focus stack.recent
-ctrl + alt - m : yabai -m window --focus stack.next || yabai -m window --focus stack.first
+default, r_mode, i_mode, w_mode, s_mode < alt - h : \
+  yabai -m window --focus west || yabai -m window --move rel:-20:0
+default, r_mode, i_mode, w_mode, s_mode < alt - j : \
+  yabai -m window --focus south || yabai -m window --move rel:0:20
+default, r_mode, i_mode, w_mode, s_mode < alt - k : \
+  yabai -m window --focus north || yabai -m window --move rel:0:-20
+default, r_mode, i_mode, w_mode, s_mode < alt - l : \
+  yabai -m window --focus east || yabai -m window --move rel:20:0
+default, r_mode, i_mode, w_mode, s_mode < alt - r : \
+  yabai -m window --focus recent || yabai -m space --focus recent
+default, r_mode, i_mode, w_mode, s_mode < alt - m : \
+  yabai -m window --focus stack.recent
+default, r_mode, i_mode, w_mode, s_mode < ctrl + alt - m : \
+  yabai -m window --focus stack.next || yabai -m window --focus stack.first
+w_mode < n : yabai -m window --focus next || yabai -m window --focus first
+w_mode < p : yabai -m window --focus prev || yabai -m window --focus last
 
 # 4.7 Resize
-shift + alt - h : \
-    yabai -m window --resize left:-40:0 || yabai -m window --resize right:-40:0
-
-shift + alt - j : \
-    yabai -m window --resize bottom:0:40 || yabai -m window --resize top:0:40
-
-shift + alt - k : \
-    yabai -m window --resize top:0:-40 || yabai -m window --resize bottom:0:-40
-
-shift + alt - l : \
-    yabai -m window --resize right:40:0 || yabai -m window --resize left:40:0
+r_mode < h : yabai -m window --resize left:-40:0 || yabai -m window --resize right:-40:0
+r_mode < j : yabai -m window --resize bottom:0:40 || yabai -m window --resize top:0:40
+r_mode < k : yabai -m window --resize top:0:-40 || yabai -m window --resize bottom:0:-40
+r_mode < l : yabai -m window --resize right:40:0 || yabai -m window --resize left:40:0
+r_mode < i : yabai -m window --resize top_left:-40:-40 && yabai -m window --resize bottom_right:40:40
+r_mode < d : yabai -m window --resize top_left:40:40 && yabai -m window --resize bottom_right:-40:-40
 
 # 4.8 Change space
-ctrl + alt - 1: yabai -m window --space 1
-ctrl + alt - 2: yabai -m window --space 2
-ctrl + alt - 3: yabai -m window --space 3
-ctrl + alt - 4: yabai -m window --space 4
-ctrl + alt - 5: yabai -m window --space 5
-ctrl + alt - 6: yabai -m window --space 6
+ctrl + alt - 1 : yabai -m window --space 1 && yabai -m space --focus 1
+ctrl + alt - 2 : yabai -m window --space 2 && yabai -m space --focus 2
+ctrl + alt - 3 : yabai -m window --space 3 && yabai -m space --focus 3
+ctrl + alt - 4 : yabai -m window --space 4 && yabai -m space --focus 4
+ctrl + alt - 5 : yabai -m window --space 5 && yabai -m space --focus 5
 
-# 4.9 close
-alt - q : yabai -m window --close
+# 4.9 sticky
+shift + alt - s : yabai -m window --toggle sticky \
+                && yabai -m window --resize right:1:0 \
+                && yabai -m window --resize right:-1:0
 
-# 4.10 sticky
-shift + lalt - p : yabai -m window --toggle sticky
-
-# space
-ctrl + alt - p : yabai -m space --focus prev || yabai -m space --focus last
-ctrl + alt - n : yabai -m space --focus next || yabai -m space --focus first
-ctrl + alt - r : yabai -m space --focus recent
