@@ -1,0 +1,282 @@
+;; README
+;; !  | means mandatory
+;; #  | means optional
+;; C  | left_command
+;; T  | left_control
+;; O  | left_option
+;; S  | left_shift
+;; F  | fn
+;; Q  | right_command
+;; W  | right_control
+;; E  | right_option
+;; R  | right_shift
+;; P  | caps_lock
+;; !! | mandatory command + control + optional + shift (hyper)
+;; ## | optional any
+;;
+;; rule [:period ["period-mode" 1] nil {:afterup ["period-mode" 0] :alone :period}]
+;;       |_____| |_______________| |_| |_________________________________________|
+;;        <from>    <to>      <conditions>         <other options>
+
+{
+;; profiles
+:profiles {:Default { :default true :sim 200 :delay 500 :alone 500 :held 500 }}
+
+
+:tos {
+  :same_app_wins {:key :grave_accent_and_tilde :modi [:left_command] :lazy true}
+  :prev_app      {:key :tab                    :modi [:left_command] :lazy true}
+}
+
+
+;; templates
+:templates {
+  :open "open -b %s"
+}
+
+
+:applications {
+  :androidstudio ["com.google.android.studio-EAP"]
+  :terminals     ["io.alacritty"
+                  "com.googlecode.iterm2"
+                  "com.apple.Terminal"]
+  :designapp     ["com.figma.Desktop"]
+}
+
+
+;; layers
+:layers {
+}
+
+
+:simlayers {
+  ;; Global 
+  ;; yabai
+  :w-mode {:key :w}
+  :r-mode {:key :r}
+  :e-mode {:key :e}
+  :c-mode {:key :c}
+  ;; launch
+  :l-mode {:key :l}
+  ;; remap
+  :s-mode {:key :s}
+  ;; quick action
+  :q-mode {:key :q}
+  ;; sign
+  :period-mode {:key :period}
+  ;; mouse
+  :mouse-mode {:key :a :afterup {:set ["mouse-scroll-mode" 0]}}
+  ;; Domain
+  :android-mode     {:key :d                                :condi :androidstudio}
+  :tmux-mode        {:key :d                                :condi :terminals}
+  :tmux-resize-mode {:key :r :modi {:mandatory :left_shift} :condi :terminals}
+  :tmux-swap-mode   {:key :s :modi {:mandatory :left_shift} :condi :terminals}
+  :design_app       {:key :spacebar                         :condi :designapp}
+}
+
+
+:main [
+  {:des "yabai"
+   :rules [:w-mode
+           [:h :!FQh]
+           [:j :!FQj]
+           [:k :!FQk]
+           [:l :!FQl]
+           [:p :!FQp]
+           [:n :!FQn]
+           :r-mode
+           [:h :!FEh]
+           [:j :!FEj]
+           [:k :!FEk]
+           [:l :!FEl]
+           [:i :!FEi]
+           [:d :!FEd]
+           :e-mode
+           [:h :!FCh]
+           [:j :!FCj]
+           [:k :!FCk]
+           [:l :!FCl]
+           [:r :!FCr]
+           [:s :!FCs]
+           :c-mode
+           [:h :!FWh]
+           [:j :!FWj]
+           [:k :!FWk]
+           [:l :!FWl]
+           [:i :!FWi]
+  ]}
+
+  {:des "launch apps"
+   :rules [:l-mode
+           [:a [:open "com.google.android.studio-EAP"]]
+           [:s [:open "io.alacritty"]]
+           [:c [:open "com.google.Chrome"]]
+           [:w :same_app_wins]
+           [:h :!Ch]
+           [:d :!COslash]
+           [:t :!Oslash]
+  ]}
+
+  {:des "right command to command-tab when used alone"
+   :rules [
+           [:##right_command :right_command nil {:alone :prev_app}]
+  ]}
+
+  {:des "fd to escape"
+   :rules [
+           [[:f :d] :escape nil {:params {:sim 50}}]
+  ]}
+
+  {:des "quick bracket/braces sequences"
+   :rules [:s-mode
+           [:e :!Sopen_bracket]
+           [:r :!Sclose_bracket]
+           [:d :!S9]
+           [:f :!S0]
+           [:c :open_bracket]
+           [:v :close_bracket]
+  ]}
+
+  {:des "navigation"
+   :rules [:s-mode
+           [:h :left_arrow]
+           [:j :down_arrow]
+           [:k :up_arrow]
+           [:l :right_arrow]
+           [:semicolon :return_or_enter]
+           [:m :mission_control]
+  ]}
+
+  {:des "space cadet and switch input method shift"
+   :rules [[:left_shift [["lshift" 0] {:input :sogou}] :lshift]
+           [:##left_shift :left_shift :!lshift {:alone   ["lshift" 1]
+                                                :params  {:delay 300}
+                                                :delayed {:invoked  [["lshift" 0]]
+                                                          :canceled ["lshift" 0]}}]
+           [:right_shift [["rshift" 0] {:input :abc}] :rshift]
+           [:##right_shift :right_shift :!rshift {:alone   ["rshift" 1]
+                                                  :params  {:delay 300}
+                                                  :delayed {:invoked  [["rshift" 0]]
+                                                            :canceled ["rshift" 0]}}]
+   ]}
+
+  {:des "quick action"
+   :rules [:q-mode
+           [:d :launchpad]
+           [:p :play_or_pause] ;; play/pause
+           [:j :volume_decrement] ;; mute
+           [:k :volume_increment] ;; mute
+           [:m :mute] ;; mute
+           [:n :!!n] ;; mute
+           [:l :!CTq]]}
+
+  {:des "sign"
+   :rules [:period-mode
+           [:e :equal_sign]
+           [:m :hyphen]
+           [:a :!Sequal_sign]
+           [:u :!Shyphen]
+           [:b :backslash]
+           [:i :!Sbackslash]
+           [:t :!Sgrave_accent_and_tilde]
+           [:m :!S1]
+           [:q :!S2]
+           [:n :!S3]
+           [:d :!S4]
+           [:b :!S5]
+           [:c :!S6]
+           [:h :!S7]
+           [:s :!S8]
+           [:g :grave_accent_and_tilde]
+           [:slash [:!Sgrave_accent_and_tilde :slash]] ;; home
+  ]}
+
+  ;; specified domain app
+  {:des "development for android studio"
+   :rules [:android-mode
+           [:r :!CSOr]
+           [:p :!TSh]
+           [:n :!TSl]
+  ]}
+
+  {:des "tmux: map [q] to prefix key"
+   :rules [:tmux-mode
+           [:u :!Tb]
+           [:comma [:!Tb :comma]]
+           [:open_bracket [:!Tb :open_bracket]]
+           [:h [:!Tb :h]]
+           [:j [:!Tb :j]]
+           [:k [:!Tb :k]]
+           [:l [:!Tb :l]]
+           [:p [:!Tb :p]]
+           [:n [:!Tb :n]]
+           [:x [:!Tb :x]]
+           [:z [:!Tb :z]]
+           [:c [:!Tb :c]]
+           [:w [:!Tb :w]]
+           [:v [:!Tb :!Squote]]
+           [:b [:!Tb :!S5]]
+           [:s [:!Tb :m]]
+           [:i [:!Tb :i]]
+           [:t [:!Tb :t]]
+           [:s [:!Tb :s]]
+           [:semicolon [:!Tb :semicolon]]
+           [:!Sslash  [:!Tb :!Sslash]]
+           :tmux-resize-mode
+           [:h [:!Tb :!Oleft_arrow]]
+           [:j [:!Tb :!Odown_arrow]]
+           [:k [:!Tb :!Oup_arrow]]
+           [:l [:!Tb :!Oright_arrow]]
+           :tmux-swap-mode
+           [:h [:!Tb :!Sopen_bracket]]
+           [:l [:!Tb :!Sclose_bracket]]
+  ]}
+
+  {:des "design app: navigation"
+   :rules [:design_app
+           [:w :up_arrow]
+           [:s :down_arrow]
+           [:a :left_arrow]
+           [:d :right_arrow]
+  ]}
+
+  {:des "mouse"
+   :rules [
+           [:##j {:mkey {:vwheel 32}} [["mouse-scroll-mode" 1]] ["mouse-mode" 1]]
+           [:##h {:mkey {:hwheel 32}} [["mouse-scroll-mode" 1]] ["mouse-mode" 1]]
+           [:##k {:mkey {:vwheel -32}} [["mouse-scroll-mode" 1]] ["mouse-mode" 1]]
+           [:##l {:mkey {:hwheel -32}} [["mouse-scroll-mode" 1]] ["mouse-mode" 1]]
+           :mouse-mode
+           [:##j {:mkey {:y 1024}}]
+           [:##k {:mkey {:y -1024}}]
+           [:##h {:mkey {:x -1024}}]
+           [:##l {:mkey {:x 1024}}]
+           [:##v {:pkey :button1}]
+           [:##b {:pkey :button3}]
+           [:##n {:pkey :button2}]
+           [:##s ["mouse-scroll-mode" 1] nil {:afterup ["mouse-scroll-mode" 0]}]
+           [:##f {:mkey {:speed 0.5}}]
+  ]}
+
+  ;; {:des "poker mapping"
+  ;;  :rules [:poker
+           ;; [:##backslash :delete_or_backspace]
+           ;; [:##delete_or_backspace :backslash]
+           ;; [:##caps_lock :left_control]
+           ;; [:##left_command :left_option]
+           ;; [:##left_option :left_command]
+           ;; [:##left_control :escape]
+           ;; [:right_control :right_option]
+           ;; [:right_option :right_command]
+  ;; ]}
+]
+
+:input-sources {
+  :abc   {:input_source_id "^com\\.apple\\.keylayout\\.ABC$"}
+  :sogou {:input_source_id "^com\\.sogou\\.inputmethod\\.sogou\\.pinyin$"}
+}
+
+:devices {:poker [{:product_id 521 :vendor_id 1241}]}
+
+:simlayer-threshold 370
+}
