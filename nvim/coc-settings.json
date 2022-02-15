@@ -82,5 +82,8 @@
   "sh.enable": true,
   "sh.highlightParsingErrors": true,
   "flutter.enabled": true,
-  "flutter.lsp.initialization.closingLabels": true
+  "flutter.lsp.initialization.closingLabels": true,
+  "imselect.enableFloating": true,
+  "imselect.defaultInput": "com.apple.keylayout.ABC",
+  "imselect.enableStatusItem": true
 }

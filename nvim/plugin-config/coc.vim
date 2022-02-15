@@ -15,6 +15,7 @@ let g:coc_global_extensions = [
   \'coc-flutter-tools',
   \'coc-diagnostic',
   \'coc-snippets',
+  \'coc-imselect',
   \'coc-yank'] 
 
   " \'coc-flutter',
