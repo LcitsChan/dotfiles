@@ -18,6 +18,8 @@ i_mode < alt - i ; default
 default, r_mode, i_mode, w_mode, s_mode < alt - 0x21 ; escape_mode # alt - [
 escape_mode < alt - 0x21 ; default
 
+# One way shortcut for karabiner
+
 # 1 Quick Open
 default, i_mode < rcmd - return : open -n -b "io.alacritty"
 default, i_mode < ralt - return : open -n -b "com.google.Chrome"
@@ -63,12 +65,24 @@ s_mode < h : yabai -m window --swap west || yabai -m window --swap east
 s_mode < l : yabai -m window --swap east || yabai -m window --swap west
 alt - x : yabai -m space --mirror x-axis
 alt - y : yabai -m space --mirror y-axis
+# ========== alternative for karabiner ==========
+fn + lcmd - r : yabai -m space --rotate 270
+fn + lcmd - s : yabai -m window --swap recent
+fn + lcmd - k : yabai -m window --swap north || yabai -m window --swap south
+fn + lcmd - j : yabai -m window --swap south || yabai -m window --swap north
+fn + lcmd - h : yabai -m window --swap west || yabai -m window --swap east
+fn + lcmd - l : yabai -m window --swap east || yabai -m window --swap west
 
 # 4.3 Warp
 w_mode < h : yabai -m window --warp west || yabai -m window --resize left:40:0
 w_mode < j : yabai -m window --warp south || yabai -m window --resize bottom:0:-40
 w_mode < k : yabai -m window --warp north || yabai -m window --resize top:0:40
 w_mode < l : yabai -m window --warp east || yabai -m window --resize right:-40:0
+# ========== alternative for karabiner ==========
+fn + rcmd - h : yabai -m window --warp west || yabai -m window --resize left:40:0
+fn + rcmd - j : yabai -m window --warp south || yabai -m window --resize bottom:0:-40
+fn + rcmd - k : yabai -m window --warp north || yabai -m window --resize top:0:40
+fn + rcmd - l : yabai -m window --warp east || yabai -m window --resize right:-40:0
 
 # 4.4 Insert
 i_mode < h : yabai -m window --insert west
@@ -76,6 +90,12 @@ i_mode < j : yabai -m window --insert south
 i_mode < k : yabai -m window --insert north
 i_mode < l : yabai -m window --insert east
 i_mode < i : yabai -m window --insert stack
+# ========== alternative for karabiner ==========
+fn + rctrl - h : yabai -m window --insert west
+fn + rctrl - j : yabai -m window --insert south
+fn + rctrl - k : yabai -m window --insert north
+fn + rctrl - l : yabai -m window --insert east
+fn + rctrl - i : yabai -m window --insert stack
 
 # 4.5 Zoom
 alt - f : yabai -m window --grid 1:1:1:1:1:1 || yabai -m window --toggle zoom-fullscreen
@@ -99,8 +119,12 @@ default, r_mode, i_mode, w_mode, s_mode < alt - m : \
   yabai -m window --focus stack.recent
 default, r_mode, i_mode, w_mode, s_mode < ctrl + alt - m : \
   yabai -m window --focus stack.next || yabai -m window --focus stack.first
+
 w_mode < n : yabai -m window --focus next || yabai -m window --focus first
 w_mode < p : yabai -m window --focus prev || yabai -m window --focus last
+# ========== alternative for karabiner ==========
+fn + rcmd - n : yabai -m window --focus next || yabai -m window --focus first
+fn + rcmd - p : yabai -m window --focus prev || yabai -m window --focus last
 
 # 4.7 Resize
 r_mode < h : yabai -m window --resize left:-40:0 || yabai -m window --resize right:-40:0
@@ -109,6 +133,13 @@ r_mode < k : yabai -m window --resize top:0:-40 || yabai -m window --resize bott
 r_mode < l : yabai -m window --resize right:40:0 || yabai -m window --resize left:40:0
 r_mode < i : yabai -m window --resize top_left:-40:-40 && yabai -m window --resize bottom_right:40:40
 r_mode < d : yabai -m window --resize top_left:40:40 && yabai -m window --resize bottom_right:-40:-40
+# ========== alternative for karabiner ==========
+fn + ralt - h : yabai -m window --resize left:-40:0 || yabai -m window --resize right:-40:0
+fn + ralt - j : yabai -m window --resize bottom:0:40 || yabai -m window --resize top:0:40
+fn + ralt - k : yabai -m window --resize top:0:-40 || yabai -m window --resize bottom:0:-40
+fn + ralt - l : yabai -m window --resize right:40:0 || yabai -m window --resize left:40:0
+fn + ralt - i : yabai -m window --resize top_left:-40:-40 && yabai -m window --resize bottom_right:40:40
+fn + ralt - d : yabai -m window --resize top_left:40:40 && yabai -m window --resize bottom_right:-40:-40
 
 # 4.8 Change space
 ctrl + alt - 1 : yabai -m window --space 1 && yabai -m space --focus 1
