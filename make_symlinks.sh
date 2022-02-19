@@ -81,6 +81,7 @@ base_link() {
     make_link $DOTDIR/yabai/yabairc $HOME/.config/yabai/yabairc
     make_link $DOTDIR/skhd/skhdrc $HOME/.config/skhd/skhdrc
     make_link $DOTDIR/spacebar/spacebarrc $HOME/.config/spacebar/spacebarrc
+    make_link $DOTDIR/goku/karabiner.edn $HOME/.config/karabiner.edn
     ;;
     Linux)
     ;;

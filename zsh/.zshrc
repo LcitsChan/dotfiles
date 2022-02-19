@@ -29,7 +29,8 @@ esac
 # Alias
 # --------------------
 
-(( $+commands[nvim] )) && alias vim=nvim
+(( $+commands[nvim] )) && alias v=nvim && alias vim=nvim
+alias ws="cd ~/workspace"
 alias ra=ranger
 alias tw="tmux new -A -s workspace"
 # switch `uname`

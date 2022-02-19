@@ -55,6 +55,7 @@ ctrl + alt - 9 : yabai -m space --destroy
 # 4.1 Arrangement
 alt - b : yabai -m space --balance
 alt - u : yabai -m window --toggle split
+alt - 0 : yabai -m config layout bsp
 
 # 4.2 Swap windows
 s_mode < r : yabai -m space --rotate 270

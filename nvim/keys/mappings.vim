@@ -18,6 +18,9 @@ noremap <Leader>z :w<CR>
 inoremap fd <Esc>
 inoremap jk <C-o>
 
+nnoremap oo o<Esc>0d$<Esc>
+nnoremap OO O<Esc>0d$<Esc>
+
 " Resize splits with arrow keys
 nnoremap <up> :res -5<CR>
 nnoremap <down> :res +5<CR>
