@@ -13,10 +13,10 @@ window:
     y: 8
   dynamic_padding: false
   dynamic_title: true
-  decorations: buttonless
+  decorations: none
   startup_mode: Windowed
 
-background_opacity: 0.85
+background_opacity: 0.95
 
 scrolling:
   history: 10000
@@ -74,53 +74,6 @@ colors:
     cyan:    '#7FC1CA'
     white:   '#E6EEF3'
 
-# colors:
-#   primary:
-#     background:     '#EDEFF1'
-#     foreground:     '#1D344F'
-#     dim_foreground: '#a5abb6'
-#  
-#   cursor:
-#     text:           '#2e3440'
-#     cursor:         '#d8dee9'
-#  
-#   vi_mode_cursor:
-#     text:           '#2e3440'
-#     cursor:         '#d8dee9'
-#  
-#   selection:
-#     text:           CellBackground
-#     background:     CellForeground
-#  
-#   normal:
-#      black:         '#1D344F'
-#      red:           '#C98093'
-#      green:         '#7ca198'
-#      yellow:        '#E4B371'
-#      blue:          '#6080b0'
-#      magenta:       '#8e6f98'
-#      cyan:          '#6ca8cf'
-#      white:         '#CDD1D5'
-#  
-#   bright:
-#      black:         '#1D344F'
-#      red:           '#C98093'
-#      green:         '#7ca198'
-#      yellow:        '#E4B371'
-#      blue:          '#6080b0'
-#      magenta:       '#8e6f98'
-#      cyan:          '#6ca8cf'
-#      white:         '#CDD1D5'
-#  
-#   dim:
-#      black:         '#1D344F'
-#      red:           '#C98093'
-#      green:         '#7ca198'
-#      yellow:        '#E4B371'
-#      blue:          '#6080b0'
-#      magenta:       '#8e6f98'
-#      cyan:          '#6ca8cf'
-     # white:         '#CDD1D5'
 
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
@@ -163,15 +116,11 @@ key_bindings:
   - { key: End,      mods: Alt,     chars: "\x1b[1;3F"                       }
   - { key: End,                     chars: "\x1bOF",        mode: AppCursor  }
   - { key: End,                     chars: "\x1b[F",        mode: ~AppCursor }
-  - { key: K,   mods: Control|Shift,   action: ScrollHalfPageUp,             }
-  - { key: K,   mods: Command|Shift,   action: ScrollPageUp,             }
   - { key: PageUp,   mods: Shift,   action: ScrollPageUp,   mode: ~Alt       }
   - { key: PageUp,   mods: Shift,   chars: "\x1b[5;2~",     mode: Alt        }
   - { key: PageUp,   mods: Control, chars: "\x1b[5;5~"                       }
   - { key: PageUp,   mods: Alt,     chars: "\x1b[5;3~"                       }
   - { key: PageUp,                  chars: "\x1b[5~"                         }
-  - { key: J,   mods: Control|Shift,   action: ScrollHalfPageDown,           }
-  - { key: J,   mods: Command|Shift,   action: ScrollPageDown,           }
   - { key: PageDown, mods: Shift,   action: ScrollPageDown, mode: ~Alt       }
   - { key: PageDown, mods: Shift,   chars: "\x1b[6;2~",     mode: Alt        }
   - { key: PageDown, mods: Control, chars: "\x1b[6;5~"                       }
