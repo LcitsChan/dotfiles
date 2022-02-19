@@ -142,9 +142,9 @@ let g:WhichKeyDesc_fd = "<leader>fd Replace TODO"
 nmap <Leader>fD :%s/TODO()//g<CR>:nohl<CR>
 let g:WhichKeyDesc_fD = "<leader>fD Clear all TODO"
 
-imap fd <Esc>
-vmap fd <Esc>
-let g:WhichKeyDesc_escape = "fd"
+" imap fd <Esc>
+" vmap fd <Esc>
+" let g:WhichKeyDesc_escape = "fd"
 imap jk <C-O>
 le g:WhichKeyDesc_escape_onetime = "jk"
 
