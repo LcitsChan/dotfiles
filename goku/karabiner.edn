@@ -22,12 +22,11 @@
 ;; profiles
 :profiles {:Default { :default true :sim 200 :delay 500 :alone 500 :held 500 }}
 
-
 :tos {
   :same_app_wins {:key :grave_accent_and_tilde :modi [:left_command] :lazy true}
   :prev_app      {:key :tab                    :modi [:left_command] :lazy true}
+  :alfred_mk [{:key :1 :modi [:left_shift]} {:key :3 :modi [:left_shift]} {:key :1 :modi [:left_shift]}]
 }
-
 
 ;; templates
 :templates {
@@ -62,6 +61,8 @@
   :s-mode {:key :s}
   ;; quick action
   :q-mode {:key :q}
+  ;; markdown action
+  :m-mode {:key :m}
   ;; sign
   :period-mode {:key :period}
   ;; mouse
@@ -230,6 +231,17 @@
            :tmux-swap-mode
            [:h [:!Tb :!Sopen_bracket]]
            [:l [:!Tb :!Sclose_bracket]]
+  ]}
+
+  {:des "markdown"
+   :rules [:m-mode
+           [:d :alfred_mk]
+           [:l [:alfred_mk :l]]
+           [:1 [:alfred_mk :1]]
+           [:2 [:alfred_mk :2]]
+           [:3 [:alfred_mk :3]]
+           [:4 [:alfred_mk :4]]
+           [:5 [:alfred_mk :5]]
   ]}
 
   {:des "design app: navigation"
