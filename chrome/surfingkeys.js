@@ -191,6 +191,7 @@ remaps("sw", "sbi");
 remaps("se", "swp");
 remaps("ss", "sso");
 remaps("sy", "syt");
+remaps("cS", "cz");
 unmap("sh");
 // previous/next page
 remaps("[[", "[");
