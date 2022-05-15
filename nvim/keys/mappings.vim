@@ -51,3 +51,6 @@ vnoremap <Leader>yf y/<C-R>"<CR>
 map <Leader><Leader> /<+ph+><CR>:nohlsearch<CR>c6l
 imap ,,, <+ph+> 
 nmap ,,, i<+ph+> 
+
+" Quick switch last visited file
+nnoremap <Leader>; :b#<Esc>

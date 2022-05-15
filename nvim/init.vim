@@ -70,7 +70,8 @@ Plug 'altercation/vim-colors-solarized'                   " Theme: Solarized imp
 Plug 'dracula/vim', { 'as': 'dracula' }                   " Dark Theme
 Plug 'junegunn/seoul256.vim'                              " Theme seoul256
 Plug 'trevordmiller/nova-vim'
-Plug 'ap/vim-css-color'                                   " Realtime render color
+" Plug 'ap/vim-css-color'                                   " Realtime render color
+Plug 'norcalli/nvim-colorizer.lua'
                                                           " -- markdown
 Plug 'plasticboy/vim-markdown'                            " Markdown Vim Mode
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -80,6 +81,7 @@ Plug 'dhruvasagar/vim-table-mode'                         " Markdown table tool
 Plug 'voldikss/vim-browser-search'                        " Online Search
 Plug 'voldikss/vim-translator'                            " Translator
 Plug 'neoclide/jsonc.vim'                                 " Jsonc syntax support
+Plug 'thiagoalessio/rainbow_levels.vim'
 
 call plug#end()
 
@@ -87,7 +89,8 @@ autocmd VimEnter *
   \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \|   PlugInstall --sync | q
   \| endif
-
+set termguicolors
+lua require'colorizer'.setup()
 
 " -------------------- 
 " Plugin setting

@@ -28,6 +28,7 @@ nmap <Leader>/ gcc
 vmap <Leader>/ gc
 " snippets
 imap <C-E> <Plug>(coc-snippets-expand-jump)
+xmap <leader>x  <Plug>(coc-convert-snippet)
 
 " Easy way to navigate between windows
 nnoremap <silent> <C-h> <C-w>h
