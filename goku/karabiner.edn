@@ -14,23 +14,29 @@
 ;; !! | mandatory command + control + optional + shift (hyper)
 ;; ## | optional any
 ;;
-;; rule [:period ["period-mode" 1] nil {:afterup ["period-mode" 0] :alone :period}]
-;;       |_____| |_______________| |_| |_________________________________________|
+;; rule [:period ["period-mode" 1] nil {:afterup ["period-mode" 0] :alone :period}] |_____| |_______________| |_| |_________________________________________|
 ;;        <from>    <to>      <conditions>         <other options>
 
 {
 ;; profiles
 :profiles {:Default { :default true :sim 200 :delay 500 :alone 500 :held 500 }}
 
+:froms {
+  :anykey {:any :key_code :modi {:optional [:any]}}
+}
+
 :tos {
   :same_app_wins {:key :grave_accent_and_tilde :modi [:left_command] :lazy true}
   :prev_app      {:key :tab                    :modi [:left_command] :lazy true}
-  :alfred_mk [{:key :1 :modi [:left_shift]} {:key :3 :modi [:left_shift]} {:key :1 :modi [:left_shift]}]
+  :to_abc [{:input :abc}]
+  :alfred_mk [{:input :abc} {:key :1 :modi [:left_shift]} {:key :3 :modi [:left_shift]} {:key :1 :modi [:left_shift]}]
+  :alfred_sb [{:key :1 :modi [:left_shift]} {:key :1 :modi [:left_shift]} {:key :3 :modi [:left_shift]} {:key :1 :modi [:left_shift]}]
 }
 
 ;; templates
 :templates {
   :open "open -b %s"
+  :open_url "open -u %s"
 }
 
 
@@ -40,11 +46,14 @@
                   "com.googlecode.iterm2"
                   "com.apple.Terminal"]
   :designapp     ["com.figma.Desktop"]
+  :photoshop     ["com.adobe.Photoshop"]
+  :chrome        ["com.google.Chrome"]
 }
 
 
 ;; layers
 :layers {
+         :ps-sb-mode       {:key :tab                         :condi :photoshop}
 }
 
 
@@ -57,28 +66,38 @@
   :c-mode {:key :c}
   ;; launch
   :l-mode {:key :l}
-  ;; remap
+  ;; navigation/shortcuts
   :s-mode {:key :s}
+  :Ss-mode {:key :s :modi {:mandatory :left_shift}}
   ;; quick action
   :q-mode {:key :q}
   ;; markdown action
   :m-mode {:key :m}
+  ;; select
+  :v-mode {:key :v}
+  :Sv-mode {:key :v :modi {:mandatory :left_shift}}
+  ;; delete
+  :x-mode {:key :x}
   ;; sign
   :period-mode {:key :period}
   ;; mouse
   :mouse-mode {:key :a :afterup {:set ["mouse-scroll-mode" 0]}}
   ;; Domain
   :android-mode     {:key :d                                :condi :androidstudio}
+  :chrome-mode      {:key :d                                :condi :chrome}
   :tmux-mode        {:key :d                                :condi :terminals}
   :tmux-resize-mode {:key :r :modi {:mandatory :left_shift} :condi :terminals}
-  :tmux-swap-mode   {:key :s :modi {:mandatory :left_shift} :condi :terminals}
+  :tmux-swap-mode   {:key :e :modi {:mandatory :left_shift} :condi :terminals}
   :design_app       {:key :spacebar                         :condi :designapp}
+  :ps-v-mode        {:key :v                                :condi :photoshop}
+  :ps-actions       {:key :spacebar                         :condi :photoshop}
 }
 
 
 :main [
   {:des "yabai"
-   :rules [:w-mode
+   :rules [
+           :w-mode
            [:h :!FQh]
            [:j :!FQj]
            [:k :!FQk]
@@ -97,7 +116,7 @@
            [:j :!FCj]
            [:k :!FCk]
            [:l :!FCl]
-           [:r :!FCr]
+           [:open_bracket :!FCr]
            [:s :!FCs]
            :c-mode
            [:h :!FWh]
@@ -105,6 +124,9 @@
            [:k :!FWk]
            [:l :!FWl]
            [:i :!FWi]
+           :s-mode
+           [:n :!FWn]
+           [:p :!FWp]
   ]}
 
   {:des "launch apps"
@@ -113,9 +135,10 @@
            [:s [:open "io.alacritty"]]
            [:c [:open "com.google.Chrome"]]
            [:w :same_app_wins]
-           [:h :!Ch]
-           [:d :!COslash]
-           [:t :!Oslash]
+           [:g :!TOg] ;; google search
+           [:h :!Ch] ;; hide window
+           [:d :!COslash] ;; search dirs
+           [:t :!Oslash] ;; translate
   ]}
 
   {:des "right command to command-tab when used alone"
@@ -136,16 +159,52 @@
            [:f :!S0]
            [:c :open_bracket]
            [:v :close_bracket]
+           [:return_or_enter [:!Cright_arrow :return_or_enter] :!terminals]
+           [:slash [:!Sgrave_accent_and_tilde :slash]] ;; home
   ]}
 
-  {:des "navigation"
-   :rules [:s-mode
+  {:des "document"
+   :rules [;; navigation
+           :s-mode
            [:h :left_arrow]
            [:j :down_arrow]
            [:k :up_arrow]
            [:l :right_arrow]
+           [:u :!Oleft_arrow] ;; backward by word
+           [:i :!Oright_arrow] ;; forward by word
+           :Ss-mode
+           [:j :!Cdown_arrow]
+           [:k :!Cup_arrow]
+           [:h :!Cleft_arrow]
+           [:l :!Cright_arrow]
+           ;; selection
+           :v-mode
+           [:j :!Sdown_arrow]
+           [:k :!Sup_arrow]
+           [:h :!Sleft_arrow]
+           [:l :!Sright_arrow]
+           [:u :!OSleft_arrow]
+           [:i :!OSright_arrow]
+           :Sv-mode
+           [:j :!CSdown_arrow]
+           [:k :!CSup_arrow]
+           [:h :!CSleft_arrow]
+           [:l :!CSright_arrow]
+           [:n :!OSdown_arrow]
+           [:p :!OSup_arrow]
+           ;; delete
+           :x-mode
+           [:h :delete_or_backspace]
+           [:l :!Fdelete_or_backspace]
+           [:u :!Odelete_or_backspace]
+  ]}
+
+  {:des "shortcut"
+   :rules [:s-mode
            [:semicolon :return_or_enter]
            [:m :mission_control]
+           [:close_bracket :!Spage_down]
+           [:open_bracket :!Spage_up]
   ]}
 
   {:des "space cadet and switch input method shift"
@@ -165,31 +224,36 @@
    :rules [:q-mode
            [:d :launchpad]
            [:p :play_or_pause] ;; play/pause
-           [:j :volume_decrement] ;; mute
-           [:k :volume_increment] ;; mute
+           [:j :volume_decrement] ;; volume-
+           [:k :volume_increment] ;; volume+
            [:m :mute] ;; mute
-           [:n :!!n] ;; mute
-           [:l :!CTq]]}
+           [:n :!!n] ;; notification
+           [:open_bracket "osascript -e 'tell application \"Spotify\" to play previous track'"] ;; spotify previous track
+           [:close_bracket "osascript -e 'tell application \"Spotify\" to play next track'"] ;; spotify next track
+           [:y "osascript -e 'tell application \"Spotify\" to playpause'"] ;; spotify play/pause
+           [:l :!CTq] ;; lock
+           [:o :!TOo] ;; switch audio output
+  ]}
 
   {:des "sign"
    :rules [:period-mode
-           [:e :equal_sign]
-           [:m :hyphen]
-           [:a :!Sequal_sign]
-           [:u :!Shyphen]
-           [:b :backslash]
-           [:i :!Sbackslash]
-           [:t :!Sgrave_accent_and_tilde]
-           [:m :!S1]
-           [:q :!S2]
-           [:n :!S3]
-           [:d :!S4]
-           [:b :!S5]
-           [:c :!S6]
-           [:h :!S7]
-           [:s :!S8]
-           [:g :grave_accent_and_tilde]
-           [:slash [:!Sgrave_accent_and_tilde :slash]] ;; home
+           [:e :equal_sign] ;; =
+           [:m :hyphen] ;; -
+           [:a :!Sequal_sign] ;; +
+           [:u :!Shyphen] ;; _
+           [:b :backslash] ;; \
+           [:i :!Sbackslash] ;; |
+           [:w :!Sgrave_accent_and_tilde] ;; ~
+           [:t :!Sgrave_accent_and_tilde] ;; ~
+           [:m :!S1] ;;
+           [:q :!S2] ;; @
+           [:n :!S3] ;; #
+           [:d :!S4] ;; $
+           [:b :!S5] ;; \
+           [:c :!S6] ;; ^
+           [:h :!S7] ;; &
+           [:s :!S8] ;; *
+           [:g :grave_accent_and_tilde] ;; `
   ]}
 
   ;; specified domain app
@@ -200,8 +264,21 @@
            [:n :!TSl]
   ]}
 
+  {:des "chrome"
+   :rules [:chrome-mode
+           [:v [:open_url "https://console.cloud.tencent.com/"]]
+           [:m [:open_url "https://mail.google.com/"]]
+           [:y [:open_url "https://youtube.com"]]
+           [:n [:open_url "https://notion.so"]]
+  ]}
+
   {:des "tmux: map [q] to prefix key"
-   :rules [:tmux-mode
+   :rules [
+           [:condi :tmux-mode :!tmux-prefixg-mode]
+           [:return_or_enter ["tmux-prefixg-mode" 1]]
+           [:condi :tmux-mode :tmux-prefixg-mode]
+           [:return_or_enter ["tmux-prefixg-mode" 0]]
+           [:condi :tmux-mode :!tmux-prefixg-mode]
            [:u :!Tb]
            [:comma [:!Tb :comma]]
            [:open_bracket [:!Tb :open_bracket]]
@@ -217,31 +294,144 @@
            [:w [:!Tb :w]]
            [:v [:!Tb :!Squote]]
            [:b [:!Tb :!S5]]
-           [:s [:!Tb :m]]
            [:i [:!Tb :i]]
            [:t [:!Tb :t]]
            [:s [:!Tb :s]]
            [:semicolon [:!Tb :semicolon]]
            [:!Sslash  [:!Tb :!Sslash]]
-           :tmux-resize-mode
+           [:0  [:!Tb :spacebar]]
+           [:condi :tmux-resize-mode :!tmux-prefixg-mode]
            [:h [:!Tb :!Oleft_arrow]]
            [:j [:!Tb :!Odown_arrow]]
            [:k [:!Tb :!Oup_arrow]]
            [:l [:!Tb :!Oright_arrow]]
-           :tmux-swap-mode
+           [:condi :tmux-swap-mode :!tmux-prefixg-mode]
            [:h [:!Tb :!Sopen_bracket]]
            [:l [:!Tb :!Sclose_bracket]]
+           ;; second mode
+           [:condi :tmux-mode :tmux-prefixg-mode]
+           [:u :!Tg]
+           [:comma [:!Tg :comma]]
+           [:open_bracket [:!Tg :open_bracket]]
+           [:h [:!Tg :h]]
+           [:j [:!Tg :j]]
+           [:k [:!Tg :k]]
+           [:l [:!Tg :l]]
+           [:p [:!Tg :p]]
+           [:n [:!Tg :n]]
+           [:x [:!Tg :x]]
+           [:z [:!Tg :z]]
+           [:c [:!Tg :c]]
+           [:w [:!Tg :w]]
+           [:v [:!Tg :!Squote]]
+           [:b [:!Tg :!S5]]
+           [:i [:!Tg :i]]
+           [:t [:!Tg :t]]
+           [:s [:!Tg :s]]
+           [:semicolon [:!Tg :semicolon]]
+           [:!Sslash  [:!Tg :!Sslash]]
+           [:0  [:!Tg :spacebar]]
+           [:condi :tmux-resize-mode :tmux-prefixg-mode]
+           [:h [:!Tg :!Oleft_arrow]]
+           [:j [:!Tg :!Odown_arrow]]
+           [:k [:!Tg :!Oup_arrow]]
+           [:l [:!Tg :!Oright_arrow]]
+           [:condi :tmux-swap-mode :tmux-prefixg-mode]
+           [:h [:!Tg :!Sopen_bracket]]
+           [:l [:!Tg :!Sclose_bracket]]
   ]}
 
+  {:des "photoshop"
+   :rules [:photoshop
+           [[:n :m] [:!CSn :return_or_enter] nil {:params {:sim 50}}]
+           [[:q :1] :f1 nil {:params {:sim 50}}]
+           [[:w :2] :f2 nil {:params {:sim 50}}]
+           [[:e :3] :f3 nil {:params {:sim 50}}]
+           [[:r :4] :f4 nil {:params {:sim 50}}]
+           [[:t :5] :f5 nil {:params {:sim 50}}]
+           [[:y :6] :f6 nil {:params {:sim 50}}]
+           [[:u :7] :f7 nil {:params {:sim 50}}]
+           [[:i :8] :f8 nil {:params {:sim 50}}]
+           [[:o :9] :f9 nil {:params {:sim 50}}]
+           [[:p :0] :f10 nil {:params {:sim 50}}]
+           [[:a :1] :f11 nil {:params {:sim 50}}]
+           [[:s :2] :f12 nil {:params {:sim 50}}]
+           [[:d :3] :f13 nil {:params {:sim 50}}]
+           [[:f :4] :f14 nil {:params {:sim 50}}]
+           [[:g :5] :f15 nil {:params {:sim 50}}]
+           [[:h :6] :f16 nil {:params {:sim 50}}]
+           [[:j :7] :f17 nil {:params {:sim 50}}]
+           [[:k :8] :f18 nil {:params {:sim 50}}]
+           [[:l :9] :f19 nil {:params {:sim 50}}]
+           [[:semicolon :0] :f20 nil {:params {:sim 50}}]
+           [[:h :j] :!CSOh nil {:params {:sim 50}}]
+           [[:open_bracket :hyphen] :f11 nil {:params {:sim 50}}]
+           [[:close_bracket :equal_sign] :f12 nil {:params {:sim 50}}]
+           ;; ps-draw-mode
+           [:!Cspacebar [:!Cspacebar ["ps-draw-mode" 0]]]
+           [[:a :s] ["ps-draw-mode" 1]]
+           [:condi :photoshop :ps-draw-mode]
+           [:a :!Cz]
+           [:s :!CSz]
+           [:h :!CSOh]
+           [:equal_sign :!Cequal_sign]
+           [:hyphen :!Chyphen]
+           [:##left_control :left_control nil {:alone :b}]
+           [:z {:key :z :repeat false} nil {:afterup :b}]
+           [:r {:key :r :repeat false} nil {:afterup :b}]
+           ;; actions
+           [:1 :!Cf1]
+           [:2 :!Cf2]
+           [:d ["ps-draw-mode" 0]]
+           ;; ----------
+           :ps-v-mode
+           ;; [:x :!COx]
+           ;; [:c :!COy]
+           [:x :!CTSh]
+           [:c :!CTSv]
+           ;; ----------
+           :ps-sb-mode
+           [:t :!CTt]
+           [:r :!CTr]
+           ;; hej stylus
+           [:1 :!!1]
+           [:2 :!!2]
+           [:3 :!!3]
+           [:4 :!!4]
+           [:5 :!!5]
+           [:s :!!s]
+           [:d :!!d]
+           [:condi :photoshop :ps-draw-mode]
+           [:!Sq :!!s]
+           [:!Sw :!!d]
+           [:1 :!TSO1]
+           [:2 :!TSO2]
+           [:3 :!TSO3]
+           :ps-actions
+  ]}
+
+  ;; snippets
   {:des "markdown"
    :rules [:m-mode
            [:d :alfred_mk]
-           [:l [:alfred_mk :l]]
            [:1 [:alfred_mk :1]]
            [:2 [:alfred_mk :2]]
            [:3 [:alfred_mk :3]]
            [:4 [:alfred_mk :4]]
            [:5 [:alfred_mk :5]]
+  ]}
+
+  {:des "symbols"
+   :rules [:period-mode
+           [:left_command [:alfred_sb :!Sc]]
+           [:left_option [:alfred_sb :!So]]
+           [:left_shift [:alfred_sb :!Ss]]
+           [:left_control [:alfred_sb :!St]]
+           [:tab [:alfred_sb :t :a]]
+           [:spacebar [:alfred_sb :s :p]]
+           [:return_or_enter [:alfred_sb :r :e]]
+           :m-mode
+           [:s [:alfred_sb]]
   ]}
 
   {:des "design app: navigation"
@@ -263,8 +453,8 @@
            [:##k {:mkey {:y -1024}}]
            [:##h {:mkey {:x -1024}}]
            [:##l {:mkey {:x 1024}}]
-           [:##v {:pkey :button1}]
-           [:##b {:pkey :button3}]
+           [:##y {:pkey :button1}]
+           [:##m {:pkey :button3}]
            [:##n {:pkey :button2}]
            [:##s ["mouse-scroll-mode" 1] nil {:afterup ["mouse-scroll-mode" 0]}]
            [:##f {:mkey {:speed 0.5}}]
