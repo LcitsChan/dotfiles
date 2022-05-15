@@ -347,6 +347,24 @@ quickOpenList.forEach((n) => {
   );
 });
 
+quickOpenLocalList = [
+  { alias: "n", description: "Open nas",       url: "http://lc/nas"    },
+  { alias: "p", description: "Open pi",        url: "http://lc/pi"     },
+  { alias: "r", description: "Open router",    url: "http://lc/router" },
+  { alias: "b", description: "Open bypass",    url: "http://lc/bypass" },
+  { alias: "h", description: "Open navi",      url: "http://lc/navi"   },
+  { alias: "c", description: "Open clash",     url: "http://lc/clash"  },
+  { alias: "C", description: "Open openclash", url: "http://lc/oc"     },
+];
+
+quickOpenLocalList.forEach((n) => {
+  mapkey(
+    `oa${n.alias}`,
+    "#6" + n.description + " in new tab",
+    openLink(n.url, true)
+  );
+});
+
 // --------------------
 // domain specific prefix
 // --------------------

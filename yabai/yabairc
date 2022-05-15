@@ -42,6 +42,7 @@ yabai -m config right_padding                16
 
 # S P A C E
 yabai -m config --space 4 layout               stack
+yabai -m config --space 5 layout               float
 
 yabai -m config external_bar all:36:0
 
@@ -65,6 +66,7 @@ yabai -m rule --add app="^Tencent Lemon$" manage=off
 yabai -m rule --add app="^Harvest$" manage=off
 yabai -m rule --add app="^Logi Options$" manage=off
 yabai -m rule --add app="^Private Internet Access$" manage=off
+yabai -m rule --add app="^IINA$" manage=off
 
 yabai -m rule --add app="^Microsoft To Do$" space=3
 

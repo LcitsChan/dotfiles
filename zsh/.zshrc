@@ -29,19 +29,24 @@ esac
 # Alias
 # --------------------
 
-(( $+commands[nvim] )) && alias v=nvim && alias vim=nvim
-alias ws="cd ~/workspace"
-alias ra=ranger
-alias tw="tmux new -A -s workspace"
 # switch `uname`
 case `uname` in
   Darwin)
+  PLAT=macOS
   alias code='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
   alias pc='/usr/local/bin/proxychains4'
   ;;
   Linux)
+  PLAT=linux
+  export LC_ALL=C.UTF-8
   ;;
 esac
+(( $+commands[nvim] )) && alias v=nvim && alias vim=nvim
+alias ws="cd ~/workspace"
+alias ra=ranger
+alias tw="tmux new -A -s $PLAT"
+alias tb="tmuxinator start base"
+alias tr="tmuxinator start remote"
 
 
 # --------------------
@@ -100,7 +105,7 @@ export EDITOR=$VISUAL
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}[m~V~S[m~V~R[m~V~Q %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zi%F{220})[m~@%f"
     command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+    command git clone https://github.com/zdharma-continuum/zinit.git "$HOME/.zinit/bin" && \
 fi
 
 source "$HOME/.zinit/bin/zinit.zsh"
@@ -133,7 +138,6 @@ zinit lucid light-mode for \
   OMZ::plugins/sudo \
   OMZ::plugins/vi-mode \
   OMZ::plugins/common-aliases \
-  OMZ::plugins/zsh_reload \
   OMZ::plugins/cp \
   has'brew' OMZ::plugins/brew \
   has'docker-compose' OMZ::plugins/docker-compose \
@@ -186,7 +190,7 @@ zinit wait'2' lucid light-mode for \
 bin_doctor() {
   ._has_bins \
     brew fzf tmux fd rg ranger nvim \
-    nvm pyenv go java \
+    fnm nvm pyenv go java \
 }
 
 
@@ -195,6 +199,7 @@ bin_doctor() {
 # --------------------
 
 source ~/.zext/fzf.zsh
+(( $+commands[navi] )) && eval "$(navi widget zsh)" && bindkey -r '^g' && bindkey '^o' _navi_widget
 
 
 # --------------------

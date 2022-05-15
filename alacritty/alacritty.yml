@@ -32,7 +32,7 @@ font:
   italic:
     family: JetBrainsMono Nerd Font Mono
     style: Italic
-  size: 20.0
+  size: 16.0
   offset:
     x: 0
     y: 0
@@ -213,3 +213,5 @@ key_bindings:
   - { key: F12,      mods: Super,   chars: "\x1b[24;3~"                      }
   - { key: NumpadEnter,             chars: "\n"                              }
   - { key: C,        mods: Alt,     chars: "\x1bc"                           }
+  - { key: F,        mods: Alt,     chars: "\x1bf"                           } # move word forward
+  - { key: B,        mods: Alt,     chars: "\x1bb"                           } # move word backward
