@@ -136,7 +136,6 @@ zinit lucid light-mode for \
   OMZ::plugins/git \
   OMZ::plugins/gitignore \
   OMZ::plugins/sudo \
-  OMZ::plugins/vi-mode \
   OMZ::plugins/common-aliases \
   OMZ::plugins/cp \
   has'brew' OMZ::plugins/brew \
@@ -149,6 +148,8 @@ zinit lucid light-mode as'completion' for \
 
 
 zinit depth=1 lucid light-mode for \
+  atload": ${ZVM_LINE_INIT_MODE:=$ZVM_MODE_INSERT}" \
+    jeffreytse/zsh-vi-mode \
   agkozak/zsh-z \
   MichaelAquilina/zsh-you-should-use \
   atload"zicompinit; zicdreplay" blockf zsh-users/zsh-completions \
@@ -156,7 +157,9 @@ zinit depth=1 lucid light-mode for \
   zsh-users/zsh-history-substring-search \
   zsh-users/zsh-autosuggestions \
   wait'1' zdharma/fast-syntax-highlighting \
-  multisrc"shell/{completion,key-bindings}.zsh" pick"/dev/null" junegunn/fzf \
+  wait multisrc"shell/{completion,key-bindings}.zsh" pick"/dev/null" junegunn/fzf \
+
+: ${ZVM_LINE_INIT_MODE:=$ZVM_MODE_INSERT}
 
 zinit wait'4' lucid light-mode for \
   as'null' has'pyenv' if'command -v pyenv 1>/dev/null 2>&1' atload'eval "$(pyenv init -)"' \
