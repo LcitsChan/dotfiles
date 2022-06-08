@@ -1,17 +1,19 @@
 # Modes
-:: default : yabai -m config window_border off
-:: r_mode : yabai -m config window_border on && yabai -m config active_window_border_color 0xff00ff00 # resize
-:: i_mode : yabai -m config window_border on && yabai -m config active_window_border_color 0xffff0000 # insert
-:: w_mode : yabai -m config window_border on && yabai -m config active_window_border_color 0xff0000ff # warp/window
-:: s_mode : yabai -m config window_border on && yabai -m config active_window_border_color 0xfff0f0f0 # swap
-:: escape_mode : yabai -m config window_border on && yabai -m config active_window_border_color 0xffff00ff
-
+:: default : yabai -m config window_border off && yabai -m config window_border_width 8
+:: r_mode : yabai -m config active_window_border_color 0xffff0000 && yabai -m config window_border on # resize red
+:: i_mode : yabai -m config active_window_border_color 0xff86d6d8 && yabai -m config window_border on # insert ice
+:: w_mode : yabai -m config active_window_border_color 0xff20c3d0 && yabai -m config window_border on # warp/window water
+:: s_mode : yabai -m config active_window_border_color 0xff888c8d && yabai -m config window_border on # swap stone
+:: escape_mode : yabai -m config active_window_border_color 0xffff00ff && yabai -m config window_border on # earth
+:: spec_mode : yabai -m config window_border_width 2 && yabai -m config active_window_border_color 0xffffffff && yabai -m config window_border on
 r_mode,  i_mode, w_mode, s_mode, escape_mode < escape      ; default
 default, i_mode, w_mode, s_mode              < alt - r     ; r_mode
 default, r_mode, i_mode, w_mode              < alt - s     ; s_mode
 default, r_mode, i_mode, s_mode              < alt - w     ; w_mode
 default, r_mode, w_mode, s_mode              < alt - i     ; i_mode
 default, r_mode, i_mode, w_mode, s_mode      < lalt - 0x21 ; escape_mode # alt - [
+# default < rcmd - e ; spec_mode
+# spec_mode < rcmd - e ; default
 
 # One way shortcut for karabiner
 
@@ -22,8 +24,8 @@ default, i_mode < ralt - return : open -n -b "com.google.Chrome"
 # 2 Display
 
 # 3 Space
-alt - p : yabai -m space --focus prev || yabai -m space --focus last
-alt - n : yabai -m space --focus next || yabai -m space --focus first
+lalt - p : yabai -m space --focus prev || yabai -m space --focus last
+lalt - n : yabai -m space --focus next || yabai -m space --focus first
 lalt - 0x29 : yabai -m space --focus recent # alt - ;
 
 # Navigate
@@ -59,8 +61,8 @@ s_mode < k : yabai -m window --swap north || yabai -m window --swap south
 s_mode < j : yabai -m window --swap south || yabai -m window --swap north
 s_mode < h : yabai -m window --swap west  || yabai -m window --swap east
 s_mode < l : yabai -m window --swap east  || yabai -m window --swap west
-alt - x : yabai -m space --mirror x-axis
-alt - y : yabai -m space --mirror y-axis
+lalt - x : yabai -m space --mirror x-axis
+lalt - y : yabai -m space --mirror y-axis
 # ========== alternative for karabiner ==========
 fn + lcmd - r : yabai -m space --rotate 270
 fn + lcmd - s : yabai -m window --swap recent
@@ -155,3 +157,12 @@ shift + alt - s : yabai -m window --toggle sticky \
                 && yabai -m window --resize right:1:0 \
                 && yabai -m window --resize right:-1:0
 
+# 4.10 float layout
+w_mode < q: yabai -m window --grid 12:2:0:0:1:6 && skhd -k "escape"
+w_mode < w: yabai -m window --grid 12:2:1:0:1:6 && skhd -k "escape"
+w_mode < a: yabai -m window --grid 12:2:0:6:1:6 && skhd -k "escape"
+w_mode < s: yabai -m window --grid 12:2:1:6:1:6 && skhd -k "escape"
+w_mode < alt - w: yabai -m window --grid 12:8:1:0:6:6 && skhd -k "escape"
+w_mode < alt - x: yabai -m window --grid 12:8:1:6:6:6 && skhd -k "escape"
+w_mode < alt - a: yabai -m window --grid 12:8:0:1:4:10 && skhd -k "escape"
+w_mode < alt - d: yabai -m window --grid 12:8:4:1:4:10 && skhd -k "escape"
