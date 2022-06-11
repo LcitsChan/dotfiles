@@ -92,6 +92,7 @@ noremap         <C-j> i<CR><Esc>^
 noremap         <C-k> <Up>
 noremap  <Leader><CR> :nohl<CR><ESC>
 let g:WhichKeyDesc_nohl = "<leader>⏎ Remove highlight"
+nnoremap <Leader>; :b#<CR>
 
 noremap L $
 noremap H ^
@@ -111,7 +112,7 @@ nnoremap tl :vsplit<CR>
 nnoremap tj :split<CR>
 
 " Quit
-nnoremap <Leader>qq :q<CR>
+nnoremap <Leader>q :q<CR>
 nnoremap W :w<CR>
 
 " System Clipboard
@@ -134,7 +135,7 @@ vnoremap * y/<C-R>"<CR><C-O>
 " Templete for replacement
 nmap <Leader>fh ^/<+++ph+++><CR>:nohlsearch<CR>c10l
 let g:WhichKeyDesc_fh = "<leader>fh Replace placeholder"
-nmap <leader>;  a<+++ph+++><Esc>
+nmap <leader>'  a<+++ph+++><Esc>
 let g:WhichKeyDesc_semicolon = "<leader>; Set placeholder"
 " nmap <Leader>fd 0/TODO("Not yet implemented")<CR>:nohl<CR>cf)
 nmap <Leader>fd 0/TODO()<CR>:nohl<CR>cf)
