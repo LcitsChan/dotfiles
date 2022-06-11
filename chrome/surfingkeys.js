@@ -185,12 +185,12 @@ unmap("od");
 unmap("oy");
 unmap("ow");
 unmap("sb");
-remaps("sg", "sgg");
-remaps("sd", "sdd");
-remaps("sw", "sbi");
-remaps("se", "swp");
-remaps("ss", "sso");
-remaps("sy", "syt");
+remaps("sg", "spgg");
+remaps("sd", "spdd");
+remaps("sw", "spbi");
+remaps("se", "spwp");
+remaps("ss", "spso");
+remaps("sy", "spyt");
 remaps("cS", "cz");
 unmap("sh");
 // previous/next page
@@ -280,7 +280,7 @@ searchEngines.pd.callback = (response) => {
     : [];
 };
 
-let op = "<Space>"; // Omnibar Prefix
+let op = "s"; // Omnibar Prefix
 mapSearchEngine = (alias, engine, extra) => {
   mapkey(`${op}${alias}`, `#8🔍 Search from ${engine}`, () =>
     Front.openOmnibar({ type: "SearchEngine", extra: extra ? extra : alias })
@@ -298,7 +298,7 @@ Object.values(searchEngines).forEach((item) => {
     item.alias,
     item.engine,
     item.url,
-    "s",
+    "sp",
     item.compl,
     item.callback
   );
