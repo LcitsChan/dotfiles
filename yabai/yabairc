@@ -7,7 +7,7 @@
 sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
-# M o u s e
+# M O U S E
 yabai -m config mouse_follows_focus          off          # set mouse follows focus mode
 yabai -m config focus_follows_mouse          off          # set focus follows mouse mode
 yabai -m config mouse_modifier               ctrl
@@ -15,13 +15,13 @@ yabai -m config mouse_action1                move
 yabai -m config mouse_action2                resize
 yabai -m config mouse_drop_action            swap
 
-# TILING
+# T I L I N G
 yabai -m config window_placement             second_child # windows become the right or bottom split when tiled
 yabai -m config window_topmost               off          # floating windows are always on top
 yabai -m config split_ratio                  0.50
 yabai -m config auto_balance                 off
 
-# WINDOWS
+# W I N D O W S
 yabai -m config active_window_opacity        1.0
 yabai -m config normal_window_opacity        0.90
 yabai -m config window_border                off
@@ -68,16 +68,16 @@ yabai -m rule --add app="^Logi Options$" manage=off
 yabai -m rule --add app="^Private Internet Access$" manage=off
 yabai -m rule --add app="^IINA$" manage=off
 
-yabai -m rule --add app="^Microsoft To Do$" space=3
 
 coding='^(Android Studio|IntelliJ IDEA)$'
 yabai -m rule --add app="${coding}" manage=off space=2
 
-music='^(Spotify|NeteaseMusic|iTunes)$'
-yabai -m rule --add app="${music}" space=4
-
+yabai -m rule --add app="^Microsoft To Do$" space=3
 chat='^(WeChat|Telegram)$'
 yabai -m rule --add app="${chat}" space=3
+
+music='^(Spotify|NeteaseMusic|iTunes)$'
+yabai -m rule --add app="${music}" space=4
 
 killall limelight &> /dev/null
 limelight &> /dev/null &
