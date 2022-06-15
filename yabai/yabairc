@@ -70,7 +70,7 @@ yabai -m rule --add app="^IINA$" manage=off
 
 
 coding='^(Android Studio|IntelliJ IDEA)$'
-yabai -m rule --add app="${coding}" manage=off space=2
+yabai -m rule --add app="${coding}" manage=off
 
 yabai -m rule --add app="^Microsoft To Do$" space=3
 chat='^(WeChat|Telegram)$'

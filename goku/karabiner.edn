@@ -14,7 +14,8 @@
 ;; !! | mandatory command + control + optional + shift (hyper)
 ;; ## | optional any
 ;;
-;; rule [:period ["period-mode" 1] nil {:afterup ["period-mode" 0] :alone :period}] |_____| |_______________| |_| |_________________________________________|
+;; rule [:period ["period-mode" 1] nil {:afterup ["period-mode" 0] :alone :period}]
+;;       |_____| |_______________| |_| |_________________________________________|
 ;;        <from>    <to>      <conditions>         <other options>
 
 {
@@ -31,23 +32,34 @@
   :to_abc [{:input :abc}]
   :alfred_mk [{:input :abc} {:key :1 :modi [:left_shift]} {:key :3 :modi [:left_shift]} {:key :1 :modi [:left_shift]}]
   :alfred_sb [{:key :1 :modi [:left_shift]} {:key :1 :modi [:left_shift]} {:key :3 :modi [:left_shift]} {:key :1 :modi [:left_shift]}]
+  :open_spec_mode [{:shell "/usr/local/bin/yabai -m config window_border on && yabai -m config active_window_border_color 0xffff00ff"}]
+  :close_spec_mode [{:shell "/usr/local/bin/yabai -m config window_border off"}]
+  :im_abc [{:shell "/usr/local/bin/im-select com.apple.keylayout.ABC"}]
+  :im_sogou [{:shell "/usr/local/bin/im-select com.sogou.inputmethod.sogou.pinyin"}]
 }
 
 ;; templates
 :templates {
   :open "open -b %s"
   :open_url "open -u %s"
+  :typing "osascript -e 'tell application \"System Events\" to keystroke \"%s\" as text'"
+  :spec_display_and_space "~/.config/yabai/scripts/focus_space_in_display.sh %s"
 }
 
 
 :applications {
   :androidstudio ["com.google.android.studio-EAP"]
+  :intellijce    ["com.jetbrains.intellij.ce"]
+  :vscode        ["com.microsoft.vscode"]
   :terminals     ["io.alacritty"
+                  "net.kovidgoyal.kitty"
                   "com.googlecode.iterm2"
                   "com.apple.Terminal"]
   :designapp     ["com.figma.Desktop"]
   :photoshop     ["com.adobe.Photoshop"]
   :chrome        ["com.google.Chrome"]
+  :logseq        ["com.electron.logseq"]
+  :kitty         ["net.kovidgoyal.kitty"]
 }
 
 
@@ -71,13 +83,17 @@
   :Ss-mode {:key :s :modi {:mandatory :left_shift}}
   ;; quick action
   :q-mode {:key :q}
-  ;; markdown action
+  ;; markdown action / display 1
   :m-mode {:key :m}
+  ;; display 2
+  :n-mode {:key :n}
   ;; select
   :v-mode {:key :v}
   :Sv-mode {:key :v :modi {:mandatory :left_shift}}
   ;; delete
   :x-mode {:key :x}
+  ;; zoom
+  :z-mode {:key :z}
   ;; sign
   :period-mode {:key :period}
   ;; mouse
@@ -85,12 +101,14 @@
   ;; Domain
   :android-mode     {:key :d                                :condi :androidstudio}
   :chrome-mode      {:key :d                                :condi :chrome}
+  :vim-macro-mode   {:key :return_or_enter                  :condi :terminals}
   :tmux-mode        {:key :d                                :condi :terminals}
   :tmux-resize-mode {:key :r :modi {:mandatory :left_shift} :condi :terminals}
   :tmux-swap-mode   {:key :e :modi {:mandatory :left_shift} :condi :terminals}
   :design_app       {:key :spacebar                         :condi :designapp}
   :ps-v-mode        {:key :v                                :condi :photoshop}
   :ps-actions       {:key :spacebar                         :condi :photoshop}
+  :logseq-mode      {:key :d                                :condi :logseq}
 }
 
 
@@ -127,16 +145,77 @@
            :s-mode
            [:n :!FWn]
            [:p :!FWp]
+           :n-mode
+           [:q [:spec_display_and_space "1 first"]]
+           [:w [:spec_display_and_space "1 last"]]
+           [:1 [:spec_display_and_space "1 1"]]
+           [:2 [:spec_display_and_space "1 2"]]
+           [:3 [:spec_display_and_space "1 3"]]
+           [:4 [:spec_display_and_space "1 4"]]
+           [:5 [:spec_display_and_space "1 5"]]
+           [:6 [:spec_display_and_space "1 6"]]
+           [:7 [:spec_display_and_space "1 7"]]
+           [:8 [:spec_display_and_space "1 8"]]
+           [:9 [:spec_display_and_space "1 9"]]
+           :m-mode
+           [:q [:spec_display_and_space "2 first"]]
+           [:w [:spec_display_and_space "2 last"]]
+           [:1 [:spec_display_and_space "2 1"]]
+           [:2 [:spec_display_and_space "2 2"]]
+           [:3 [:spec_display_and_space "2 3"]]
+           [:4 [:spec_display_and_space "2 4"]]
+           [:5 [:spec_display_and_space "2 5"]]
+           [:6 [:spec_display_and_space "2 6"]]
+           [:7 [:spec_display_and_space "2 7"]]
+           [:8 [:spec_display_and_space "2 8"]]
+           [:9 [:spec_display_and_space "2 9"]]
+  ]}
+
+  {:des "spec mode"
+   :rules [
+           [:!Oclose_bracket [:open_spec_mode ["spec-mode" 1]] :!spec-mode]
+           [:!Oclose_bracket [:close_spec_mode ["spec-mode" 0]] :spec-mode] 
+           [[:f :d] [:close_spec_mode ["spec-mode" 0]] :spec-mode {:params {:sim 50}}]
+           [:escape [:close_spec_mode ["spec-mode" 0]] :spec-mode] 
+           :spec-mode
+           [:##p :##page_up]
+           [:##n :##page_down]
+           [:##h :##left_arrow]
+           [:##j :##down_arrow]
+           [:##k :##up_arrow]
+           [:##l :##right_arrow]
+           [:##1 :##f1]
+           [:##2 :##f2]
+           [:##3 :##f3]
+           [:##4 :##f4]
+           [:##5 :##f5]
+           [:##6 :##f6]
+           [:##7 :##f7]
+           [:##8 :##f8]
+           [:##9 :##f9]
+           [:##0 :##f10]
+           [:##hyphen :##f11]
+           [:##equal_sign :##f12]
   ]}
 
   {:des "launch apps"
    :rules [:l-mode
-           [:a [:open "com.google.android.studio-EAP"]]
-           [:s [:open "io.alacritty"]]
+           [:1 [:open "com.google.android.studio-EAP"]]
+           [:2 [:open "com.microsoft.VSCode"]]
+           [:3 [:open "com.jetbrains.intellij.ce"]]
+           [:z [:open "io.alacritty"]]
            [:c [:open "com.google.Chrome"]]
+           [:a [:open "net.kovidgoyal.kitty"] :!kitty]
+           [:a [:!Ch] :kitty]
+           [:s [:open "com.electron.logseq"] :!logseq]
+           [:s [:!Ch] :logseq]
+           [:r [:prev_app]]
+           [:e :!CStab]
+           [:q :!CTspacebar] ;; emoji
            [:w :same_app_wins]
            [:g :!TOg] ;; google search
            [:h :!Ch] ;; hide window
+           [:m [:left_option]] ;; restore minimize
            [:d :!COslash] ;; search dirs
            [:t :!Oslash] ;; translate
   ]}
@@ -149,6 +228,30 @@
   {:des "fd to escape"
    :rules [
            [[:f :d] :escape nil {:params {:sim 50}}]
+  ]}
+
+  {:des "function key"
+   :rules [
+           [[:q :1] :f1 nil {:params {:sim 50}}]
+           [[:w :2] :f2 nil {:params {:sim 50}}]
+           [[:e :3] :f3 nil {:params {:sim 50}}]
+           [[:r :4] :f4 nil {:params {:sim 50}}]
+           [[:t :5] :f5 nil {:params {:sim 50}}]
+           [[:y :6] :f6 nil {:params {:sim 50}}]
+           [[:u :7] :f7 nil {:params {:sim 50}}]
+           [[:i :8] :f8 nil {:params {:sim 50}}]
+           [[:o :9] :f9 nil {:params {:sim 50}}]
+           [[:p :0] :f10 nil {:params {:sim 50}}]
+           [[:a :1] :f11 nil {:params {:sim 50}}]
+           [[:s :2] :f12 nil {:params {:sim 50}}]
+           [[:d :3] :f13 nil {:params {:sim 50}}]
+           [[:f :4] :f14 nil {:params {:sim 50}}]
+           [[:g :5] :f15 nil {:params {:sim 50}}]
+           [[:h :6] :f16 nil {:params {:sim 50}}]
+           [[:j :7] :f17 nil {:params {:sim 50}}]
+           [[:k :8] :f18 nil {:params {:sim 50}}]
+           [[:l :9] :f19 nil {:params {:sim 50}}]
+           [[:semicolon :0] :f20 nil {:params {:sim 50}}]
   ]}
 
   {:des "quick bracket/braces sequences"
@@ -166,10 +269,10 @@
   {:des "document"
    :rules [;; navigation
            :s-mode
-           [:h :left_arrow]
-           [:j :down_arrow]
-           [:k :up_arrow]
-           [:l :right_arrow]
+           [:##h :##left_arrow]
+           [:##j :##down_arrow]
+           [:##k :##up_arrow]
+           [:##l :##right_arrow]
            [:u :!Oleft_arrow] ;; backward by word
            [:i :!Oright_arrow] ;; forward by word
            :Ss-mode
@@ -207,23 +310,21 @@
            [:open_bracket :!Spage_up]
   ]}
 
-  {:des "space cadet and switch input method shift"
-   :rules [[:left_shift [["lshift" 0] {:input :sogou}] :lshift]
-           [:##left_shift :left_shift :!lshift {:alone   ["lshift" 1]
-                                                :params  {:delay 300}
-                                                :delayed {:invoked  [["lshift" 0]]
-                                                          :canceled ["lshift" 0]}}]
-           [:right_shift [["rshift" 0] {:input :abc}] :rshift]
-           [:##right_shift :right_shift :!rshift {:alone   ["rshift" 1]
-                                                  :params  {:delay 300}
-                                                  :delayed {:invoked  [["rshift" 0]]
-                                                            :canceled ["rshift" 0]}}]
-   ]}
+  ; use im-select switch sogou from abc if typing, the popup window didn't disappear
+  {:des "switch input method with single shift key"
+   :rules [
+           [:##left_shift :left_shift nil {:alone {:input :abc}
+                                             :params {:alone 250} }]
+           [:##right_shift :right_shift nil {:alone :im_sogou
+                                             :params {:alone 250} }]
+  ]}
 
   {:des "quick action"
    :rules [:q-mode
            [:d :launchpad]
            [:p :play_or_pause] ;; play/pause
+           [:hyphen :display_brightness_decrement]
+           [:equal_sign :display_brightness_increment]
            [:j :volume_decrement] ;; volume-
            [:k :volume_increment] ;; volume+
            [:m :mute] ;; mute
@@ -233,6 +334,12 @@
            [:y "osascript -e 'tell application \"Spotify\" to playpause'"] ;; spotify play/pause
            [:l :!CTq] ;; lock
            [:o :!TOo] ;; switch audio output
+  ]}
+
+  {:des "zoom"
+   :rules [:z-mode
+           [:o :!CTequal_sign]
+           [:n :!CTf]
   ]}
 
   {:des "sign"
@@ -264,6 +371,11 @@
            [:n :!TSl]
   ]}
 
+  {:des "logseq"
+   :rules [:logseq-mode
+           [:t [:typing "TODO "]]
+  ]}
+
   {:des "chrome"
    :rules [:chrome-mode
            [:v [:open_url "https://console.cloud.tencent.com/"]]
@@ -281,6 +393,7 @@
            [:condi :tmux-mode :!tmux-prefixg-mode]
            [:u :!Tb]
            [:comma [:!Tb :comma]]
+           [:quote [:!Tb :b]]
            [:open_bracket [:!Tb :open_bracket]]
            [:h [:!Tb :h]]
            [:j [:!Tb :j]]
@@ -311,7 +424,8 @@
            ;; second mode
            [:condi :tmux-mode :tmux-prefixg-mode]
            [:u :!Tg]
-           [:comma [:!Tg :comma]]
+           [:comma [:!Tb :comma]]
+           [:quote [:!Tg :b]]
            [:open_bracket [:!Tg :open_bracket]]
            [:h [:!Tg :h]]
            [:j [:!Tg :j]]
@@ -339,31 +453,38 @@
            [:condi :tmux-swap-mode :tmux-prefixg-mode]
            [:h [:!Tg :!Sopen_bracket]]
            [:l [:!Tg :!Sclose_bracket]]
+           :vim-macro-mode
+           [:a [:!S2 :a]]
+           [:b [:!S2 :b]]
+           [:c [:!S2 :c]]
+           [:d [:!S2 :d]]
+           [:e [:!S2 :e]]
+           [:f [:!S2 :f]]
+           [:g [:!S2 :g]]
+           [:h [:!S2 :h]]
+           [:i [:!S2 :i]]
+           [:j [:!S2 :j]]
+           [:k [:!S2 :k]]
+           [:l [:!S2 :l]]
+           [:m [:!S2 :m]]
+           [:n [:!S2 :n]]
+           [:o [:!S2 :o]]
+           [:p [:!S2 :p]]
+           [:q [:!S2 :q]]
+           [:r [:!S2 :r]]
+           [:s [:!S2 :s]]
+           [:t [:!S2 :t]]
+           [:u [:!S2 :u]]
+           [:v [:!S2 :v]]
+           [:w [:!S2 :w]]
+           [:x [:!S2 :x]]
+           [:y [:!S2 :y]]
+           [:z [:!S2 :z]]
   ]}
 
   {:des "photoshop"
    :rules [:photoshop
            [[:n :m] [:!CSn :return_or_enter] nil {:params {:sim 50}}]
-           [[:q :1] :f1 nil {:params {:sim 50}}]
-           [[:w :2] :f2 nil {:params {:sim 50}}]
-           [[:e :3] :f3 nil {:params {:sim 50}}]
-           [[:r :4] :f4 nil {:params {:sim 50}}]
-           [[:t :5] :f5 nil {:params {:sim 50}}]
-           [[:y :6] :f6 nil {:params {:sim 50}}]
-           [[:u :7] :f7 nil {:params {:sim 50}}]
-           [[:i :8] :f8 nil {:params {:sim 50}}]
-           [[:o :9] :f9 nil {:params {:sim 50}}]
-           [[:p :0] :f10 nil {:params {:sim 50}}]
-           [[:a :1] :f11 nil {:params {:sim 50}}]
-           [[:s :2] :f12 nil {:params {:sim 50}}]
-           [[:d :3] :f13 nil {:params {:sim 50}}]
-           [[:f :4] :f14 nil {:params {:sim 50}}]
-           [[:g :5] :f15 nil {:params {:sim 50}}]
-           [[:h :6] :f16 nil {:params {:sim 50}}]
-           [[:j :7] :f17 nil {:params {:sim 50}}]
-           [[:k :8] :f18 nil {:params {:sim 50}}]
-           [[:l :9] :f19 nil {:params {:sim 50}}]
-           [[:semicolon :0] :f20 nil {:params {:sim 50}}]
            [[:h :j] :!CSOh nil {:params {:sim 50}}]
            [[:open_bracket :hyphen] :f11 nil {:params {:sim 50}}]
            [[:close_bracket :equal_sign] :f12 nil {:params {:sim 50}}]
@@ -414,11 +535,6 @@
   {:des "markdown"
    :rules [:m-mode
            [:d :alfred_mk]
-           [:1 [:alfred_mk :1]]
-           [:2 [:alfred_mk :2]]
-           [:3 [:alfred_mk :3]]
-           [:4 [:alfred_mk :4]]
-           [:5 [:alfred_mk :5]]
   ]}
 
   {:des "symbols"
@@ -473,6 +589,7 @@
   ;; ]}
 ]
 
+; sometime not work, need to switch out and come back to window, then work
 :input-sources {
   :abc   {:input_source_id "^com\\.apple\\.keylayout\\.ABC$"}
   :sogou {:input_source_id "^com\\.sogou\\.inputmethod\\.sogou\\.pinyin$"}

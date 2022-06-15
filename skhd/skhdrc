@@ -32,24 +32,15 @@ lalt - 0x29 : yabai -m space --focus recent # alt - ;
 lalt - 0x2B : yabai -m display --focus recent # alt - ;
 
 # Navigate
-ctrl - 1 : sh ~/.config/yabai/scripts/smart_focus.sh 1
-ctrl - 2 : sh ~/.config/yabai/scripts/smart_focus.sh 2
-ctrl - 3 : sh ~/.config/yabai/scripts/smart_focus.sh 3
-ctrl - 4 : sh ~/.config/yabai/scripts/smart_focus.sh 4
-ctrl - 5 : sh ~/.config/yabai/scripts/smart_focus.sh 5
-ctrl - 6 : sh ~/.config/yabai/scripts/smart_focus.sh 6
-ctrl - 7 : sh ~/.config/yabai/scripts/smart_focus.sh 7
-ctrl - 8 : sh ~/.config/yabai/scripts/smart_focus.sh 8
-ctrl - 9 : sh ~/.config/yabai/scripts/smart_focus.sh 9
-# ctrl - 1 : yabai -m space --focus 1
-# ctrl - 2 : yabai -m space --focus 2
-# ctrl - 3 : yabai -m space --focus 3
-# ctrl - 4 : yabai -m space --focus 4
-# ctrl - 5 : yabai -m space --focus 5
-# ctrl - 6 : yabai -m space --focus 6
-# ctrl - 7 : yabai -m space --focus 7
-# ctrl - 8 : yabai -m space --focus 8
-# ctrl - 9 : yabai -m space --focus 9
+ctrl - 1 : ~/.config/yabai/scripts/smart_focus.sh 1
+ctrl - 2 : ~/.config/yabai/scripts/smart_focus.sh 2
+ctrl - 3 : ~/.config/yabai/scripts/smart_focus.sh 3
+ctrl - 4 : ~/.config/yabai/scripts/smart_focus.sh 4
+ctrl - 5 : ~/.config/yabai/scripts/smart_focus.sh 5
+ctrl - 6 : ~/.config/yabai/scripts/smart_focus.sh 6
+ctrl - 7 : ~/.config/yabai/scripts/smart_focus.sh 7
+ctrl - 8 : ~/.config/yabai/scripts/smart_focus.sh 8
+ctrl - 9 : ~/.config/yabai/scripts/smart_focus.sh 9
 
 # Create and destroy
 # Seveveven
@@ -119,13 +110,13 @@ lalt - z [
 
 # 4.6 Navigate
 default, r_mode, i_mode, w_mode, s_mode < alt - h : \
-  sh ~/.config/yabai/scripts/focus_window.sh west || yabai -m window --move rel:-20:0
+  ~/.config/yabai/scripts/focus_window.sh west || yabai -m window --move rel:-20:0
 default, r_mode, i_mode, w_mode, s_mode < alt - j : \
   yabai -m window --focus south || yabai -m window --move rel:0:20
 default, r_mode, i_mode, w_mode, s_mode < alt - k : \
   yabai -m window --focus north || yabai -m window --move rel:0:-20
 default, r_mode, i_mode, w_mode, s_mode < alt - l : \
-  sh ~/.config/yabai/scripts/focus_window.sh east || yabai -m window --move rel:20:0
+  ~/.config/yabai/scripts/focus_window.sh east || yabai -m window --move rel:20:0
 default, r_mode, i_mode, w_mode, s_mode < alt - r : \
   yabai -m window --focus recent || yabai -m space --focus recent
 default, r_mode, i_mode, w_mode, s_mode < alt - m : \
@@ -157,14 +148,14 @@ fn + ralt - i : yabai -m window --resize top_left:-40:-40 && yabai -m window --r
 fn + ralt - d : yabai -m window --resize top_left:40:40 && yabai -m window --resize bottom_right:-40:-40
 
 # 4.8 Change space
-ctrl + alt - 1 : yabai -m window --space 1 && yabai -m space --focus 1
-ctrl + alt - 2 : yabai -m window --space 2 && yabai -m space --focus 2
-ctrl + alt - 3 : yabai -m window --space 3 && yabai -m space --focus 3
-ctrl + alt - 4 : yabai -m window --space 4 && yabai -m space --focus 4
-ctrl + alt - 5 : yabai -m window --space 5 && yabai -m space --focus 5
-ctrl + alt - 6 : yabai -m window --space 6 && yabai -m space --focus 6
-ctrl + alt - h : sh ~/.config/yabai/scripts/move_window_to_space.sh prev
-ctrl + alt - l : sh ~/.config/yabai/scripts/move_window_to_space.sh next
+ctrl + alt - 1 : ~/.config/yabai/scripts/move_window_to_space.sh 1
+ctrl + alt - 2 : ~/.config/yabai/scripts/move_window_to_space.sh 2
+ctrl + alt - 3 : ~/.config/yabai/scripts/move_window_to_space.sh 3
+ctrl + alt - 4 : ~/.config/yabai/scripts/move_window_to_space.sh 4
+ctrl + alt - 5 : ~/.config/yabai/scripts/move_window_to_space.sh 5
+ctrl + alt - 6 : ~/.config/yabai/scripts/move_window_to_space.sh 6
+ctrl + alt - h : ~/.config/yabai/scripts/move_window_to_display.sh prev
+ctrl + alt - l : ~/.config/yabai/scripts/move_window_to_display.sh next
 
 # 4.9 sticky
 shift + alt - s : yabai -m window --toggle sticky \
