@@ -78,9 +78,9 @@ base_link() {
   make_link $DOTDIR/idea/ideavimrc $HOME/.ideavimrc
   case `uname` in
     Darwin)
-    make_link $DOTDIR/yabai/yabairc $HOME/.config/yabai/yabairc
-    make_link $DOTDIR/skhd/skhdrc $HOME/.config/skhd/skhdrc
-    make_link $DOTDIR/spacebar/spacebarrc $HOME/.config/spacebar/spacebarrc
+    make_link $DOTDIR/yabai $HOME/.config/yabai
+    make_link $DOTDIR/skhd $HOME/.config/skhd
+    make_link $DOTDIR/spacebar $HOME/.config/spacebar
     make_link $DOTDIR/goku/karabiner.edn $HOME/.config/karabiner.edn
     ;;
     Linux)
