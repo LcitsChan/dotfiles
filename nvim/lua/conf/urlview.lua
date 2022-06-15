@@ -1,4 +1,9 @@
-require("urlview").setup({
+local status_ok, urlview = pcall(require, "urlview")
+if not status_ok then
+	return
+end
+
+urlview.setup({
   -- Prompt title (`<context> <default_title>`, e.g. `Buffer Links:`)
   default_title = "Links:",
   -- Default picker to display links with
