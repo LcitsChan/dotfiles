@@ -1,5 +1,5 @@
 require "options"
-require "plugin_loader"
+require "plugins"
 require "conf.nvimtree"
 require "conf.toggleterm"
 require "conf.comment"
