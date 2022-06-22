@@ -114,6 +114,7 @@ local mappings = {
       name = "Buffer",
       o = { '<cmd>%bd|e#<cr>', "Close others" }
     },
+    ["c"] = { "<cmd>Sayonara<cr>", "Sayonara"},
     d = {
       name = "Debug",
     },

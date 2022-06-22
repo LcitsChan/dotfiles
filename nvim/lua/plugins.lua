@@ -1,9 +1,8 @@
 local core_plugins = {
-
   {
-    "wbthomason/packer.nvim",
-    "nvim-lua/plenary.nvim",
-    "nvim-lua/popup.nvim",
+    { "wbthomason/packer.nvim" },
+    { "nvim-lua/plenary.nvim" },
+    { "nvim-lua/popup.nvim" },
   },
 
   { "kyazdani42/nvim-web-devicons" },
@@ -96,6 +95,7 @@ local core_plugins = {
   { "farmergreg/vim-lastplace" },
   { "lewis6991/impatient.nvim" },
   { "lalitmee/browse.nvim" },
+  { "mhinz/vim-sayonara", cmd = "Sayonara" },
 
   -- Enhance
   -- Integrate with nvim-ts-context-commentstring
@@ -123,7 +123,6 @@ local core_plugins = {
       require "conf.far"
     end
   },
-
 
   -- Treesitter
   {
@@ -204,9 +203,9 @@ local core_plugins = {
         "nvim-lua/plenary.nvim",
         "telescope-frecency.nvim",
         "telescope-fzf-native.nvim",
-        "nvim-telescope/telescope-file-browser.nvim",
-        "nvim-telescope/telescope-project.nvim",
-        "nvim-telescope/telescope-symbols.nvim",
+        { "nvim-telescope/telescope-file-browser.nvim" },
+        { "nvim-telescope/telescope-project.nvim" },
+        { "nvim-telescope/telescope-symbols.nvim" },
       },
       -- make sure plugins loaded and then apply config
       wants = {
@@ -222,7 +221,10 @@ local core_plugins = {
     {
       "nvim-telescope/telescope-frecency.nvim",
       after = "telescope.nvim",
-      requires = "tami5/sqlite.lua",
+      requires = { "sqlite.lua" },
+    },
+    {
+      "tami5/sqlite.lua"
     },
     {
       "nvim-telescope/telescope-fzf-native.nvim",
@@ -303,8 +305,29 @@ local core_plugins = {
 
 }
 
-for _, entry in ipairs(core_plugins) do
+local function lock_entry(entry)
   entry["lock"] = true
+end
+
+local function lock_entrys(entrys)
+  local reqs = entrys["requires"]
+  if reqs ~= nil and type(reqs) == "table" then
+    lock_entrys(reqs)
+  end
+  if type(entrys) == "table" then
+    for _, item in ipairs(entrys) do
+      if item ~= nil and type(item) == "table" then
+        lock_entry(item)
+        lock_entrys(item)
+      end
+    end
+  end
+end
+
+lock_entrys(core_plugins)
+
+function _HHHH()
+  print(vim.inspect(core_plugins))
 end
 
 local fn = vim.fn
