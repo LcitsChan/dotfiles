@@ -11,6 +11,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Normal --
+keymap("n", "<Leader>q", ":q<CR>", opts)
+keymap("n", "<Leader>Q", ":q!<CR>", opts)
+keymap("n", "<Leader>z", ":w<CR>", opts)
+
 -- Navigation
 keymap("n", "j", "gj", opts)
 keymap("n", "k", "gk", opts)

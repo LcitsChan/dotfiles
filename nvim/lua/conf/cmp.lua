@@ -1,13 +1,15 @@
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
+  vim.notify_once("[Config] no cmp", "error")
   return
 end
 
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
-  return
+  vim.notify_once("[Config] no luasnip", "error")
+else
+  require("luasnip/loaders/from_vscode").lazy_load()
 end
-require("luasnip/loaders/from_vscode").lazy_load()
 
 local check_backspace = function()
   local col = vim.fn.col "." - 1
@@ -96,16 +98,14 @@ cmp.setup {
     }),
   },
   formatting = {
-    fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
-      -- Kind icons
-      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-      -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+      vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
         luasnip = "[SNIP]",
         buffer = "[BUF]",
         path = "[PATH]",
+        nvim_lua = "[NAPI]",
       })[entry.source.name]
       return vim_item
     end,

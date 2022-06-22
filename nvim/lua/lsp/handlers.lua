@@ -63,8 +63,8 @@ end
 local function lsp_keymaps(bufnr)
   local bufmap = require("kmutil").bufmap
   local opts = {
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
+    noremap = true,
+    silent = true,
   }
 
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", '<cmd>lua require("lsp.caller").definitions()<cr>', opts)
@@ -77,45 +77,12 @@ local function lsp_keymaps(bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-p>", '<cmd>lua require("lsp.caller").signature_help()<cr>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, "i", "<C-p>", '<cmd>lua require("lsp.caller").signature_help()<cr>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "ta", '<cmd>lua require("lsp.caller").code_action()<CR>', opts)
-  local status_ok, wk = pcall(require, "which-key")
-  if not status_ok then
-    return
-  end
-  local wkopts = {
-    mode = "n", -- NORMAL mode
-    prefix = "<leader>",
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = true, -- use `nowait` when creating keymaps
-  }
-  local caller = require("lsp.caller")
-  local leader_mappings = {
-    j = {
-      d = { caller.diagnotics_next, "Diagnostic" },
-    },
-    k = {
-      d = { caller.diagnotics_prev, "Diagnostic" },
-    },
-    r = {
-      n = { caller.rename, "Rename" },
-      c = { caller.format, "Format" }
-    }
-  }
-  wk.register(leader_mappings, wkopts)
 
-  -- local mappings = {
-  --   ["gd"] = { caller.definition, "" },
-  --   ["gD"] = { caller.definitions, "" },
-  --   ["gy"] = { caller.references, "" },
-  --   -- ["gi"] = { caller.implementations, "" },
-  --   ["gi"] = { '<cmd>lua require("lsp.caller").definition()<cr>', "" },
-  --   ["gt"] = { caller.type_definitions, "" },
-  --   ["K"] = { caller.hover, "" },
-  --   ["<C-k>"] = { caller.signature_help, "" },
-  --   ["ta"] = { caller.code_action, "" },
-  -- }
-  -- wk.register(mappings, opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>jd", '<cmd>lua require("lsp.caller").diagnotics_next()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>kd", '<cmd>lua require("lsp.caller").diagnotics_prev()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", '<cmd>lua require("lsp.caller").rename()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rc", '<cmd>lua require("lsp.caller").format()<CR>', opts)
+
   vim.api.nvim_buf_set_keymap(
     bufnr,
     "n",
@@ -134,13 +101,11 @@ M.on_attach = function(client, bufnr)
   lsp_highlight_document(client)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then
-  return
+if status_ok then
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 end
-
-M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 return M
