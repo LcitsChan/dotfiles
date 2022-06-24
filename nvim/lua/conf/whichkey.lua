@@ -109,12 +109,13 @@ local mappings = {
       r = { "<cmd>Telescope oldfiles<cr>", "Recent files" },
       s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document symbols" },
       o = { "<cmd>Telescope oldfiles<cr>", "Old files" },
+      p = { "<cmd>Telescope projects<cr>", "Project" },
     },
     b = {
       name = "Buffer",
       o = { '<cmd>%bd|e#<cr>', "Close others" }
     },
-    ["c"] = { "<cmd>Sayonara<cr>", "Sayonara"},
+    ["c"] = { "<cmd>Sayonara<cr>", "Sayonara" },
     d = {
       name = "Debug",
     },
@@ -212,14 +213,13 @@ local mappings = {
     },
     ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
     ["<cr>"] = { "<cmd>nohl<cr>", "Cancel highlight" },
-    -- ["P"] = { "<cmd>Telescope projects<cr>", "Project" },
     P = {
       name = "Packer",
-      C = { "<cmd>PackerCompile<cr>", "Compile"},
-      S = { "<cmd>PackerSync<cr>", "Sync"},
-      I = { "<cmd>PackerStatus<cr>", "Info"},
+      C = { "<cmd>PackerCompile<cr>", "Compile" },
+      S = { "<cmd>PackerSync<cr>", "Sync" },
+      I = { "<cmd>PackerStatus<cr>", "Info" },
       P = { "<cmd>PackerProfile<cr>", "Profile" },
-      U = { "<cmd>UrlView packer<cr>", "Urls"}
+      U = { "<cmd>UrlView packer<cr>", "Urls" }
     }
   }
 }

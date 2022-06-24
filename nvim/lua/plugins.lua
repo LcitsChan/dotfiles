@@ -3,6 +3,7 @@ local core_plugins = {
     { "wbthomason/packer.nvim" },
     { "nvim-lua/plenary.nvim" },
     { "nvim-lua/popup.nvim" },
+    { "lewis6991/impatient.nvim" },
   },
 
   { "kyazdani42/nvim-web-devicons" },
@@ -17,7 +18,7 @@ local core_plugins = {
   -- Colorschemes
   { "trevordmiller/nova-vim", disable = true },
   { "rmehri01/onenord.nvim",
-    event = "VimEnter",
+    event = "BufReadPre",
     as = "theme",
     config = function()
       require("onenord").setup()
@@ -38,7 +39,7 @@ local core_plugins = {
   },
   { "yamatsum/nvim-cursorline",
     opt = true,
-    event = "BufWinEnter",
+    event = "CursorMoved",
     config = function()
       require("nvim-cursorline").setup {
         cursorline = {
@@ -68,7 +69,7 @@ local core_plugins = {
   },
 
   -- Window --
-  { "psliwka/vim-smoothie", event = "GUIEnter" },
+  { "psliwka/vim-smoothie", event = "CursorMoved" },
   { "szw/vim-maximizer", cmd = { "MaximizerToggle", "MaximizerToggle!" } },
   { "folke/twilight.nvim", cmd = { "Twilight" } },
   { "folke/zen-mode.nvim",
@@ -82,31 +83,30 @@ local core_plugins = {
 
 
   -- Operation Enhance --
-  { "tpope/vim-surround", event = "VimEnter" },
-  { "vim-scripts/ReplaceWithRegister", event = "VimEnter" },
-  { "tpope/vim-repeat", event = "VimEnter" },
-  { "tommcdo/vim-exchange", event = "VimEnter" },
-  { "ggandor/lightspeed.nvim", event = "VimEnter" },
+  { "tpope/vim-surround", event = "User InitDeferredHigh" },
+  { "vim-scripts/ReplaceWithRegister", event = "User InitDeferredHigh" },
+  { "tpope/vim-repeat", event = "User InitDeferredHigh" },
+  { "tommcdo/vim-exchange", event = "User InitDeferredHigh" },
+  { "ggandor/lightspeed.nvim", event = "User InitDeferredHigh" },
 
 
   -- Coding --
   -- Base
-  { "lambdalisue/suda.vim" },
-  { "farmergreg/vim-lastplace" },
-  { "lewis6991/impatient.nvim" },
-  { "lalitmee/browse.nvim" },
+  { "farmergreg/vim-lastplace", event = "User InitDeferredHigh"  },
+  { "lambdalisue/suda.vim", cmd = { "SudaWrite", "SudaRead" } },
+  { "lalitmee/browse.nvim", event = "User InitDeferredLow" },
   { "mhinz/vim-sayonara", cmd = "Sayonara" },
 
   -- Enhance
   -- Integrate with nvim-ts-context-commentstring
   { "numToStr/Comment.nvim",
-    event = 'BufWinEnter',
+    event = "User InitDeferredHigh",
     config = function()
       require "conf.comment"
     end
   },
   { "folke/todo-comments.nvim",
-    event = 'BufWinEnter',
+    event = "User InitDeferredHigh",
     config = function()
       require("todo-comments").setup {}
     end
@@ -167,7 +167,7 @@ local core_plugins = {
 
   -- LSP --
   { "neovim/nvim-lspconfig",
-    event = "VimEnter",
+    event = "User InitDeferredLow",
     config = function()
       require "lsp"
       vim.cmd("LspStart")
@@ -179,13 +179,13 @@ local core_plugins = {
     },
   },
   { "stevearc/dressing.nvim",
-    event = "VimEnter",
+    event = "User InitDeferredMedium",
     config = function()
       require "conf.dressing"
     end
   },
   { "folke/trouble.nvim",
-    event = "BufWinEnter",
+    event = "User InitDeferredLow",
     requires = "kyazdani42/nvim-web-devicons",
     cmd = { "TroubleToggle", "Trouble" },
     config = function()
@@ -250,7 +250,7 @@ local core_plugins = {
 
   -- Term --
   { "akinsho/toggleterm.nvim",
-    event = 'BufWinEnter',
+    event = 'User InitDeferredLow',
     config = function()
       require "conf.toggleterm"
     end
@@ -258,7 +258,7 @@ local core_plugins = {
 
   -- Keymap --
   { "folke/which-key.nvim",
-    event = "VimEnter",
+    event = "User InitDeferredHigh",
     -- keys = { '<leader>', '"', '`' },
     config = function()
       require "conf.whichkey"
@@ -267,19 +267,20 @@ local core_plugins = {
 
   -- Git --
   { "lewis6991/gitsigns.nvim",
-    event = 'BufWinEnter',
+    event = "User InitDeferredHigh",
     config = function()
       require "conf.gitsigns"
     end
   },
+  { "sindrets/diffview.nvim", requires = 'nvim-lua/plenary.nvim', cmd = {"DiffviewOpen"} },
   { "tpope/vim-fugitive", cmd = { 'Git', 'Gstatus', 'Gblame', 'Gpush', 'Gpull' } },
-  { "junegunn/gv.vim", cmd = { "GV", "GV!" } },
+  { "junegunn/gv.vim", wants = "vim-fugitive", cmd = { "GV", "GV!" } },
 
   -- Tools --
   -- Symbol outline
   { "simrat39/symbols-outline.nvim", cmd = "SymbolsOutline" },
   { "mbbill/undotree",
-    event = 'BufWinEnter',
+    event = "User InitDeferredHigh",
     config = function()
       require "conf.undotree"
     end
