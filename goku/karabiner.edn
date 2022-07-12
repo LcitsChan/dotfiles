@@ -36,6 +36,7 @@
   :close_spec_mode [{:shell "/usr/local/bin/yabai -m config window_border off"}]
   :im_abc [{:shell "/usr/local/bin/im-select com.apple.keylayout.ABC"}]
   :im_sogou [{:shell "/usr/local/bin/im-select com.sogou.inputmethod.sogou.pinyin"}]
+  :kitty_prefix {:key :b :modi [:left_control :left_shift] :lazy true}
 }
 
 ;; templates
@@ -48,8 +49,12 @@
 
 
 :applications {
-  :androidstudio ["com.google.android.studio-EAP"]
+  :androidstudio ["com.google.android.studio" 
+                  "com.google.android.studio-EAP"]
   :intellijce    ["com.jetbrains.intellij.ce"]
+  :ideas         ["com.google.android.studio"
+                  "com.google.android.studio-EAP"
+                  "com.jetbrains.intellij.ce" ]
   :vscode        ["com.microsoft.vscode"]
   :terminals     ["io.alacritty"
                   "net.kovidgoyal.kitty"
@@ -58,6 +63,11 @@
   :designapp     ["com.figma.Desktop"]
   :photoshop     ["com.adobe.Photoshop"]
   :chrome        ["com.google.Chrome"]
+  :browser       ["com.google.Chrome"
+                  "com.google.Chrome.beta"
+                  "com.vivaldi.Vivaldi"
+                  "com.apple.Safari" ]
+  :vivaldi       ["com.vivaldi.Vivaldi"]
   :logseq        ["com.electron.logseq"]
   :kitty         ["net.kovidgoyal.kitty"]
 }
@@ -100,7 +110,9 @@
   :mouse-mode {:key :a :afterup {:set ["mouse-scroll-mode" 0]}}
   ;; Domain
   :android-mode     {:key :d                                :condi :androidstudio}
+  :ideas-mode       {:key :d                                :condi :ideas}
   :chrome-mode      {:key :d                                :condi :chrome}
+  :vivaldi-mode     {:key :d                                :condi :vivaldi}
   :vim-macro-mode   {:key :return_or_enter                  :condi :terminals}
   :tmux-mode        {:key :d                                :condi :terminals}
   :tmux-resize-mode {:key :r :modi {:mandatory :left_shift} :condi :terminals}
@@ -109,6 +121,7 @@
   :ps-v-mode        {:key :v                                :condi :photoshop}
   :ps-actions       {:key :spacebar                         :condi :photoshop}
   :logseq-mode      {:key :d                                :condi :logseq}
+  :kitty-tmux-imitation {:key :f                            :condi :kitty}
 }
 
 
@@ -200,15 +213,19 @@
 
   {:des "launch apps"
    :rules [:l-mode
-           [:1 [:open "com.google.android.studio-EAP"]]
-           [:2 [:open "com.microsoft.VSCode"]]
-           [:3 [:open "com.jetbrains.intellij.ce"]]
+           [:1 [:open "com.google.android.studio"]]
+           [:2 [:open "com.spotify.client"]]
+           [:3 [:open "com.microsoft.VSCode"]]
+           [:4 [:open "com.jetbrains.intellij.ce"]]
            [:z [:open "io.alacritty"]]
-           [:c [:open "com.google.Chrome"]]
-           [:a [:open "net.kovidgoyal.kitty"] :!kitty]
+           [:c [:!Ch] :chrome]
+           [:c [:open "com.google.Chrome"] :!chrome]
+           [:v [:!Ch] :vivaldi]
+           [:v [:open "com.vivaldi.Vivaldi"] :!vivaldi]
            [:a [:!Ch] :kitty]
-           [:s [:open "com.electron.logseq"] :!logseq]
+           [:a [:open "net.kovidgoyal.kitty"] :!kitty]
            [:s [:!Ch] :logseq]
+           [:s [:open "com.electron.logseq"] :!logseq]
            [:r [:prev_app]]
            [:e :!CStab]
            [:q :!CTspacebar] ;; emoji
@@ -225,6 +242,7 @@
            [:##right_command :right_command nil {:alone :prev_app}]
   ]}
 
+  ;; experimental
   {:des "fd to escape"
    :rules [
            [[:f :d] :escape nil {:params {:sim 50}}]
@@ -332,6 +350,8 @@
            [:open_bracket "osascript -e 'tell application \"Spotify\" to play previous track'"] ;; spotify previous track
            [:close_bracket "osascript -e 'tell application \"Spotify\" to play next track'"] ;; spotify next track
            [:y "osascript -e 'tell application \"Spotify\" to playpause'"] ;; spotify play/pause
+           [:9 "osascript -e 'tell application \"Spotify\" to set sound volume to (sound volume + 10)'"]
+           [:0 "osascript -e 'tell application \"Spotify\" to set sound volume to (sound volume - 10)'"]
            [:l :!CTq] ;; lock
            [:o :!TOo] ;; switch audio output
   ]}
@@ -364,11 +384,14 @@
   ]}
 
   ;; specified domain app
-  {:des "development for android studio"
+  {:des "development for android studio / ideas"
    :rules [:android-mode
+           ;; compose preview
            [:r :!CSOr]
-           [:p :!TSh]
-           [:n :!TSl]
+           [:p :!TSleft_arrow]
+           [:n :!TSright_arrow]
+           :ideas-mode
+           [:open_bracket :!Sescape]
   ]}
 
   {:des "logseq"
@@ -377,11 +400,27 @@
   ]}
 
   {:des "chrome"
-   :rules [:chrome-mode
+   :rules [
+           :vivaldi-mode
+           [:h :!CSopen_bracket]
+           [:j :!CSclose_bracket]
+           [:k :!CSopen_bracket]
+           [:l :!CSclose_bracket]
+           :vivaldi
+           [:!Cq [:!Cq ["quit-mode" 0] [:noti :cmdq]] :quit-mode]
+           [:!Cq [["quit-mode" 1] [:noti :cmdq "Press Again to QUIT"]] 
+            nil {:delayed {:invoked  [["quit-mode" 0] [:noti :cmdq]]
+                           :canceled [["quit-mode" 0] [:noti :cmdq]]}
+                 :params {:delay 1000} }]
+           :chrome-mode
            [:v [:open_url "https://console.cloud.tencent.com/"]]
            [:m [:open_url "https://mail.google.com/"]]
            [:y [:open_url "https://youtube.com"]]
            [:n [:open_url "https://notion.so"]]
+           :browser
+           [:##left_control :left_control nil {:alone [:button1 :button1 :button1 :!TSi]}]
+           [:##left_command :left_command nil {:alone [:button1 :button1 :button1]}]
+           [:##left_option :left_option nil {:alone [:button1 :button1]}]
   ]}
 
   {:des "tmux: map [q] to prefix key"
@@ -482,6 +521,27 @@
            [:z [:!S2 :z]]
   ]}
 
+  {:des "use kitty in tmux way"
+   :rules [:kitty-tmux-imitation
+           [:u [:kitty_prefix]]
+           ;; WINDOW
+           [:h [:kitty_prefix :h]]
+           [:j [:kitty_prefix :j]]
+           [:k [:kitty_prefix :k]]
+           [:l [:kitty_prefix :l]]
+           [:semicolon [:kitty_prefix :semicolon]]
+           [:x [:kitty_prefix :x]] ;; close window
+           [:i [:kitty_prefix :i]] ;; select window visually
+           [:m [:kitty_prefix :m]] ;; move current window to top
+           [:z [:kitty_prefix :z]]
+           [:spacebar [:kitty_prefix :spacebar]]
+           [:return_or_enter [:!Ct]]
+           ;; TAB
+           [:p [:!CSopen_bracket]]
+           [:n [:!CSclose_bracket]]
+           [:c [:kitty_prefix :c]]
+  ]}
+
   {:des "photoshop"
    :rules [:photoshop
            [[:n :m] [:!CSn :return_or_enter] nil {:params {:sim 50}}]
@@ -491,7 +551,7 @@
            ;; ps-draw-mode
            [:!Cspacebar [:!Cspacebar ["ps-draw-mode" 0]]]
            [[:a :s] ["ps-draw-mode" 1]]
-           [:condi :photoshop :ps-draw-mode]
+           [:condi :photoshop :ps-draw-mode :!ps-fn-mode]
            [:a :!Cz]
            [:s :!CSz]
            [:h :!CSOh]
@@ -505,13 +565,13 @@
            [:2 :!Cf2]
            [:d ["ps-draw-mode" 0]]
            ;; ----------
-           :ps-v-mode
-           ;; [:x :!COx]
-           ;; [:c :!COy]
-           [:x :!CTSh]
-           [:c :!CTSv]
-           ;; ----------
-           :ps-sb-mode
+           ; :ps-v-mode
+           ; ;; [:x :!COx]
+           ; ;; [:c :!COy]
+           ; [:x :!CTSh]
+           ; [:c :!CTSv]
+           ; ;; ----------
+           [:condi :pbotosbop :ps-sb-mode :!ps-fn-mode]
            [:t :!CTt]
            [:r :!CTr]
            ;; hej stylus
@@ -522,13 +582,33 @@
            [:5 :!!5]
            [:s :!!s]
            [:d :!!d]
-           [:condi :photoshop :ps-draw-mode]
+           [:condi :photoshop :ps-draw-mode :!ps-fn-mode]
            [:!Sq :!!s]
            [:!Sw :!!d]
            [:1 :!TSO1]
            [:2 :!TSO2]
            [:3 :!TSO3]
-           :ps-actions
+           ;; --------------------
+           ;; order is master
+           ;; --------------------
+           [:condi :photoshop :ps-fn-mode]
+           ; flip layer
+           [:h :!CTSh]
+           [:v :!CTSv]
+           ; flip whole canvas
+           ; [:x ]
+           ; [:y ]
+           :photoshop
+           [:##left_option :left_option nil {:alone ["ps-fn-mode" 1]
+                                             :params {:delay 1000}
+                                             :delayed {:invoked [["ps-fn-mode" 0]]
+                                                       :canceled ["ps-fn-mode" 0]
+                                                         }}]
+           [:##right_option :right_option nil {:alone ["ps-fn-mode" 1]
+                                               :params {:delay 1000}
+                                               :delayed {:invoked [["ps-fn-mode" 0]]
+                                                         :canceled ["ps-fn-mode" 0]
+                                                         }}]
   ]}
 
   ;; snippets
