@@ -24,31 +24,40 @@
 
 :froms {
   :anykey {:any :key_code :modi {:optional [:any]}}
+  :zone_mode {:key :return_or_enter :modi [:left_control :left_shift] :lazy true}
 }
 
 :tos {
   :same_app_wins {:key :grave_accent_and_tilde :modi [:left_command] :lazy true}
   :prev_app      {:key :tab                    :modi [:left_command] :lazy true}
+  :cmdctrlopt      {:key :left_command :modi [:left_command :left_control :left_option] :lazy true}
   :to_abc [{:input :abc}]
   :alfred_mk [{:input :abc} {:key :1 :modi [:left_shift]} {:key :3 :modi [:left_shift]} {:key :1 :modi [:left_shift]}]
   :alfred_sb [{:key :1 :modi [:left_shift]} {:key :1 :modi [:left_shift]} {:key :3 :modi [:left_shift]} {:key :1 :modi [:left_shift]}]
   :open_spec_mode [{:shell "/usr/local/bin/yabai -m config window_border on && yabai -m config active_window_border_color 0xffff00ff"}]
   :close_spec_mode [{:shell "/usr/local/bin/yabai -m config window_border off"}]
-  :im_abc [{:shell "/usr/local/bin/im-select com.apple.keylayout.ABC"}]
-  :im_sogou [{:shell "/usr/local/bin/im-select com.sogou.inputmethod.sogou.pinyin"}]
+  :cancel_yabai_noti [{:noti {:id "yabai_mode", :text ""}}]
   :kitty_prefix {:key :b :modi [:left_control :left_shift] :lazy true}
+  :spotlight {:key :spacebar :modi [:left_command] :lazy true}
+  :readme_arc [{:shell "/usr/bin/qlmanage -p ~/.dotfiles/goku/arc.md"}]
+  ;; Config Zone Mode
+  :cancel_mode_doc [{:set ["zone-mode-doc" 0]} {:set ["zone-mode-doc-v" 0]} {:noti {:id "mode-noti-doc", :text ""}}]
+  :canel_all_prefix_mode [{:set ["zone-mode-doc" 0]} {:set ["zone-mode-doc-v" 0]} {:noti {:id "mode-noti-doc", :text ""}}
+                          {:set ["zone-mode-ideas-debug" 0]} {:noti {:id "zone-noti-ideas-debug", :text ""}}]
 }
 
 ;; templates
 :templates {
   :open "open -b %s"
   :open_url "open -u %s"
+  :open_dir "open %s"
   :typing "osascript -e 'tell application \"System Events\" to keystroke \"%s\" as text'"
   :spec_display_and_space "~/.config/yabai/scripts/focus_space_in_display.sh %s"
 }
 
 
 :applications {
+  :monitor       ["com.apple.ActivityMonitor"]
   :androidstudio ["com.google.android.studio" 
                   "com.google.android.studio-EAP"]
   :intellijce    ["com.jetbrains.intellij.ce"]
@@ -70,6 +79,9 @@
   :vivaldi       ["com.vivaldi.Vivaldi"]
   :logseq        ["com.electron.logseq"]
   :kitty         ["net.kovidgoyal.kitty"]
+  :arc           ["company.thebrowser.Browser"]
+  :qlmanage      ["com.apple.quicklook.qlmanage"]
+  :obsidian      ["md.obsidian"]
 }
 
 
@@ -90,29 +102,32 @@
   :l-mode {:key :l}
   ;; navigation/shortcuts
   :s-mode {:key :s}
-  :Ss-mode {:key :s :modi {:mandatory :left_shift}}
+  :S-mode {:key :s :modi {:mandatory :left_shift}}
   ;; quick action
   :q-mode {:key :q}
   ;; markdown action / display 1
   :m-mode {:key :m}
   ;; display 2
   :n-mode {:key :n}
-  ;; select
-  :v-mode {:key :v}
-  :Sv-mode {:key :v :modi {:mandatory :left_shift}}
-  ;; delete
-  :x-mode {:key :x}
   ;; zoom
   :z-mode {:key :z}
+  ;; open
+  :o-mode {:key :o}
+  :hyper-a-mode {:key :a}
   ;; sign
   :period-mode {:key :period}
+  :spacebar-mode {:key :spacebar}
   ;; mouse
-  :mouse-mode {:key :a :afterup {:set ["mouse-scroll-mode" 0]}}
+  :mouse-mode {:key :a :modi {:mandatory :left_shift} :afterup {:set ["mouse-scroll-mode" 0]}}
   ;; Domain
   :android-mode     {:key :d                                :condi :androidstudio}
   :ideas-mode       {:key :d                                :condi :ideas}
   :chrome-mode      {:key :d                                :condi :chrome}
   :vivaldi-mode     {:key :d                                :condi :vivaldi}
+  :arc-mode         {:key :d                                :condi :arc}
+  :arc-j-mode       {:key :j                                :condi :arc}
+  :arc-rctrl-mode   {:key :semicolon                        :condi :arc}
+  :raycast-mode     {:key :d                                :condi :raycast}
   :vim-macro-mode   {:key :return_or_enter                  :condi :terminals}
   :tmux-mode        {:key :d                                :condi :terminals}
   :tmux-resize-mode {:key :r :modi {:mandatory :left_shift} :condi :terminals}
@@ -122,11 +137,53 @@
   :ps-actions       {:key :spacebar                         :condi :photoshop}
   :logseq-mode      {:key :d                                :condi :logseq}
   :kitty-tmux-imitation {:key :f                            :condi :kitty}
+  :obsidian-mode    {:key :d                                :condi :obsidian}
 }
 
-
 :main [
-  {:des "yabai"
+;; Template
+;; {:des "Zone Mode"
+;;   :app
+;;   [:!TSreturn_or_enter [[:noti :zone-noti-xxx "xxx mode (q)"] ["zone-mode-xxx" 1]]]
+;;   [:q :cancel_mode_doc :zone-mode-xxx]
+;;  }
+
+;; ### Global
+  {:des "Escape Action"
+   :rules [
+           [[:f :d] [:close_spec_mode ["spec-mode" 0]] :spec-mode {:params {:sim 50}}]
+           [:escape [:close_spec_mode ["spec-mode" 0]] :spec-mode] 
+           ; :obsidian
+           [:escape [:escape {:input :abc}] :!abc {:params {:sim 50}}]
+           [[:f :d] [:escape {:input :abc}] :!abc {:params {:sim 50}}]
+           [[:f :d] :escape nil {:params {:sim 50}}]
+  ]}
+
+  {:des "Command Action"
+   :rules [
+           [:##right_command :cmdctrlopt :ideas {:alone :prev_app}]
+           [:##left_command :left_command nil {:alone :prev_app}]
+           [:##right_command :right_command nil {:alone :prev_app}]
+  ]}
+
+  {:des "Open Folder"
+   :rules [
+           :o-mode
+           [:d [:open_dir "~/Downloads/"]]
+  ]}
+
+  {:des "Raycast"
+   :rules [
+           ; [:!Cspacebar [:!Cspacebar :!Cescape ["raycast" 1]] 
+           ;  nil 
+           ;  {:delayed {:invoked  ["raycast" 0]
+           ;             :canceled ["raycast" 0] }
+           ;   :params {:delay 3000} }]
+           :raycast-prefix
+           [:t [:a :g :t :return_or_enter]] ;; Translate
+  ]}
+
+  {:des "Service: yabai"
    :rules [
            :w-mode
            [:h :!FQh]
@@ -186,10 +243,8 @@
 
   {:des "spec mode"
    :rules [
-           [:!Oclose_bracket [:open_spec_mode ["spec-mode" 1]] :!spec-mode]
            [:!Oclose_bracket [:close_spec_mode ["spec-mode" 0]] :spec-mode] 
-           [[:f :d] [:close_spec_mode ["spec-mode" 0]] :spec-mode {:params {:sim 50}}]
-           [:escape [:close_spec_mode ["spec-mode" 0]] :spec-mode] 
+           [:!Oclose_bracket [:open_spec_mode ["spec-mode" 1]] :!spec-mode]
            :spec-mode
            [:##p :##page_up]
            [:##n :##page_down]
@@ -214,14 +269,18 @@
   {:des "launch apps"
    :rules [:l-mode
            [:1 [:open "com.google.android.studio"]]
-           [:2 [:open "com.spotify.client"]]
-           [:3 [:open "com.microsoft.VSCode"]]
-           [:4 [:open "com.jetbrains.intellij.ce"]]
+           [:2 [:open "com.microsoft.VSCode"]]
+           [:3 [:open "com.jetbrains.intellij.ce"]]
+           [:4 [:open "com.spotify.client"]]
            [:z [:open "io.alacritty"]]
+           [:q [:!Ch] :monitor]
+           [:q [:open "com.apple.ActivityMonitor"] :!monitor]
            [:c [:!Ch] :chrome]
            [:c [:open "com.google.Chrome"] :!chrome]
-           [:v [:!Ch] :vivaldi]
-           [:v [:open "com.vivaldi.Vivaldi"] :!vivaldi]
+           ; [:v [:!Ch] :vivaldi]
+           ; [:v [:open "com.vivaldi.Vivaldi"] :!vivaldi]
+           [:v [:!Ch] :arc]
+           [:v [:open "company.thebrowser.Browser"] :!arc]
            [:a [:!Ch] :kitty]
            [:a [:open "net.kovidgoyal.kitty"] :!kitty]
            [:s [:!Ch] :logseq]
@@ -232,21 +291,10 @@
            [:w :same_app_wins]
            [:g :!TOg] ;; google search
            [:h :!Ch] ;; hide window
-           [:m [:left_option]] ;; restore minimize
            [:d :!COslash] ;; search dirs
-           [:t :!Oslash] ;; translate
+           [:t :!!f1] ;; translate
   ]}
 
-  {:des "right command to command-tab when used alone"
-   :rules [
-           [:##right_command :right_command nil {:alone :prev_app}]
-  ]}
-
-  ;; experimental
-  {:des "fd to escape"
-   :rules [
-           [[:f :d] :escape nil {:params {:sim 50}}]
-  ]}
 
   {:des "function key"
    :rules [
@@ -284,56 +332,61 @@
            [:slash [:!Sgrave_accent_and_tilde :slash]] ;; home
   ]}
 
-  {:des "document"
+  {:des "Document"
    :rules [;; navigation
+           [:condi :!ideas :!terminals]
+           [:q :cancel_mode_doc :zone-mode-doc]
+           [:q :cancel_mode_doc :zone-mode-doc-v]
+           [:!TSreturn_or_enter [[:noti :zone-noti-doc "Document mode (q)"] ["zone-mode-doc" 1]]]
+           :zone-mode-doc
+           [:v [[:noti :zone-noti-doc "Document mode (q)\n y: yank, d: delete"] ["zone-mode-doc-v" 1]]]
            :s-mode
+           [:##j {:mkey {:vwheel 32}} :qlmanage]
+           [:##k {:mkey {:vwheel -32}} :qlmanage]
            [:##h :##left_arrow]
            [:##j :##down_arrow]
            [:##k :##up_arrow]
            [:##l :##right_arrow]
            [:u :!Oleft_arrow] ;; backward by word
            [:i :!Oright_arrow] ;; forward by word
-           :Ss-mode
+           :S-mode
            [:j :!Cdown_arrow]
            [:k :!Cup_arrow]
            [:h :!Cleft_arrow]
            [:l :!Cright_arrow]
            ;; selection
-           :v-mode
+           :zone-mode-doc-v
+           [:!Sv [:!CSleft_arrow :!CSright_arrow]]
            [:j :!Sdown_arrow]
            [:k :!Sup_arrow]
            [:h :!Sleft_arrow]
            [:l :!Sright_arrow]
-           [:u :!OSleft_arrow]
-           [:i :!OSright_arrow]
-           :Sv-mode
-           [:j :!CSdown_arrow]
-           [:k :!CSup_arrow]
-           [:h :!CSleft_arrow]
-           [:l :!CSright_arrow]
-           [:n :!OSdown_arrow]
-           [:p :!OSup_arrow]
-           ;; delete
-           :x-mode
-           [:h :delete_or_backspace]
-           [:l :!Fdelete_or_backspace]
-           [:u :!Odelete_or_backspace]
+           [:!Sh :!CSleft_arrow]
+           [:!Sl :!CSright_arrow]
+           ;; word
+           [:b :!OSleft_arrow]
+           [:w :!OSright_arrow]
+           ;; home/end
+           [:!Sg :!CSup_arrow] 
+           [:g :!CSdown_arrow]
+           [:y [:!Cc :right_arrow :cancel_mode_doc]]
+           [:d [:delete_or_backspace :cancel_mode_doc]]
   ]}
 
   {:des "shortcut"
    :rules [:s-mode
-           [:semicolon :return_or_enter]
            [:m :mission_control]
            [:close_bracket :!Spage_down]
            [:open_bracket :!Spage_up]
   ]}
 
-  ; use im-select switch sogou from abc if typing, the popup window didn't disappear
   {:des "switch input method with single shift key"
    :rules [
-           [:##left_shift :left_shift nil {:alone {:input :abc}
+           ;; The switching mode of using karabiner's built-in input method occasionally fails, 
+           ;; and it is more stable to use the system's built-in switching input method
+           [:##left_shift :left_shift :!abc {:alone {:input :abc}
                                              :params {:alone 250} }]
-           [:##right_shift :right_shift nil {:alone :im_sogou
+           [:##right_shift :right_shift :abc {:alone :!Tsemicolon
                                              :params {:alone 250} }]
   ]}
 
@@ -354,6 +407,18 @@
            [:0 "osascript -e 'tell application \"Spotify\" to set sound volume to (sound volume - 10)'"]
            [:l :!CTq] ;; lock
            [:o :!TOo] ;; switch audio output
+           [:semicolon [:spotlight ["raycast-prefix" 1]]
+            nil
+            {:delayed {:invoked  ["raycast-prefix" 0]
+                       :canceled ["raycast-prefix" 0] }
+             :params {:delay 1500} }]
+  ]}
+
+  {:des "raycast shortcut"
+   :rules [:hyper-a-mode
+           ; [:l :!!]
+           ;; Within Raycast
+           [:o :!!f2]
   ]}
 
   {:des "zoom"
@@ -390,8 +455,40 @@
            [:r :!CSOr]
            [:p :!TSleft_arrow]
            [:n :!TSright_arrow]
-           :ideas-mode
-           [:open_bracket :!Sescape]
+           ;; --- space mode ---
+           [:condi :ideas :zone-mode-ideas-debug :spacebar-mode]
+           [:x [["zone-mode-ideas-debug" 0] [:noti :zone-noti-ideas-debug]]]
+           [:t :!CTSd]   ;; Run debug
+           [:a :!Cf8]    ;; Toggle line breakpoint
+           [:m :!CTf8]   ;; Mute breakpoint
+           [:e :!Of8]    ;; Expression
+           [:q :!Cf2]    ;; Quit debugging mode
+           [:v :!CSf8]   ;; View breakpoints
+           [:r :!COr]    ;; Resume
+           [:o :f8]      ;; Step Over
+           [:i :f7]      ;; Step Into
+           [:o :!ERf8]   ;; Force Step Over
+           [:i :!ERf7]   ;; Force Step Into
+           [:f :!OSf7]   ;; Force Step Into
+           [:p :!Sf8]    ;; Step out
+           [:c :!Qf9]    ;; Run cursor
+           [:j :tab]     ;; Next
+           [:k :!Stab]   ;; Previous
+           [:equal_sign [:!QWEb :equal_sign]] ;; Add Watch
+           [:hyphen [:!QWEb :hyphen]] ;; Add inline Watch
+           [:n [:!QWEb :n]] ;; Add new Watch
+           [:delete_or_backspace [:!QWEb :delete_or_backspace]] ;; Remove all Watches
+           ;; --- Special l-mode ---
+           [:condi :ideas :l-mode]
+           [:tab :!Ttab]
+           [:left_control :!TStab]
+           [:condi :ideas]
+           [:##right_option :right_option nil {:alone :same_app_wins}]
+           [:!Qj :!TSdown_arrow]
+           [:!Qk :!TSup_arrow]
+           :ideas
+           [:zone_mode [["zone-mode-ideas-debug" 0] [:noti :zone-noti-ideas-debug]] :zone-mode-ideas-debug]
+           [:zone_mode [["zone-mode-ideas-debug" 1] [:noti :zone-noti-ideas-debug "IDEAS-MODE: DEBUGGING"]] :!zone-mode-ideas-debug]
   ]}
 
   {:des "logseq"
@@ -399,8 +496,34 @@
            [:t [:typing "TODO "]]
   ]}
 
+  {:des "obsidian"
+   :rules [:obsidian-mode
+           [:i :!OTi]
+  ]}
+
   {:des "chrome"
    :rules [
+           :arc-rctrl-mode
+           [:1 :!W1]
+           [:!Q2 :!W2]
+           [:!Q3 :!W3]
+           :arc-mode
+           [:period :!CTperiod]
+           [:comma  :!CTcomma]
+           [:h :!COup_arrow]
+           [:j :!COdown_arrow]
+           [:k :!COup_arrow]
+           [:l :!COdown_arrow]
+           [:slash :readme_arc]
+           :arc-j-mode
+           [:1 :!W1]
+           [:2 :!W2]
+           [:3 :!W3]
+           [:b :!!b]
+           [:f :!!f]
+           [:s :!!s]
+           [:e :!TStab]
+           [:r :!Ttab]
            :vivaldi-mode
            [:h :!CSopen_bracket]
            [:j :!CSclose_bracket]
@@ -418,9 +541,18 @@
            [:y [:open_url "https://youtube.com"]]
            [:n [:open_url "https://notion.so"]]
            :browser
-           [:##left_control :left_control nil {:alone [:button1 :button1 :button1 :!TSi]}]
-           [:##left_command :left_command nil {:alone [:button1 :button1 :button1]}]
-           [:##left_option :left_option nil {:alone [:button1 :button1]}]
+           [:right_option ["browser-translate" 1] ["browser-ro-once" 1]]
+           [:right_option [:right_option ["browser-ro-once" 1]] ["browser-translate" 0] {:delayed
+                                                                                         {:invoked ["browser-ro-once" 0]
+                                                                                          :canceled ["browser-ro-once" 0]}}]
+           [:right_option ["browser-translate" 0] ["browser-translate-cancel" 1]]
+           [:right_option [:right_option ["browser-translate-cancel" 1]] ["browser-translate" 1] {:delayed
+                                                                                         {:invoked ["browser-translate-cancel" 0]
+                                                                                          :canceled ["browser-translate-cancel" 0]}}]
+           ; [:condi :browser :browser-translate]
+           ; [:##left_control :left_control nil {:alone [:button1 :button1 :button1 :!TSi]}]
+           ; [:##left_command :left_command nil {:alone [:button1 :button1 :button1]}]
+           ; [:##left_option :left_option nil {:alone [:button1 :button1]}]
   ]}
 
   {:des "tmux: map [q] to prefix key"
@@ -638,12 +770,18 @@
            [:d :right_arrow]
   ]}
 
+  ;; Baisc
+  ; {:des "fd to escape"
+  ;  :rules [
+  ;          [[:f :d] :escape nil {:params {:sim 50}}]
+  ; ]}
+  ;
   {:des "mouse"
    :rules [
-           [:##j {:mkey {:vwheel 32}} [["mouse-scroll-mode" 1]] ["mouse-mode" 1]]
-           [:##h {:mkey {:hwheel 32}} [["mouse-scroll-mode" 1]] ["mouse-mode" 1]]
-           [:##k {:mkey {:vwheel -32}} [["mouse-scroll-mode" 1]] ["mouse-mode" 1]]
-           [:##l {:mkey {:hwheel -32}} [["mouse-scroll-mode" 1]] ["mouse-mode" 1]]
+           ; [:##j {:mkey {:vwheel 32}} [["mouse-scroll-mode" 1]] ["mouse-mode" 1]]
+           ; [:##h {:mkey {:hwheel 32}} [["mouse-scroll-mode" 1]] ["mouse-mode" 1]]
+           ; [:##k {:mkey {:vwheel -32}} [["mouse-scroll-mode" 1]] ["mouse-mode" 1]]
+           ; [:##l {:mkey {:hwheel -32}} [["mouse-scroll-mode" 1]] ["mouse-mode" 1]]
            :mouse-mode
            [:##j {:mkey {:y 1024}}]
            [:##k {:mkey {:y -1024}}]
@@ -652,8 +790,10 @@
            [:##y {:pkey :button1}]
            [:##m {:pkey :button3}]
            [:##n {:pkey :button2}]
-           [:##s ["mouse-scroll-mode" 1] nil {:afterup ["mouse-scroll-mode" 0]}]
+           ; [:##s ["mouse-scroll-mode" 1] nil {:afterup ["mouse-scroll-mode" 0]}]
            [:##f {:mkey {:speed 0.5}}]
+           [:open_bracket {:mkey {:vwheel 32}}]
+           [:close_bracket {:mkey {:vwheel -32}}]
   ]}
 
   ;; {:des "poker mapping"
@@ -673,6 +813,7 @@
 :input-sources {
   :abc   {:input_source_id "^com\\.apple\\.keylayout\\.ABC$"}
   :sogou {:input_source_id "^com\\.sogou\\.inputmethod\\.sogou\\.pinyin$"}
+  :weixin {:input_source_id "^com\\.tencent\\.inputmethod\\.wetype\\.pinyin$"}
 }
 
 :devices {:poker [{:product_id 521 :vendor_id 1241}]}
