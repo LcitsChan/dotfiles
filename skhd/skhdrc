@@ -6,56 +6,57 @@
 :: s_mode : yabai -m config active_window_border_color 0xff888c8d && yabai -m config window_border on # swap stone
 :: escape_mode : yabai -m config active_window_border_color 0xffff00ff && yabai -m config window_border on # earth
 :: spec_mode : yabai -m config window_border_width 2 && yabai -m config active_window_border_color 0xffffffff && yabai -m config window_border on
-r_mode,  i_mode, w_mode, s_mode, escape_mode < escape      ; default
-default, i_mode, w_mode, s_mode              < alt - r     ; r_mode
-default, r_mode, i_mode, w_mode              < alt - s     ; s_mode
-default, r_mode, i_mode, s_mode              < alt - w     ; w_mode
-default, r_mode, w_mode, s_mode              < alt - i     ; i_mode
+r_mode,  i_mode, w_mode, s_mode, escape_mode < escape       ; default
+default, i_mode, w_mode, s_mode              < lalt - r     ; r_mode
+default, r_mode, i_mode, w_mode              < lalt - s     ; s_mode
+default, r_mode, i_mode, s_mode              < lalt - w     ; w_mode
+default, r_mode, w_mode, s_mode              < lalt - i     ; i_mode
 default, r_mode, i_mode, w_mode, s_mode      < lalt - 0x21 ; escape_mode # alt - [
 # default < rcmd - e ; spec_mode
 # spec_mode < rcmd - e ; default
 
 # One way shortcut for karabiner
+default < lalt - x : ~/.dotfiles/goku/switch_karabiner_mode.sh
 
 # 1 Quick Open
-default, i_mode < rcmd - return : open -n -b "io.alacritty"
-default, i_mode < ralt - return : open -n -b "com.google.Chrome"
+default, i_mode < rcmd - return : open -n -b "net.kovidgoyal.kitty"
+default, i_mode < ralt - return : open -n -b "company.thebrowser.Browser"
+lalt - 0x2B : open -n -b "com.apple.systempreferences"
 
 # 2 Display
-ralt - 1 : yabai -m display --focus 1
-ralt - 2 : yabai -m display --focus 2
+lalt - 1 : yabai -m display --focus 1
+lalt - 2 : yabai -m display --focus 2
+lalt - d : yabai -m display --focus recent
+
 
 # 3 Space
 lalt - p : yabai -m space --focus prev || yabai -m space --focus last
 lalt - n : yabai -m space --focus next || yabai -m space --focus first
 lalt - 0x29 : yabai -m space --focus recent # alt - ;
-lalt - 0x2B : yabai -m display --focus recent # alt - ;
 
 # Navigate
-ctrl - 1 : ~/.config/yabai/scripts/smart_focus.sh 1
-ctrl - 2 : ~/.config/yabai/scripts/smart_focus.sh 2
-ctrl - 3 : ~/.config/yabai/scripts/smart_focus.sh 3
-ctrl - 4 : ~/.config/yabai/scripts/smart_focus.sh 4
-ctrl - 5 : ~/.config/yabai/scripts/smart_focus.sh 5
-ctrl - 6 : ~/.config/yabai/scripts/smart_focus.sh 6
-ctrl - 7 : ~/.config/yabai/scripts/smart_focus.sh 7
-ctrl - 8 : ~/.config/yabai/scripts/smart_focus.sh 8
-ctrl - 9 : ~/.config/yabai/scripts/smart_focus.sh 9
+lctrl - 1 : ~/.config/yabai/scripts/smart_focus.sh 1
+lctrl - 2 : ~/.config/yabai/scripts/smart_focus.sh 2
+lctrl - 3 : ~/.config/yabai/scripts/smart_focus.sh 3
+lctrl - 4 : ~/.config/yabai/scripts/smart_focus.sh 4
+lctrl - 5 : ~/.config/yabai/scripts/smart_focus.sh 5
+lctrl - 6 : ~/.config/yabai/scripts/smart_focus.sh 6
+lctrl - 7 : ~/.config/yabai/scripts/smart_focus.sh 7
+lctrl - 8 : ~/.config/yabai/scripts/smart_focus.sh 8
+lctrl - 9 : ~/.config/yabai/scripts/smart_focus.sh 9
 
 # Create and destroy
-# Seveveven
-ctrl + alt - 7 : yabai -m space --focus next || yabai -m space --focus first
-# Create: Cr-eight
-ctrl + alt - 8 : yabai -m space --create && yabai -m space --focus last
-# Destory: why 9, like kill -9, just for mnemonic
-ctrl + alt - 9 : yabai -m space --destroy
+ctrl + alt - 7 : yabai -m space --focus next || yabai -m space --focus first # Seveveven
+ctrl + alt - 8 : yabai -m space --create && yabai -m space --focus last      # Create: Cr-eight
+ctrl + alt - 9 : yabai -m space --destroy                                    # Destory: why 9, like kill -9, just for mnemonic
 # ctrl + alt - 9 : osascript ~/.dotfiles/skhd/scripts/close_space.scpt
 
 # 4 Window
 # 4.1 Arrangement
 lalt - b : yabai -m space --balance
-lalt - u : yabai -m window --toggle split
-lalt - 0 : yabai -m config layout bsp
+lalt - t : yabai -m window --toggle split
+lalt - 0 : yabai -m space --layout bsp
+ralt - 0 : yabai -m space --layout stack
 
 # 4.2 Swap windows
 s_mode < r : yabai -m space --rotate 270
@@ -66,24 +67,28 @@ s_mode < h : yabai -m window --swap west  || yabai -m window --swap east
 s_mode < l : yabai -m window --swap east  || yabai -m window --swap west
 lalt - x : yabai -m space --mirror x-axis
 lalt - y : yabai -m space --mirror y-axis
-# ========== alternative for karabiner ==========
-fn + lcmd - r : yabai -m space --rotate 270
-fn + lcmd - s : yabai -m window --swap recent
-fn + lcmd - k : yabai -m window --swap north || yabai -m window --swap south
-fn + lcmd - j : yabai -m window --swap south || yabai -m window --swap north
-fn + lcmd - h : yabai -m window --swap west  || yabai -m window --swap east || yabai -m window --grid 12:8:0:0:4:12
-fn + lcmd - l : yabai -m window --swap east  || yabai -m window --swap west || yabai -m window --grid 12:8:4:0:4:12
+# ========== Alternative for karabiner ==========
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+fn + lcmd - r : yabai -m space --rotate 270                                                                         #
+fn + lcmd - s : yabai -m window --swap recent                                                                       #
+fn + lcmd - k : yabai -m window --swap north || yabai -m window --swap south                                        #
+fn + lcmd - j : yabai -m window --swap south || yabai -m window --swap north                                        #
+fn + lcmd - h : yabai -m window --swap west  || yabai -m window --swap east || yabai -m window --grid 12:8:0:0:4:12 #
+fn + lcmd - l : yabai -m window --swap east  || yabai -m window --swap west || yabai -m window --grid 12:8:4:0:4:12 #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # 4.3 Warp
 w_mode < h : yabai -m window --warp west  || yabai -m window --resize left:40:0
 w_mode < j : yabai -m window --warp south || yabai -m window --resize bottom:0:-40
 w_mode < k : yabai -m window --warp north || yabai -m window --resize top:0:40
 w_mode < l : yabai -m window --warp east  || yabai -m window --resize right:-40:0
-# ========== alternative for karabiner ==========
-fn + rcmd - h : yabai -m window --warp west  || yabai -m window --resize left:40:0
-fn + rcmd - j : yabai -m window --warp south || yabai -m window --resize bottom:0:-40
-fn + rcmd - k : yabai -m window --warp north || yabai -m window --resize top:0:40
-fn + rcmd - l : yabai -m window --warp east  || yabai -m window --resize right:-40:0
+# ========== Alternative for karabiner ==========
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+fn + rcmd - h : yabai -m window --warp west  || yabai -m window --resize left:40:0    #
+fn + rcmd - j : yabai -m window --warp south || yabai -m window --resize bottom:0:-40 #
+fn + rcmd - k : yabai -m window --warp north || yabai -m window --resize top:0:40     #
+fn + rcmd - l : yabai -m window --warp east  || yabai -m window --resize right:-40:0  #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # 4.4 Insert
 i_mode < h : yabai -m window --insert west  && skhd -k "escape"
@@ -91,46 +96,56 @@ i_mode < j : yabai -m window --insert south && skhd -k "escape"
 i_mode < k : yabai -m window --insert north && skhd -k "escape"
 i_mode < l : yabai -m window --insert east  && skhd -k "escape"
 i_mode < i : yabai -m window --insert stack && skhd -k "escape"
-# ========== alternative for karabiner ==========
-fn + rctrl - h : yabai -m window --insert west
-fn + rctrl - j : yabai -m window --insert south
-fn + rctrl - k : yabai -m window --insert north
-fn + rctrl - l : yabai -m window --insert east
-fn + rctrl - i : yabai -m window --insert stack
+# ========== Alternative for karabiner ==========
+# # # # # # # # # # # # # # # # # # # # # # # # #
+fn + rctrl - h : yabai -m window --insert west  #
+fn + rctrl - j : yabai -m window --insert south #
+fn + rctrl - k : yabai -m window --insert north #
+fn + rctrl - l : yabai -m window --insert east  #
+fn + rctrl - i : yabai -m window --insert stack #
+# # # # # # # # # # # # # # # # # # # # # # # # #
 
 # 4.5 Zoom
 lalt - f : yabai -m window --grid 1:1:1:1:1:1 || yabai -m window --toggle zoom-fullscreen
 shift + lalt - f : yabai -m window --toggle native-fullscreen
 lalt - v : yabai -m window --toggle zoom-parent
-lalt - o : yabai -m window --toggle float && yabai -m window --grid 12:8:1:1:6:10
+lalt - u : yabai -m window --toggle float && yabai -m window --grid 12:8:1:1:6:10
+lalt - 0x2A : ~/.config/yabai/scripts/trigger_manage.sh # 临时规则：是否在服务重启前管理应用
+lalt - 0x18 [
+  "kitty": skhd -k "cmd + ctrl - 0x18"
+  * : ~/.config/yabai/scripts/switch_zoom_mode.sh
+]
+lctrl + rcmd + ralt - o: ~/.config/yabai/scripts/trigger_manage.sh title
 lalt - z [
   "iTerm2" : yabai -m window --grid 200:30:1:118:28:80
   *        : yabai -m window --grid 12:8:1:1:6:10
 ]
 
 # 4.6 Navigate
-default, r_mode, i_mode, w_mode, s_mode < alt - h : \
+default, r_mode, i_mode, w_mode, s_mode < lalt - h : \
   ~/.config/yabai/scripts/focus_window.sh west || yabai -m window --move rel:-20:0
-default, r_mode, i_mode, w_mode, s_mode < alt - j : \
+default, r_mode, i_mode, w_mode, s_mode < lalt - j : \
   yabai -m window --focus south || yabai -m window --move rel:0:20
-default, r_mode, i_mode, w_mode, s_mode < alt - k : \
+default, r_mode, i_mode, w_mode, s_mode < lalt - k : \
   yabai -m window --focus north || yabai -m window --move rel:0:-20
-default, r_mode, i_mode, w_mode, s_mode < alt - l : \
+default, r_mode, i_mode, w_mode, s_mode < lalt - l : \
   ~/.config/yabai/scripts/focus_window.sh east || yabai -m window --move rel:20:0
-default, r_mode, i_mode, w_mode, s_mode < alt - r : \
-  yabai -m window --focus recent || yabai -m space --focus recent
-default, r_mode, i_mode, w_mode, s_mode < alt - m : \
+# default, r_mode, i_mode, w_mode, s_mode < ralt - r : \
+#   yabai -m window --focus recent || yabai -m space --focus recent
+default, r_mode, i_mode, w_mode, s_mode < lalt - m : \
   yabai -m window --focus stack.recent
 default, r_mode, i_mode, w_mode, s_mode < ctrl + alt - m : \
   yabai -m window --focus stack.next || yabai -m window --focus stack.first
 
 w_mode < n : yabai -m window --focus next || yabai -m window --focus first
 w_mode < p : yabai -m window --focus prev || yabai -m window --focus last
-# ========== alternative for karabiner ==========
-fn + rcmd - n : yabai -m window --focus next || yabai -m window --focus first
-fn + rcmd - p : yabai -m window --focus prev || yabai -m window --focus last
-fn + rctrl - n : yabai -m window --focus stack.next || yabai -m window --focus stack.first
-fn + rctrl - p : yabai -m window --focus stack.prev || yabai -m window --focus stack.last
+# ========== Alternative for karabiner ==========
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+fn + rcmd - n : yabai -m window --focus next || yabai -m window --focus first               #
+fn + rcmd - p : yabai -m window --focus prev || yabai -m window --focus last                #
+fn + rctrl - n : yabai -m window --focus stack.next || yabai -m window --focus stack.first  #
+fn + rctrl - p : yabai -m window --focus stack.prev || yabai -m window --focus stack.last   #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # 4.7 Resize
 r_mode < h : yabai -m window --resize left:-40:0 || yabai -m window --resize right:-40:0
@@ -139,13 +154,15 @@ r_mode < k : yabai -m window --resize top:0:-40 || yabai -m window --resize bott
 r_mode < l : yabai -m window --resize right:40:0 || yabai -m window --resize left:40:0
 r_mode < i : yabai -m window --resize top_left:-40:-40 && yabai -m window --resize bottom_right:40:40
 r_mode < d : yabai -m window --resize top_left:40:40 && yabai -m window --resize bottom_right:-40:-40
-# ========== alternative for karabiner ==========
-fn + ralt - h : yabai -m window --resize left:-40:0 || yabai -m window --resize right:-40:0
-fn + ralt - j : yabai -m window --resize bottom:0:40 || yabai -m window --resize top:0:40
-fn + ralt - k : yabai -m window --resize top:0:-40 || yabai -m window --resize bottom:0:-40
-fn + ralt - l : yabai -m window --resize right:40:0 || yabai -m window --resize left:40:0
-fn + ralt - i : yabai -m window --resize top_left:-40:-40 && yabai -m window --resize bottom_right:40:40
-fn + ralt - d : yabai -m window --resize top_left:40:40 && yabai -m window --resize bottom_right:-40:-40
+# ========== Alternative for karabiner ==========
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+fn + ralt - h : yabai -m window --resize left:-40:0 || yabai -m window --resize right:-40:0               #
+fn + ralt - j : yabai -m window --resize bottom:0:40 || yabai -m window --resize top:0:40                 #
+fn + ralt - k : yabai -m window --resize top:0:-40 || yabai -m window --resize bottom:0:-40               #
+fn + ralt - l : yabai -m window --resize right:40:0 || yabai -m window --resize left:40:0                 #
+fn + ralt - i : yabai -m window --resize top_left:-40:-40 && yabai -m window --resize bottom_right:40:40  #
+fn + ralt - d : yabai -m window --resize top_left:40:40 && yabai -m window --resize bottom_right:-40:-40  #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # 4.8 Change space
 ctrl + alt - 1 : ~/.config/yabai/scripts/move_window_to_space.sh 1
@@ -167,7 +184,7 @@ w_mode < q: yabai -m window --grid 12:2:0:0:1:6 && skhd -k "escape"
 w_mode < w: yabai -m window --grid 12:2:1:0:1:6 && skhd -k "escape"
 w_mode < a: yabai -m window --grid 12:2:0:6:1:6 && skhd -k "escape"
 w_mode < s: yabai -m window --grid 12:2:1:6:1:6 && skhd -k "escape"
-w_mode < alt - w: yabai -m window --grid 12:8:1:0:6:6 && skhd -k "escape"
-w_mode < alt - x: yabai -m window --grid 12:8:1:6:6:6 && skhd -k "escape"
-w_mode < alt - a: yabai -m window --grid 12:8:0:1:4:10 && skhd -k "escape"
-w_mode < alt - d: yabai -m window --grid 12:8:4:1:4:10 && skhd -k "escape"
+w_mode < lalt - w: yabai -m window --grid 12:8:1:0:6:6 && skhd -k "escape"
+w_mode < lalt - x: yabai -m window --grid 12:8:1:6:6:6 && skhd -k "escape"
+w_mode < lalt - a: yabai -m window --grid 12:8:0:1:4:10 && skhd -k "escape"
+w_mode < lalt - d: yabai -m window --grid 12:8:4:1:4:10 && skhd -k "escape"
