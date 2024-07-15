@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# INFO: yabai-v5.0.6
 
 # Y A B A I
 # https://github.com/koekeishiya/yabai
@@ -17,17 +18,17 @@ yabai -m config mouse_drop_action            swap
 
 # T I L I N G
 yabai -m config window_placement             second_child # windows become the right or bottom split when tiled
-yabai -m config window_topmost               off          # floating windows are always on top
+# yabai -m config window_topmost               off          # floating windows are always on top
 yabai -m config split_ratio                  0.50
 yabai -m config auto_balance                 off
 
 # W I N D O W S
 yabai -m config active_window_opacity        1.0
 yabai -m config normal_window_opacity        0.90
-yabai -m config window_border                off
-yabai -m config window_border_width          8
-yabai -m config active_window_border_color   0xffffff00
-yabai -m config normal_window_border_color   0xff555555
+# yabai -m config window_border                off
+# yabai -m config window_border_width          8
+# yabai -m config active_window_border_color   0xffffff00
+# yabai -m config normal_window_border_color   0xff555555
 yabai -m config window_shadow                on           # show shadows only for floating windows
 yabai -m config window_opacity               off          # window opacity switch
 yabai -m config window_gap                   16
@@ -41,10 +42,15 @@ yabai -m config left_padding                 16
 yabai -m config right_padding                16
 
 # S P A C E
-yabai -m config --space 4 layout               stack
-yabai -m config --space 5 layout               float
-
 yabai -m config external_bar all:36:0
+yabai -m config --space 2 layout               stack
+yabai -m config --space 4 layout               stack
+yabai -m config --space 5 window_gap           0
+yabai -m config --space 5 top_padding          2
+yabai -m config --space 5 bottom_padding       2
+yabai -m config --space 5 left_padding         2
+yabai -m config --space 5 right_padding        2
+
 
 # float system preferences. Most of these just diable Yabai form resizing them.
 yabai -m rule --add app="^System Preferences$" sticky=on layer=above manage=off
@@ -54,7 +60,6 @@ yabai -m rule --add app="^Path Finder$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Karabiner-EventViewer$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Keka$" sticky=on layer=above manage=off
-yabai -m rule --add app="^Alfred Preferences$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Disk Utility$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Activity Monitor$" sticky=on layer=above manage=off
 yabai -m rule --add app="^TeamViewer$" sticky=off layer=above manage=off
@@ -67,17 +72,24 @@ yabai -m rule --add app="^Harvest$" manage=off
 yabai -m rule --add app="^Logi Options$" manage=off
 yabai -m rule --add app="^Private Internet Access$" manage=off
 yabai -m rule --add app="^IINA$" manage=off
+yabai -m rule --add app="^Adobe Photoshop 202" manage=off
+yabai -m rule --add app="^Logseq$" manage=off
+yabai -m rule --add app="^Arc$" manage=off
 
-
-coding='^(Android Studio|IntelliJ IDEA)$'
-yabai -m rule --add app="${coding}" manage=off
+coding='^(studio|Android Studio|IntelliJ IDEA|Code)$'
+yabai -m rule --add app="${coding}" space=2
+# yabai -m rule --add app="Code" space=2
 
 yabai -m rule --add app="^Microsoft To Do$" space=3
 chat='^(WeChat|Telegram)$'
 yabai -m rule --add app="${chat}" space=3
+yabai -m rule --add app="WeChat" title="!WeChat (Chats\)" manage=off
 
 music='^(Spotify|NeteaseMusic|iTunes)$'
 yabai -m rule --add app="${music}" space=4
+
+tools='^(Alfred Preferences|Raycast)$'
+yabai -m rule --add app="${tools}" sticky=on layer=above manage=off
 
 killall limelight &> /dev/null
 limelight &> /dev/null &
@@ -85,9 +97,11 @@ limelight &> /dev/null &
 yabai -m signal --add event=window_created action="sketchybar -m --trigger yabai_window &> /dev/null"
 yabai -m signal --add event=window_destroyed action="sketchybar -m --trigger yabai_window &> /dev/null"
 yabai -m signal --add event=window_focused action="sketchybar -m --trigger yabai_window &> /dev/null"
+yabai -m signal --add event=window_focused action="~/.config/yabai/scripts/record_win_info.sh &> /dev/null"
 yabai -m signal --add event=window_title_changed action="sketchybar -m --trigger yabai_window &> /dev/null"
 yabai -m signal --add event=space_changed action="sketchybar -m --trigger yabai_window &> /dev/null"
 yabai -m signal --add event=window_resized action="sketchybar -m --trigger yabai_window_mode &> /dev/null"
 yabai -m signal --add event=window_moved action="sketchybar -m --trigger yabai_window_mode &> /dev/null"
+yabai -m signal --add event=window_created action="bash ~/.dotfiles/yabai/scripts/only_first_win_managed.sh Arc &> /dev/null"
 
 echo "yabai configuration loaded.."
