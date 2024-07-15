@@ -1,0 +1,34 @@
+[manager]
+prepend_keymap = [
+  { on = [
+    "<C-s>",
+  ], run = 'shell "$SHELL" --block --confirm', desc = "Open shell here" },
+  { on = [
+    "J",
+  ], run = 'seek 1', desc = "Scrolling preview down" },
+  { on = [
+    "K",
+  ], run = 'seek -1', desc = "Scrolling preview up" },
+  { on = [
+    "q",
+  ], run = 'escape --visual', desc = "Exit visual mode" },
+  { on = [
+    "Q",
+  ], run = 'quit', desc = "Quit" },
+  { on = [
+    "g",
+    ".",
+  ], run = 'cd ~/.dotfiles/', desc = "Go to dotfiles" },
+  { on = [
+    "g",
+    "y",
+  ], run = 'cd ~/.config/yazi', desc = "Go to yazi" },
+  { on = [
+    "g",
+    "n",
+  ], run = 'cd ~/.config/nvim', desc = "Go to nvim" },
+  # { on = [ "g", "c" ],       run = "cd ~/.config",     desc = "Go to the config directory" },
+]
+
+[input]
+prepend_keymap = [{ on = ["<Esc>"], run = "close", desc = "Cancel input" }]
