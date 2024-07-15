@@ -82,7 +82,6 @@ cmap("<Ctrl-h>", "<Ctrl-,>");
 cmap("<Ctrl-l>", "<Ctrl-.>");
 
 // Basic
-map("F", "gf");
 vmap("H", "0");
 vmap("L", "$");
 
@@ -399,6 +398,7 @@ domainActions.bl.play = () => {
 };
 domainActions.bl.webFullscreen = () => {
   btnClick(".squirtle-video-pagefullscreen");
+  btnClick(".bpx-player-ctrl-btn.bpx-player-ctrl-web");
 };
 
 // github trending
@@ -425,6 +425,18 @@ domainActions.gg.exchangeZh = () => {
   navHref(url.href)()
 }
 
+// google search
+domainActions.ddg = {};
+domainActions.ddg.exchangeZh = () => {
+  let href = window.location.href
+  let url = new URL(href)
+  if (url.searchParams.has('kl')) {
+    url.searchParams.delete('kl')
+  } else {
+    url.searchParams.append('kl', 'cn-zh')
+  }
+  navHref(url.href)()
+}
 
 domain_spec_mappings = [
   {
@@ -484,6 +496,16 @@ domain_spec_mappings = [
         alias: "D",
         description: "Google - exchange search lr(zh) ",
         action: domainActions.gg.exchangeZh,
+      },
+    ],
+  },
+  {
+    domain: /duckduckgo\.com/i,
+    mappings: [
+      {
+        alias: "D",
+        description: "Duckduckgo - exchange search",
+        action: domainActions.ddg.exchangeZh,
       },
     ],
   },
