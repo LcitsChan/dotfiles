@@ -5,7 +5,7 @@ return {
 		lazy = false,
 		priority = 1000,
 		opts = {
-			flavour = "mocha",
+			flavour = "frappe",
 			transparent_background = "true",
 			integrations = { blink_cmp = true },
 		},

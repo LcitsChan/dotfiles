@@ -1,5 +1,4 @@
 #!/bin/bash
 
-stow .
-cd ./zsh
-stow .
+stow -v .
+stow -v --target="$HOME" zsh
