@@ -2,8 +2,6 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 local map = LazyVim.safe_keymap_set
-local keymap = vim.keymap
-local opts = { noremap = true, silent = true }
 --
 -- Basic
 map({ "n", "v" }, "<leader><cr>", ":nohl<cr>", { desc = "which_key_ignore" })
@@ -38,10 +36,9 @@ vim.keymap.del("n", "<leader>l")
 vim.keymap.del("n", "<leader>L")
 map("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "which_key_ignore" })
 
--- dial
-map("n", "<C-a>", "gg<>G")
+map("n", "<leader>A", "gg<cmd>sleep 10m<cr><S-v><S-g>", { desc = "which_key_ignore" })
 
 -- LazyVim Changelog
 map("n", "<leader>C", function()
-  LazyVim.news.changelog()
+	LazyVim.news.changelog()
 end, { desc = "which_key_ignore" })

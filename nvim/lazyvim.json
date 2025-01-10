@@ -1,12 +1,9 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.editor.aerial",
-    "lazyvim.plugins.extras.lang.java",
-    "lazyvim.plugins.extras.lang.kotlin",
-    "lazyvim.plugins.extras.util.mini-hipatterns"
+
   ],
   "news": {
-    "NEWS.md": "6077"
+    "NEWS.md": "10960"
   },
-  "version": 6
+  "version": 7
 }
