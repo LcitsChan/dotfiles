@@ -188,7 +188,8 @@ source ~/.zext/fzf.zsh
 # Apply Theme
 # --------------------
 
-(( $+commands[starship] )) && eval "$(starship init zsh)"
+(( $+commands[starship] )) && eval "$(starship init zsh)" && \
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"

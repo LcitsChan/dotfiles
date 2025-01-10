@@ -1,8 +1,7 @@
 #!/bin/bash
 
-help() 
-{
-  cat <<- EOF
+help() {
+  cat <<-EOF
 
   Usage: 
   all           -- link all
@@ -12,7 +11,7 @@ EOF
   exit 0
 }
 
-if [[ $# -gt 1 ]];then
+if [[ $# -gt 1 ]]; then
   echo ""
   echo "Invaild args"
   help
@@ -41,13 +40,13 @@ make_link() {
     bk_date="$(date '+%Y%m%d%H%M%S')"
     bk_name="${BACKUPDIR}/$(basename "$2").${bk_date}"
     $(
-    set -x;
-    mv $2 $bk_name
+      set -x
+      mv $2 $bk_name
     )
-  fi 
+  fi
   $(
-  set -x;
-  ln -sfn $1 $2
+    set -x
+    ln -sfn $1 $2
   )
   echo ""
 }
@@ -56,8 +55,7 @@ make_link_recursively() {
   if [ -d $1 ] && [ -d $2 ]; then
     local pd=${1##*/}
     echo " -$pd:"
-    for f in $1/*
-    do 
+    for f in $1/*; do
       bf=${f##*/}
       make_link $f "$2/$pd/$bf"
     done
@@ -65,37 +63,23 @@ make_link_recursively() {
 }
 
 base_link() {
-  make_link $DOTDIR/nvim $HOME/.config/nvim
-  make_link $DOTDIR/ranger $HOME/.config/ranger
-  make_link $DOTDIR/tmux/.tmux.conf $HOME/.tmux.conf
-  make_link $DOTDIR/zsh/.zshrc $HOME/.zshrc
-  make_link $DOTDIR/zsh/zext $HOME/.zext
-  make_link $DOTDIR/zsh/.p10k.zsh $HOME/.p10k.zsh
-  make_link $DOTDIR/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml
   make_link $DOTDIR/git/gitconfig $HOME/.gitconfig
   make_link $DOTDIR/git/gitmessage $HOME/.gitmessage
   make_link $DOTDIR/git/gitignore_global $HOME/.gitignore_global
   make_link $DOTDIR/idea/ideavimrc $HOME/.ideavimrc
-  case `uname` in
-    Darwin)
-    make_link $DOTDIR/yabai $HOME/.config/yabai
-    make_link $DOTDIR/skhd $HOME/.config/skhd
-    make_link $DOTDIR/spacebar $HOME/.config/spacebar
-    make_link $DOTDIR/goku/karabiner.edn $HOME/.config/karabiner.edn
-    ;;
-    Linux)
-    ;;
+  case $(uname) in
+  Darwin) ;;
+  Linux) ;;
   esac
 }
 
 idea_link() {
   echo "Installing IntelliJ configs..."
-  local CONFIGS="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/idea/configs"
+  local CONFIGS="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/idea/configs"
   for i in $HOME/Library/Preferences/AndroidStudio* \
-           $HOME/.AndroidStudio*/config \
-           $HOME/Library/ApplicationSupport/Google/AndroidStudio* \
-           $HOME/Library/ApplicationSupport/JetBrains/IdeaIC*
-  do
+    $HOME/.AndroidStudio*/config \
+    $HOME/Library/ApplicationSupport/Google/AndroidStudio* \
+    $HOME/Library/ApplicationSupport/JetBrains/IdeaIC*; do
     if [[ -d $i ]]; then
       echo "[${i##*/}] Linking"
       # Link codestyles
@@ -125,23 +109,23 @@ idea_link() {
   echo "Done."
 }
 
-case "$1" in 
-  all) 
-    base_link
-    idea_link
-    ;;
-  idea) 
-    idea_link
-    ;;
-  "")
-    base_link
-    ;;
-  help)
-    help
-    ;;
-  *)
-    echo ""
-    echo "Invaild args"
-    help
-    ;;
+case "$1" in
+all)
+  base_link
+  idea_link
+  ;;
+idea)
+  idea_link
+  ;;
+"")
+  base_link
+  ;;
+help)
+  help
+  ;;
+*)
+  echo ""
+  echo "Invaild args"
+  help
+  ;;
 esac

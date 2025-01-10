@@ -1,0 +1,13 @@
+--target=~/.config
+--ignore=.stowrc
+--ignore=DS_Store
+--ignore=chrome
+--ignore=code
+--ignore=git
+--ignore=goku
+--ignore=idea
+--ignore=install
+--ignore=zsh
+--ignore=README.md
+--ignore=make_symlinks.sh
+--ignore=setup.sh
