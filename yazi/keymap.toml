@@ -10,11 +10,16 @@ prepend_keymap = [
     "K",
   ], run = 'seek -1', desc = "Scrolling preview up" },
   { on = [
-    "q",
-  ], run = 'escape --visual', desc = "Exit visual mode" },
-  { on = [
     "Q",
   ], run = 'quit', desc = "Quit" },
+  { on = [
+    "q",
+    "q",
+  ], run = 'quit', desc = "Quit" },
+  { on = [
+    "q",
+    "t",
+  ], run = 'close', desc = "Close Tab" },
   { on = [
     "g",
     ".",
@@ -27,7 +32,25 @@ prepend_keymap = [
     "g",
     "n",
   ], run = 'cd ~/.config/nvim', desc = "Go to nvim" },
-  # { on = [ "g", "c" ],       run = "cd ~/.config",     desc = "Go to the config directory" },
+  { on = [
+    "T",
+  ], run = 'plugin hide-preview', desc = "Hide or show preview" },
+  { on = [
+    "c",
+    "m",
+  ], run = "plugin chmod", desc = "Go to the config directory" },
+  { on = [
+    "b",
+    "a",
+  ], run = 'plugin mactag --args="add"', desc = "Tag selected files" },
+  { on = [
+    "b",
+    "r",
+  ], run = 'plugin mactag --args="remove"', desc = "Untag selected files" },
+  { on = "F", run = "plugin smart-filter", desc = "Smart filter" },
+  { on = "Z", run = "plugin max-preview", desc = "Maximize or restore preview" },
+  { on = "<C-g>", run = 'shell --block --confirm lazygit', desc = "Lazygit" },
+  # { on = [],       run = "",     desc = "" },
 ]
 
 [input]

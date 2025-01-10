@@ -1,56 +1,110 @@
 "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
 
 [manager]
-linemode    = "size"
+linemode = "size"
 show_hidden = false
-sort_by     = "natural"
-ratio       = [2, 4, 4]
+sort_by = "natural"
+ratio = [2, 4, 4]
 
 [preview]
-tab_size   = 2
-max_width  = 1000
+tab_size = 2
+max_width = 1000
 max_height = 1000
 
 [opener]
 edit = [
-	{ run = '${EDITOR:=vi} "$@"', desc = "$EDITOR", block = true },
-	{ run = 'code "$@"', orphan = true },
+  { run = '${EDITOR:=vi} "$@"', desc = "$EDITOR", block = true },
+  { run = 'code "$@"', orphan = true },
+]
+open = [
+  { run = 'xdg-open "$1"', desc = "Open", for = "linux" },
+  { run = 'open "$@"', desc = "Open", for = "unix" },
+  { run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
 ]
 play = [
-	{ run = 'mpv --force-window "$@"' },
-	{ run = 'iina --no-stdin "$@"' },
-	{ run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" }
+  { run = 'afplay "$@"' },
+  { run = 'iina --no-stdin "$@"' },
+  { run = 'mpv --force-window "$@"' },
+  { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
 ]
-archive = [
-	{ run = 'unar "$1"', desc = "Extract here" },
-	{ run = '/Applications/MacZip.app/Contents/MacOS/MacZip "$1"', orphan = true, desc = "MacZip" },
+extract = [
+  { run = 'ya pub extract --list "$@"', desc = "Extract here (builtin)", for = "unix" },
+  { run = 'ya pub extract --list %*', desc = "Extract here (builtin)", for = "windows" },
 ]
 
 [open]
 rules = [
-	{ name = "*/", use = [ "open", "edit", "reveal" ] },
-
-	{ mime = "text/*",  use = [ "edit", "reveal" ] },
-	{ mime = "image/*", use = [ "open", "reveal" ] },
-	{ mime = "video/*", use = [ "play", "reveal" ] },
-	{ mime = "audio/*", use = [ "play", "reveal" ] },
-	{ mime = "inode/x-empty", use = [ "edit", "reveal" ] },
-
-	{ mime = "application/json", use = [ "edit", "reveal" ] },
-	{ mime = "*/javascript",     use = [ "edit", "reveal" ] },
-
-	{ mime = "application/zip",             use = [ "extract", "reveal", "archive" ] },
-	{ mime = "application/gzip",            use = [ "extract", "reveal", "archive" ] },
-	{ mime = "application/x-tar",           use = [ "extract", "reveal", "archive" ] },
-	{ mime = "application/x-bzip",          use = [ "extract", "reveal", "archive" ] },
-	{ mime = "application/x-bzip2",         use = [ "extract", "reveal", "archive" ] },
-	{ mime = "application/x-7z-compressed", use = [ "extract", "reveal", "archive" ] },
-	{ mime = "application/x-rar",           use = [ "extract", "reveal", "archive" ] },
-
-	{ mime = "*", use = [ "open", "reveal" ] },
+  # Folder
+  { name = "*/", use = ["edit", "open", "reveal"] },
+  # Text
+  { mime = "text/*", use = ["edit", "reveal"] },
+  # Image
+  { mime = "image/*", use = ["open", "reveal"] },
+  # Media
+  { mime = "{audio,video}/*", use = ["play", "reveal"] },
+  # Archive
+  { mime = "application/{,g}zip", use = ["extract", "reveal"] },
+  { mime = "application/{tar,bzip*,7z*,xz,rar}", use = ["extract", "reveal"] },
+  # JSON
+  { mime = "application/{json,ndjson}", use = ["edit", "reveal"] },
+  { mime = "*/javascript", use = ["edit", "reveal"] },
+  # Empty file
+  { mime = "inode/empty", use = ["edit", "reveal"] },
+  # Fallback
+  { name = "*", use = ["edit", "open", "reveal"] },
 ]
+
 
 [plugin]
 prepend_previewers = [
-	{ mime = "audio/*", run = "exifaudio" },
+  { mime = "audio/*", run = "exifaudio" },
+  { name = "*.md", run = "glow" },
 ]
+
+previewers = [
+  { name = "*/", run = "folder", sync = true },
+  # Code
+  { mime = "text/*", run = "code" },
+  { mime = "*/{xml,javascript,wine-extension-ini}", run = "code" },
+  # JSON
+  { mime = "application/{json,ndjson}", run = "json" },
+  # Image
+  { mime = "image/{avif,hei?,jxl,svg+xml}", run = "magick" },
+  { mime = "image/*", run = "image" },
+  # Video
+  { mime = "video/*", run = "video" },
+  # PDF
+  { mime = "application/pdf", run = "pdf" },
+  # Archive
+  { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", run = "archive" },
+  { mime = "application/{debian*-package,redhat-package-manager,rpm,android.package-archive}", run = "archive" },
+  { name = "*.{AppImage,appimage}", run = "archive" },
+  # Virtual Disk / Disk Image
+  { mime = "application/{iso9660-image,qemu-disk,ms-wim,apple-diskimage}", run = "archive" },
+  { mime = "application/virtualbox-{vhd,vhdx}", run = "archive" },
+  { name = "*.{img,fat,ext,ext2,ext3,ext4,squashfs,ntfs,hfs,hfsx}", run = "archive" },
+  # Font
+  { mime = "font/*", run = "font" },
+  { mime = "application/ms-opentype", run = "font" },
+  # Empty file
+  { mime = "inode/empty", run = "empty" },
+  # Fallback
+  { name = "*", run = "code" },
+]
+
+[[plugin.prepend_fetchers]]
+id = "git"
+name = "*/"
+run = "git"
+
+[[plugin.prepend_fetchers]]
+id = "mactag"
+name = "*"
+run = "mactag"
+
+[[plugin.prepend_fetchers]]
+id = "mime"
+if = "!(mime|dummy)"
+name = "*"
+run = "mime-ext"
+prio = "high"
