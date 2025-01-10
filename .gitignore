@@ -2,3 +2,4 @@
 *.pyc
 *.lock.json
 idea/configs/options/editor.xml
+yazi/plugins

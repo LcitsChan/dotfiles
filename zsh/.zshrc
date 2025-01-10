@@ -2,12 +2,6 @@
 # Instant Prompt
 # --------------------
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-
 # --------------------
 #  brew
 # --------------------
@@ -33,8 +27,6 @@ esac
 case `uname` in
   Darwin)
   PLAT=macOS
-  alias code='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
-  alias pc='/usr/local/bin/proxychains4'
   ;;
   Linux)
   PLAT=linux
@@ -66,14 +58,14 @@ case `uname` in
   export CPPFLAGS="-I/usr/local/opt/openjdk@8/include"
   export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk-8.jdk/Contents/Home/
   export ANDROID_HOME=~/Library/Android/sdk
+  export PATH=${PATH}:${ANDROID_HOME}/tools
+  export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+  export ANDROID_JAVA_HOME=$JAVA_HOME
+  export PATH=${PATH}:~/development/flutter/bin
   ;;
   Linux)
   ;;
 esac
-export PATH=${PATH}:${ANDROID_HOME}/tools
-export PATH=${PATH}:${ANDROID_HOME}/platform-tools
-export ANDROID_JAVA_HOME=$JAVA_HOME
-export PATH=${PATH}:~/development/flutter/bin
 
 
 # --------------------
@@ -91,7 +83,6 @@ setopt extended_history         # Show Timestamp In History.
 # Zsh Setting
 # --------------------
 
-export LC_ALL=en_US.UTF-8
 # set the number of open files to be 1024 
 ulimit -S -n 1024
 export VISUAL=nvim
@@ -112,15 +103,9 @@ source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-
-export NVM_DIR="$HOME/.nvm"
-
 # --------------------
 # Theme
 # --------------------
-
-zinit depth=1 lucid light-mode for \
-        romkatv/powerlevel10k \
 
 
 # --------------------
@@ -141,12 +126,6 @@ zinit lucid light-mode for \
   has'brew' OMZ::plugins/brew \
   has'docker-compose' OMZ::plugins/docker-compose \
 
-  # has'tmux' OMZ::plugins/tmux \
-
-zinit lucid light-mode as'completion' for \
-  OMZ::plugins/docker/_docker \
-
-
 zinit depth=1 lucid light-mode for \
   atload": ${ZVM_LINE_INIT_MODE:=$ZVM_MODE_INSERT}" \
     jeffreytse/zsh-vi-mode \
@@ -161,15 +140,15 @@ zinit depth=1 lucid light-mode for \
 
 : ${ZVM_LINE_INIT_MODE:=$ZVM_MODE_INSERT}
 
+zinit lucid light-mode for \
+  as'null' has'zoxide' atload'unalias z zi; eval "$(zoxide init zsh)"' $HOME
+
 zinit wait'4' lucid light-mode for \
   as'null' has'pyenv' if'command -v pyenv 1>/dev/null 2>&1' atload'eval "$(pyenv init -)"' \
     $PYENV_ROOT 
 
 zinit wait'2' lucid light-mode for \
   as'null' has'fnm' atload'eval "$(fnm env)"' $HOME/.fnm 
-
-# zinit wait'6' lucid light-mode for \
-#   if'[[ -s "$NVM_DIR/nvm.sh" ]]' pick'nvm.sh' $NVM_DIR
 
 
 # --------------------
@@ -209,5 +188,20 @@ source ~/.zext/fzf.zsh
 # Apply Theme
 # --------------------
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+(( $+commands[starship] )) && eval "$(starship init zsh)"
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+
+
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+    . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+[ ! -f "$HOME/.nix.config" ] || . "$HOME/.nix.config"
+# End Nix
